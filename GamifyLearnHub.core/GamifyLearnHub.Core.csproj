@@ -14,10 +14,4 @@
     <PackageReference Include="Oracle.EntityFrameworkCore" Version="6.21.120" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Service\" />
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
 </Project>
