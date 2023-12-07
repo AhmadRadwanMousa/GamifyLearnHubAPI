@@ -34,7 +34,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("Badge_Name", badgeactivity.Badgename, dbType:DbType.String, direction:ParameterDirection.Input);
             p.Add("RowsAffected", dbType:DbType.Int32, direction:ParameterDirection.Output);
 
-            _dbContext.Connection.ExecuteAsync("BadgeActivity_Package.UpdateBadgeActivity",p,commandType:CommandType.StoredProcedure);
+            await _dbContext.Connection.ExecuteAsync("BadgeActivity_Package.UpdateBadgeActivity",p,commandType:CommandType.StoredProcedure);
 
             return p.Get<int>("RowsAffected");
 

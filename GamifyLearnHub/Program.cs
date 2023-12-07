@@ -16,6 +16,8 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IDbContext, DbContext>();
             builder.Services.AddScoped<IBadgeActivityRepository, BadgeActivityRepository>();
             builder.Services.AddScoped<IBadgeActivityService, BadgeActivityService>();
+            builder.Services.AddScoped<IProgramRepository, ProgramRepository>(); 
+            builder.Services.AddScoped<IProgramService, ProgramService>(); 
 
 
             builder.Services.AddControllers();
