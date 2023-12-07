@@ -27,9 +27,4 @@
     <ProjectReference Include="..\GamifyLearnHub.core\GamifyLearnHub.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Service\" />
-    <Folder Include="Repositroy\" />
-  </ItemGroup>
-
 </Project>
