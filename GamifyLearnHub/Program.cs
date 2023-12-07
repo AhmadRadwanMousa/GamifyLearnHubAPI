@@ -18,6 +18,8 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IBadgeActivityService, BadgeActivityService>();
             builder.Services.AddScoped<IProgramRepository, ProgramRepository>(); 
             builder.Services.AddScoped<IProgramService, ProgramService>(); 
+            builder.Services.AddScoped<IPointsActivityRepository, PointsActivityRepository>(); 
+            builder.Services.AddScoped<IPointsActivityService, PointsActivityService>();
 
 
             builder.Services.AddControllers();
