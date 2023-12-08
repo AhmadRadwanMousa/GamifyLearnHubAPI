@@ -24,7 +24,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPut]
-        public async Task<int> UpdatePointsActivity(Pointsactivity pointsactivity) 
+        public async Task<int> UpdatePointsActivity([FromForm] Pointsactivity pointsactivity) 
         {
             return await _pointsActivityService.UpdatePointsActivity(pointsactivity);
         }
