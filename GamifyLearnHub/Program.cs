@@ -15,8 +15,6 @@ namespace GamifyLearnHub
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-
             builder.Services.AddScoped<IDbContext, DbContext>();
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();  
