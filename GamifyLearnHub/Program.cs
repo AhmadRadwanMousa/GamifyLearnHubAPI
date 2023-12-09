@@ -2,11 +2,15 @@ using GamifyLearnHub.Core.Common;
 
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
+using GamifyLearnHub.Core.Repository;
+using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GamifyLearnHub.Infra.Repositroy;
+using GamifyLearnHub.Infra.Service;
+using GamifyLearnHub.Infra.Repository;
 using GamifyLearnHub.Infra.Service;
 
 using GamifyLearnHup.Infra.Repository;
@@ -72,6 +76,11 @@ namespace GamifyLearnHub
 
        
             var app = builder.Build();
+			builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+			builder.Services.AddScoped<IEducationalPeriodRepository, EducationalPeriodRepository>();
+			builder.Services.AddScoped<IPlanService, PlanService>();
+			builder.Services.AddScoped<IEducationalPeriodService, EducationalPeriodService>();
+			var app = builder.Build();
 
            
             if (app.Environment.IsDevelopment())
