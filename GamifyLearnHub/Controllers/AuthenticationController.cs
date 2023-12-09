@@ -17,7 +17,6 @@ namespace GamifyLearnHub.Controllers
         [HttpPost]
         public IActionResult Login([FromForm]LoginCredentails loginDetails)
         {
-            
             var token = _authenticationService.Login(loginDetails);
             if (token == null) { 
             return Unauthorized();

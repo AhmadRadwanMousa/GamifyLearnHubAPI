@@ -20,10 +20,11 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IDbContext, DbContext>();
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();  
-
+            builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();  
 
             builder.Services.AddScoped<IUserService, UserService>();    
             builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();    
             builder.Services.AddAuthentication((opt) => {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme;
