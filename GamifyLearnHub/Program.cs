@@ -1,12 +1,12 @@
 using GamifyLearnHub.Core.Common;
-using GamifyLearnHub.Core.Repository;
-using GamifyLearnHub.Core.Service;
+
 using GamifyLearnHub.Infra.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GamifyLearnHub.Infra.Repositroy;
 using GamifyLearnHub.Infra.Service;
+
 
 namespace GamifyLearnHub
 {
@@ -25,6 +25,10 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IProgramService, ProgramService>(); 
             builder.Services.AddScoped<IPointsActivityRepository, PointsActivityRepository>(); 
             builder.Services.AddScoped<IPointsActivityService, PointsActivityService>();
+            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<ICourseService, CourseService>();
+            builder.Services.AddScoped<ICourseSequenceRepository, CourseSequenceRepository>();
+            builder.Services.AddScoped<ICourseSequenceService, CourseSequenceService>();
 
             builder.Services.AddScoped<IUserService, UserService>();    
             builder.Services.AddScoped<IRoleService, RoleService>();
