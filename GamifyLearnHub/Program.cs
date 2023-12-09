@@ -1,5 +1,9 @@
 using GamifyLearnHub.Core.Common;
+using GamifyLearnHub.Core.Repository;
+using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Common;
+using GamifyLearnHub.Infra.Repository;
+using GamifyLearnHub.Infra.Service;
 
 namespace GamifyLearnHub
 {
@@ -16,8 +20,11 @@ namespace GamifyLearnHub
           
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-       
-            var app = builder.Build();
+			builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+			builder.Services.AddScoped<IEducationalPeriodRepository, EducationalPeriodRepository>();
+			builder.Services.AddScoped<IPlanService, PlanService>();
+			builder.Services.AddScoped<IEducationalPeriodService, EducationalPeriodService>();
+			var app = builder.Build();
 
            
             if (app.Environment.IsDevelopment())
