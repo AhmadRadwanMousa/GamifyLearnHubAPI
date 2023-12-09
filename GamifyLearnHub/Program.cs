@@ -8,9 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GamifyLearnHub.Infra.Repositroy;
 using GamifyLearnHub.Infra.Service;
-using GamifyLearnHub.Core.Repository;
-using GamifyLearnHub.Core.Service;
-using GamifyLearnHub.Infra.Repositroy;
+
 using GamifyLearnHup.Infra.Repository;
 using GamifyLearnHup.Infra.Service;
 using System.ComponentModel.Design;
@@ -37,6 +35,12 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<ICourseService, CourseService>();
             builder.Services.AddScoped<ICourseSequenceRepository, CourseSequenceRepository>();
             builder.Services.AddScoped<ICourseSequenceService, CourseSequenceService>();
+            builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+            builder.Services.AddScoped<IUserSectionRepository, UserSectionRepository>();
+
+
+            builder.Services.AddScoped<ISectionService, SectionService>();
+            builder.Services.AddScoped<IUserSectionService, UserSectionService>();
 
             builder.Services.AddScoped<IUserService, UserService>();    
             builder.Services.AddScoped<IRoleService, RoleService>();
@@ -57,13 +61,7 @@ namespace GamifyLearnHub
                 };
             });
  
-            builder.Services.AddScoped<ISectionRepository, SectionRepository>();
-            builder.Services.AddScoped<IUserSectionRepository, UserSectionRepository>();
-
-
-            builder.Services.AddScoped<ISectionService, SectionService>();
-            builder.Services.AddScoped<IUserSectionService, UserSectionService>();
-
+         
 
 
             builder.Services.AddControllers();
