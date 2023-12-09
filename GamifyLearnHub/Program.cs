@@ -1,5 +1,7 @@
 using GamifyLearnHub.Core.Common;
 
+using GamifyLearnHub.Core.Repository;
+using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +10,10 @@ using GamifyLearnHub.Infra.Repositroy;
 using GamifyLearnHub.Infra.Service;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
+using GamifyLearnHub.Infra.Repositroy;
+using GamifyLearnHup.Infra.Repository;
+using GamifyLearnHup.Infra.Service;
+using System.ComponentModel.Design;
 
 
 namespace GamifyLearnHub
@@ -51,6 +57,15 @@ namespace GamifyLearnHub
                 };
             });
  
+            builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+            builder.Services.AddScoped<IUserSectionRepository, UserSectionRepository>();
+
+
+            builder.Services.AddScoped<ISectionService, SectionService>();
+            builder.Services.AddScoped<IUserSectionService, UserSectionService>();
+
+
+
             builder.Services.AddControllers();
           
             builder.Services.AddEndpointsApiExplorer();
