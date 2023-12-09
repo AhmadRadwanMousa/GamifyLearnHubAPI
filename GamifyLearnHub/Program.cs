@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GamifyLearnHub.Infra.Repositroy;
 using GamifyLearnHub.Infra.Service;
+using GamifyLearnHub.Core.Repository;
+using GamifyLearnHub.Core.Service;
 
 
 namespace GamifyLearnHub
