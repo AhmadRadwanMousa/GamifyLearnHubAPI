@@ -1,7 +1,4 @@
 using GamifyLearnHub.Core.Common;
-
-using GamifyLearnHub.Core.Repository;
-using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Common;
@@ -11,11 +8,11 @@ using System.Text;
 using GamifyLearnHub.Infra.Repositroy;
 using GamifyLearnHub.Infra.Service;
 using GamifyLearnHub.Infra.Repository;
-using GamifyLearnHub.Infra.Service;
+
 
 using GamifyLearnHup.Infra.Repository;
 using GamifyLearnHup.Infra.Service;
-using System.ComponentModel.Design;
+
 
 
 namespace GamifyLearnHub
@@ -45,7 +42,10 @@ namespace GamifyLearnHub
 
             builder.Services.AddScoped<ISectionService, SectionService>();
             builder.Services.AddScoped<IUserSectionService, UserSectionService>();
-
+            builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+            builder.Services.AddScoped<IEducationalPeriodRepository, EducationalPeriodRepository>();
+            builder.Services.AddScoped<IPlanService, PlanService>();
+            builder.Services.AddScoped<IEducationalPeriodService, EducationalPeriodService>();
             builder.Services.AddScoped<IUserService, UserService>();    
             builder.Services.AddScoped<IRoleService, RoleService>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();    
@@ -76,11 +76,7 @@ namespace GamifyLearnHub
 
        
             var app = builder.Build();
-			builder.Services.AddScoped<IPlanRepository, PlanRepository>();
-			builder.Services.AddScoped<IEducationalPeriodRepository, EducationalPeriodRepository>();
-			builder.Services.AddScoped<IPlanService, PlanService>();
-			builder.Services.AddScoped<IEducationalPeriodService, EducationalPeriodService>();
-			var app = builder.Build();
+		
 
            
             if (app.Environment.IsDevelopment())
