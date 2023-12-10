@@ -21,25 +21,22 @@ namespace GamifyLearnHub.Controllers
 		{
 			return await _planService.GetAllPlans();
 		}
-
 		[HttpPost]
 		[Route("CreatePlan")]
-
-		public async void CreatePlan(Plan plan)
+		public async Task<int> CreatePlan([FromForm] Plan plan)
 		{
-			_planService.CreatePlan(plan);
+			return await _planService.CreatePlan(plan);
 		}
-
 		[HttpPut]
 		[Route("UpdatePlan")]
-		public async void UpdatePlan(Plan plan)
+		public async Task<int> UpdatePlan([FromForm] Plan plan)
 		{
-			_planService.UpdatePlan(plan);
+			return await _planService.UpdatePlan(plan);
 		}
 		[HttpDelete("{id}")]
-		public async void DeletePlan(int id)
+		public async Task<int> DeletePlan(int id)
 		{
-			_planService.DeletePlan(id);
+			return await _planService.DeletePlan(id);
 		}
 		[HttpGet]
 		[Route("GetPlanById/{id}")]

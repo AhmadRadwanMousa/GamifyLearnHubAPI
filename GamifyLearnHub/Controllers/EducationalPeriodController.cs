@@ -16,7 +16,6 @@ namespace GamifyLearnHub.Controllers
         {
 			this._educationalPeriodService = educationalPeriodService;
         }
-
 		[HttpGet]
 		[Route("GetAllEducationalPeriod")]
 		public async Task<List<Educationalperiod>> GetAllEducationalperiod()
@@ -25,22 +24,20 @@ namespace GamifyLearnHub.Controllers
 		}
 		[HttpPost]
 		[Route("CreateEducationalperiod")]
-
-		public async void CreateEducationalperiod(Educationalperiod educationalPeriod)
+		public async Task<int> CreateEducationalperiod([FromForm] Educationalperiod educationalPeriod)
 		{
-			_educationalPeriodService.CreateEducationalperiod(educationalPeriod);
+			return await _educationalPeriodService.CreateEducationalperiod(educationalPeriod);
 		}
-
 		[HttpPut]
 		[Route("UpdateEducationalperiod")]
-		public async void UpdateEducationalperiod(Educationalperiod educationalPeriod)
+		public async Task<int> UpdateEducationalperiod([FromForm] Educationalperiod educationalPeriod)
 		{
-			_educationalPeriodService.UpdateEducationalperiod(educationalPeriod);
+			return await _educationalPeriodService.UpdateEducationalperiod(educationalPeriod);
 		}
 		[HttpDelete("{id}")]
-		public async void DeleteEducationalperiod(int id)
+		public async Task<int> DeleteEducationalperiod(int id)
 		{
-			_educationalPeriodService.DeleteEducationalperiod(id);
+			return await _educationalPeriodService.DeleteEducationalperiod(id);
 		}
 		[HttpGet]
 		[Route("GetEducationalperiodById/{id}")]

@@ -16,14 +16,14 @@ namespace GamifyLearnHub.Infra.Service
         {
             this._educationalPeriodRepository = educationalPeriodRepository;
         }
-        public void CreateEducationalperiod(Educationalperiod educationalPeriod)
+        public async Task<int> CreateEducationalperiod(Educationalperiod educationalPeriod)
 		{
-			_educationalPeriodRepository.CreateEducationalperiod(educationalPeriod);
+			return await _educationalPeriodRepository.CreateEducationalperiod(educationalPeriod);
 		}
 
-		public void DeleteEducationalperiod(int id)
+		public async Task<int> DeleteEducationalperiod(int id)
 		{
-			_educationalPeriodRepository.DeleteEducationalperiod(id);
+			return await _educationalPeriodRepository.DeleteEducationalperiod(id);
 		}
 
 		public async Task<List<Educationalperiod>> GetAllEducationalperiod()
@@ -36,9 +36,9 @@ namespace GamifyLearnHub.Infra.Service
 			return await _educationalPeriodRepository.GetEducationalperiodById(id);
 		}
 
-		public void UpdateEducationalperiod(Educationalperiod educationalPeriod)
+		public async Task<int> UpdateEducationalperiod(Educationalperiod educationalPeriod)
 		{
-			_educationalPeriodRepository.UpdateEducationalperiod(educationalPeriod);
+			return await _educationalPeriodRepository.UpdateEducationalperiod(educationalPeriod);
 		}
 	}
 }

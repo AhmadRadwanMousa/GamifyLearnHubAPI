@@ -17,14 +17,14 @@ namespace GamifyLearnHub.Infra.Service
         {
 			this._planRepository = planRepository;   
         }
-        public void CreatePlan(Plan plan)
+        public async Task<int> CreatePlan(Plan plan)
 		{
-			_planRepository.CreatePlan(plan);
+			return await _planRepository.CreatePlan(plan);
 		}
 
-		public void DeletePlan(int id)
+		public async Task<int> DeletePlan(int id)
 		{
-			_planRepository.DeletePlan(id);
+			return await _planRepository.DeletePlan(id);
 		}
 
 		public async Task<List<Plan>> GetAllPlans()
@@ -37,9 +37,9 @@ namespace GamifyLearnHub.Infra.Service
 			return await _planRepository.GetPlanById(id);
 		}
 
-		public void UpdatePlan(Plan plan)
+		public async Task<int> UpdatePlan(Plan plan)
 		{
-			_planRepository.UpdatePlan(plan);
+			return await _planRepository.UpdatePlan(plan);
 		}
 	}
 }
