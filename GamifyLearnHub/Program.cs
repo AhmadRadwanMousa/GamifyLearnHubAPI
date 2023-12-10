@@ -23,6 +23,10 @@ namespace GamifyLearnHub
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddScoped<IDbContext, DbContext>();
+
+            builder.Services.AddScoped<ICertificationRepository, CertificationRepository>();
+            builder.Services.AddScoped<ICertificationService, CertificationService>();
+
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();  
             builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();  
