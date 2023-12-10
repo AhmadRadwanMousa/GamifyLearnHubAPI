@@ -58,8 +58,8 @@ namespace GamifyLearnHub.API.Controllers
         {
             try
             {
-                int createdSectionId = await _sectionService.CreateSection(section);
-                return CreatedAtAction(nameof(GetSectionById), new { sectionId = createdSectionId }, section);
+                decimal createdSectionId = await _sectionService.CreateSection(section);
+                return Ok(new { sectionId = createdSectionId });
             }
             catch (Exception ex)
             {

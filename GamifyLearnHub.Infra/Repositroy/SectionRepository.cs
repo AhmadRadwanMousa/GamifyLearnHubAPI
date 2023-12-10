@@ -42,7 +42,7 @@ namespace GamifyLearnHub.Infra.Repository
             return result.FirstOrDefault();
         }
 
-        public async Task<int> CreateSection(Section section)
+        public async Task<decimal> CreateSection(Section section)
         {
             var parameters = new DynamicParameters();
             parameters.Add("p_section_name", section.Sectionname, DbType.String, ParameterDirection.Input);
@@ -52,10 +52,13 @@ namespace GamifyLearnHub.Infra.Repository
             parameters.Add("created_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-            await _dbContext.Connection.ExecuteAsync("Section_Package.CreateSection", parameters, commandType: CommandType.StoredProcedure);
+            await _dbContext.Connection.ExecuteAsync(
+                "Section_Package.CreateSection",
+                parameters,
+                commandType: CommandType.StoredProcedure
+            );
 
-            int createdId = parameters.Get<int>("created_id");
-            return createdId;
+            return parameters.Get<decimal>("created_id");
         }
 
         public async Task<int> UpdateSection(decimal sectionId, Section section)

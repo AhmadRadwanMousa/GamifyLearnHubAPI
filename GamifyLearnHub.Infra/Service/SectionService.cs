@@ -25,7 +25,7 @@ namespace GamifyLearnHub.Infra.Service
             return _sectionRepository.GetSectionById(sectionId);
         }
 
-        public async Task<int> CreateSection(Section section)
+        public async Task<decimal> CreateSection(Section section)
         {
             return await _sectionRepository.CreateSection(section);
         }
