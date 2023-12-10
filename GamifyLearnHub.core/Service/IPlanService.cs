@@ -10,9 +10,9 @@ namespace GamifyLearnHub.Core.Service
 	public interface IPlanService
 	{
 		Task<List<Plan>> GetAllPlans();
-		void CreatePlan(Plan plan);
-		void DeletePlan(int id);
-		public void UpdatePlan(Plan plan);
+		Task<int> CreatePlan(Plan plan);
+		Task<int> DeletePlan(int id);
+		Task<int> UpdatePlan(Plan plan);
 		Task<Plan> GetPlanById(int id);
 	}
 }

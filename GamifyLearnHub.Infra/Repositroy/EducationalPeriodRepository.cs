@@ -22,24 +22,29 @@ namespace GamifyLearnHub.Infra.Repository
         }
         public async Task<List<Educationalperiod>> GetAllEducationalperiod()
 		{
-			IEnumerable<Educationalperiod> educationalPeriods = _dBContext.Connection.Query<Educationalperiod>("EducationalPeriod_Package.GetAllEducationalPeriods", commandType: CommandType.StoredProcedure);
+			IEnumerable<Educationalperiod> educationalPeriods = await _dBContext.Connection.QueryAsync<Educationalperiod>("EducationalPeriod_Package.GetAllEducationalPeriods", commandType: CommandType.StoredProcedure);
 			return educationalPeriods.ToList();
 		}
-		public async void CreateEducationalperiod(Educationalperiod educationalPeriod)
+		public async Task<int> CreateEducationalperiod(Educationalperiod educationalPeriod)
 		{
 			var p = new DynamicParameters();
 			p.Add("Start_Date", educationalPeriod.Startdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 			p.Add("End_Date", educationalPeriod.Enddate, dbType: DbType.Int32, direction: ParameterDirection.Input);
-			_dBContext.Connection.ExecuteAsync("EducationalPeriod_Package.CreateEducationalPeriod", p, commandType: CommandType.StoredProcedure);
+			p.Add("created_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			await _dBContext.Connection.ExecuteAsync("EducationalPeriod_Package.CreateEducationalPeriod", p, commandType: CommandType.StoredProcedure);
+			return p.Get<int>("created_id");
 		}
 
-		public void DeleteEducationalperiod(int id)
+		public async Task<int> DeleteEducationalperiod(int id)
 		{
 			var p = new DynamicParameters();
 			p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-			_dBContext.Connection.ExecuteAsync("EducationalPeriod_Package.DeleteEducationalPeriod", p, commandType: CommandType.StoredProcedure);
+			p.Add("deleted_id", DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("rows_affected", DbType.Int32, direction: ParameterDirection.Output);
+			await _dBContext.Connection.ExecuteAsync("EducationalPeriod_Package.DeleteEducationalPeriod", p, commandType: CommandType.StoredProcedure);
+			return p.Get<int>("rows_affected");
 		}
-
 
 		public async Task<Educationalperiod> GetEducationalperiodById(int id)
 		{
@@ -49,13 +54,18 @@ namespace GamifyLearnHub.Infra.Repository
 			return result.FirstOrDefault();
 		}
 
-		public void UpdateEducationalperiod(Educationalperiod educationalPeriod)
+		public async Task<int> UpdateEducationalperiod(Educationalperiod educationalPeriod)
 		{
 			var p = new DynamicParameters();
 			p.Add("EducationalPeriod_Id", educationalPeriod.Educationalperiodid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 			p.Add("Start_Date", educationalPeriod.Startdate, dbType: DbType.String, direction: ParameterDirection.Input);
 			p.Add("End_Date", educationalPeriod.Enddate, dbType: DbType.String, direction: ParameterDirection.Input);
-			_dBContext.Connection.ExecuteAsync("EducationalPeriod_Package.UpdateEducationalPeriod", p, commandType: CommandType.StoredProcedure);
+			p.Add("updated_id", DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("rows_affected", DbType.Int32, direction: ParameterDirection.Output);
+
+			await _dBContext.Connection.ExecuteAsync("EducationalPeriod_Package.UpdateEducationalPeriod", p, commandType: CommandType.StoredProcedure);
+			return p.Get<int>("rows_affected");
+
 		}
 	}
 }

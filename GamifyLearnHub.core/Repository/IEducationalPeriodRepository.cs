@@ -10,9 +10,9 @@ namespace GamifyLearnHub.Core.Repository
 	public interface IEducationalPeriodRepository
 	{
 		Task<List<Educationalperiod>> GetAllEducationalperiod();
-		void CreateEducationalperiod(Educationalperiod educationalPeriod);
-		void DeleteEducationalperiod(int id);
-		public void UpdateEducationalperiod(Educationalperiod educationalPeriod);
 		Task<Educationalperiod> GetEducationalperiodById(int id);
+		Task<int> CreateEducationalperiod(Educationalperiod educationalPeriod);
+		Task<int> DeleteEducationalperiod(int id);
+		Task<int> UpdateEducationalperiod(Educationalperiod educationalPeriod);
 	}
 }
