@@ -31,22 +31,35 @@ namespace GamifyLearnHub.API.Controllers
         }
 
         [HttpPost]
-        public async Task CreateUserSection(Usersection userSection)
+        public async Task<ActionResult<decimal>> CreateUserSection(Usersection userSection)
         {
-            await _userSectionService.CreateUserSection(userSection);
+            decimal createdId = await _userSectionService.CreateUserSection(userSection);
+            return CreatedAtAction(nameof(GetUserSectionById), new { userSectionId = createdId }, createdId);
         }
 
         [HttpPut("{userSectionId}")]
-        public async Task UpdateUserSection(decimal userSectionId, Usersection userSection)
+        public async Task<IActionResult> UpdateUserSection(decimal userSectionId, Usersection userSection)
         {
             userSection.Usersectionid = userSectionId;
-            await _userSectionService.UpdateUserSection(userSection);
+            int affectedRows = await _userSectionService.UpdateUserSection(userSection);
+
+            return affectedRows > 0
+                ? Ok(new { affectedRows })
+                : NotFound(new { affectedRows });
         }
 
         [HttpDelete("{userSectionId}")]
-        public async Task DeleteUserSection(decimal userSectionId)
+        public async Task<IActionResult> DeleteUserSection(decimal userSectionId)
         {
-            await _userSectionService.DeleteUserSection(userSectionId);
+            try
+            {
+                int affectedRows = await _userSectionService.DeleteUserSection(userSectionId);
+                return Ok(new { affectedRows });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
         }
     }
 }

@@ -28,19 +28,19 @@ namespace GamifyLearnHup.Infra.Service
             return _userSectionRepository.GetUserSectionById(userSectionId);
         }
 
-        public Task CreateUserSection(Usersection userSection)
+        public async Task<decimal> CreateUserSection(Usersection userSection)
         {
-            return _userSectionRepository.CreateUserSection(userSection);
+            return await _userSectionRepository.CreateUserSection(userSection);
         }
 
-        public Task UpdateUserSection(Usersection userSection)
+        public async Task<int> UpdateUserSection(Usersection userSection)
         {
-            return _userSectionRepository.UpdateUserSection(userSection);
+            return await _userSectionRepository.UpdateUserSection(userSection);
         }
 
-        public Task DeleteUserSection(decimal userSectionId)
+        public async Task<int> DeleteUserSection(decimal userSectionId)
         {
-            return _userSectionRepository.DeleteUserSection(userSectionId);
+            return await _userSectionRepository.DeleteUserSection(userSectionId);
         }
     }
 }
