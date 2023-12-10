@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Threading.Tasks;
 using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
@@ -22,11 +20,11 @@ namespace GamifyLearnHub.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Section>> GetAllSections()
+        public async Task<ActionResult<IEnumerable<Section>>> GetAllSections()
         {
             try
             {
-                var sections = _sectionService.GetAllSections();
+                var sections = await _sectionService.GetAllSections();
                 return Ok(sections);
             }
             catch (Exception ex)
@@ -60,8 +58,8 @@ namespace GamifyLearnHub.API.Controllers
         {
             try
             {
-                await _sectionService.CreateSection(section);
-                return CreatedAtAction(nameof(GetSectionById), new { sectionId = section.Sectionid }, section);
+                int createdSectionId = await _sectionService.CreateSection(section);
+                return CreatedAtAction(nameof(GetSectionById), new { sectionId = createdSectionId }, section);
             }
             catch (Exception ex)
             {
@@ -74,17 +72,8 @@ namespace GamifyLearnHub.API.Controllers
         {
             try
             {
-                var existingSection = await _sectionService.GetSectionById(sectionId);
-
-                if (existingSection == null)
-                {
-                    return NotFound();
-                }
-
-                section.Sectionid = sectionId;
-                await _sectionService.UpdateSection(section);
-
-                return Ok(section);
+                int affectedRows = await _sectionService.UpdateSection(sectionId, section);
+                return Ok(new { affectedRows });
             }
             catch (Exception ex)
             {
@@ -97,16 +86,8 @@ namespace GamifyLearnHub.API.Controllers
         {
             try
             {
-                var existingSection = await _sectionService.GetSectionById(sectionId);
-
-                if (existingSection == null)
-                {
-                    return NotFound();
-                }
-
-                await _sectionService.DeleteSection(sectionId);
-
-                return NoContent();
+                int affectedRows = await _sectionService.DeleteSection(sectionId);
+                return Ok(new { affectedRows });
             }
             catch (Exception ex)
             {

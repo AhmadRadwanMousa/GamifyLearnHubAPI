@@ -1,10 +1,10 @@
-﻿
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 
-namespace GamifyLearnHup.Infra.Service
+namespace GamifyLearnHub.Infra.Service
 {
     public class SectionService : ISectionService
     {
@@ -25,19 +25,21 @@ namespace GamifyLearnHup.Infra.Service
             return _sectionRepository.GetSectionById(sectionId);
         }
 
-        public Task CreateSection(Section section)
+        public async Task<int> CreateSection(Section section)
         {
-            return _sectionRepository.CreateSection(section);
+            return await _sectionRepository.CreateSection(section);
         }
 
-        public Task UpdateSection(Section section)
+        public async Task<int> UpdateSection(decimal sectionId, Section section)
         {
-            return _sectionRepository.UpdateSection(section);
+            int rowsAffected = await _sectionRepository.UpdateSection(sectionId, section);
+            return rowsAffected;
         }
 
-        public Task DeleteSection(decimal sectionId)
+        public async Task<int> DeleteSection(decimal sectionId)
         {
-            return _sectionRepository.DeleteSection(sectionId);
+            int rowsAffected = await _sectionRepository.DeleteSection(sectionId);
+            return rowsAffected;
         }
     }
 }
