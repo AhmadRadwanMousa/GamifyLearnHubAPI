@@ -21,6 +21,13 @@ namespace GamifyLearnHub.Infra.Repositroy
         {
             _dbContext = dbContext;
         }
+
+        public async Task<List<Certification>> GetAllCertifications()
+        {
+            var result = await _dbContext.Connection.QueryAsync<Certification>("Certification_Package.GetAllCertifications", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
         public async Task<(List<CertificationUser>, int)> GetAllUsersPass(int CourseSequence)
         {
             var p = new DynamicParameters();
@@ -33,6 +40,22 @@ namespace GamifyLearnHub.Infra.Repositroy
             int dateEndValue = p.Get<int>("Date_End");
 
             return (result.ToList(), dateEndValue);
+        }
+
+        public async Task<Certification> GetCertificationById(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("id", id, DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Certification>("Certification_Package.GetCertificationById", p, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
+
+        public async Task<List<Certification>> GetCertificationByUserId(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("id", id, DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Certification>("Certification_Package.GetCertificationByUserId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
         public async void InsertCertification(Certification certification)

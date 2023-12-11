@@ -18,6 +18,27 @@ namespace GamifyLearnHub.Controllers
         }
 
 
+
+        [HttpGet]
+        public async Task<List<Certification>> GetAllCertifications()
+        {
+            return await _certificationService.GetAllCertifications();
+        }
+
+        [HttpGet]
+        [Route("GetById/{id}")]
+        public async Task<Certification> GetCertificationById(int id)
+        {
+            return await _certificationService.GetCertificationById(id);
+        }
+
+        [HttpGet]
+        [Route("GetByUserId/{id}")]
+        public async Task<List<Certification>> GetCertificationByUserId(int id)
+        {
+            return await _certificationService.GetCertificationByUserId(id);
+        }
+
         [HttpGet]
         [Route("PassUser/{CourseSequence}")]
         public async Task<IActionResult> GetAllUsersPass(int CourseSequence)
