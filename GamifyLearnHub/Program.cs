@@ -69,7 +69,10 @@ namespace GamifyLearnHub
 
             builder.Services.AddScoped<IAssignmentSolutionDetailsRepository, AssignmentSolutionDetailsRepository>();    
             builder.Services.AddScoped<IAssignmentSolutionDetailsService, AssignmentSolutionDetailsService>();  
-
+            builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+            builder.Services.AddScoped<ICouponService, CouponService>();
+            builder.Services.AddScoped<IUserCouponRepository, UserCouponRepository>();
+            builder.Services.AddScoped<IUserCouponService, UserCouponService>();
             builder.Services.AddScoped<IUserSectionService, UserSectionService>();
             builder.Services.AddScoped<IPlanRepository, PlanRepository>();
             builder.Services.AddScoped<IEducationalPeriodRepository, EducationalPeriodRepository>();
