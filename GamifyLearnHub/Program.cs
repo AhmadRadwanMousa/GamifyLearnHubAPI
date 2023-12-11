@@ -42,6 +42,18 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<ICourseSequenceService, CourseSequenceService>();
             builder.Services.AddScoped<ISectionRepository, SectionRepository>();
             builder.Services.AddScoped<IUserSectionRepository, UserSectionRepository>();
+            
+            builder.Services.AddScoped<ICourseSectionRepository, CourseSectionRepository>();
+            builder.Services.AddScoped<ILectureRepository, LectureRepository>();
+            builder.Services.AddScoped<ISectionAnnouncementRepository, SectionAnnouncementRepository>();
+            builder.Services.AddScoped<IUserProgressRepository, UserProgressRepository>();
+
+
+            builder.Services.AddScoped<ILectureService, LectureService>();
+            builder.Services.AddScoped<ICourseSectionService, CourseSectionService>();
+            builder.Services.AddScoped<ISectionAnnouncementService, SectionAnnouncementService>();
+            builder.Services.AddScoped<IUserProgressService, UserProgressService>();
+
             builder.Services.AddScoped<IExamRepository, ExamRepository>();
             builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
