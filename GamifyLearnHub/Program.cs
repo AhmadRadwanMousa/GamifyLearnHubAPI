@@ -43,7 +43,6 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
             builder.Services.AddScoped<ICourseService, CourseService>();
             builder.Services.AddScoped<ICourseSequenceRepository, CourseSequenceRepository>();
-            builder.Services.AddScoped<ICourseSequenceService, CourseSequenceService>();
             builder.Services.AddScoped<ISectionRepository, SectionRepository>();
             builder.Services.AddScoped<IUserSectionRepository, UserSectionRepository>();
             
@@ -62,11 +61,20 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
+            builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+            builder.Services.AddScoped<IAssignmentSolutionRepository, AssignmentSolutionRepository>();
+            
+            builder.Services.AddScoped<IAssignmentSolutionService, AssignmentSolutionService>();
+            builder.Services.AddScoped<IAssignmentService, AssignmentService>();    
 
-            builder.Services.AddScoped<ISectionService, SectionService>();
+            builder.Services.AddScoped<IAssignmentSolutionDetailsRepository, AssignmentSolutionDetailsRepository>();    
+            builder.Services.AddScoped<IAssignmentSolutionDetailsService, AssignmentSolutionDetailsService>();  
+
             builder.Services.AddScoped<IUserSectionService, UserSectionService>();
             builder.Services.AddScoped<IPlanRepository, PlanRepository>();
             builder.Services.AddScoped<IEducationalPeriodRepository, EducationalPeriodRepository>();
+            builder.Services.AddScoped<ICourseSequenceService, CourseSequenceService>();
+            builder.Services.AddScoped<ISectionService, SectionService>();
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<IEducationalPeriodService, EducationalPeriodService>();
             builder.Services.AddScoped<IUserService, UserService>();    
