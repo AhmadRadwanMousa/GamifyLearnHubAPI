@@ -12,6 +12,10 @@ namespace GamifyLearnHub.Core.Service
     {
         Task<(List<CertificationUser>, int)> GetAllUsersPass(int CourseSequence);
         void InsertCertification(List<CertificationUser> usersections);
+        Task<List<Certification>> GetAllCertifications();
+
+        Task<Certification> GetCertificationById(int id);
+        Task<List<Certification>> GetCertificationByUserId(int id);
 
 
     }

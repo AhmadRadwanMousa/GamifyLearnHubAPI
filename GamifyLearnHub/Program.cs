@@ -27,6 +27,10 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<ICertificationRepository, CertificationRepository>();
             builder.Services.AddScoped<ICertificationService, CertificationService>();
 
+            builder.Services.AddScoped<IExamLearnerRepository, ExamLearnerRepository>();
+            builder.Services.AddScoped<IExamLearnerService, ExamLearnerService>();
+
+
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();  
             builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();  

@@ -18,10 +18,27 @@ namespace GamifyLearnHub.Infra.Service
         {
             _certificationRepository = certificationRepository;
         }
+
+        public async Task<List<Certification>> GetAllCertifications()
+        {
+            return await _certificationRepository.GetAllCertifications();
+
+        }
+
         public async Task<(List<CertificationUser>, int)> GetAllUsersPass(int CourseSequence)
         {
             var ( UsersPass , Date_End) = await _certificationRepository.GetAllUsersPass(CourseSequence);
             return (UsersPass , Date_End);
+        }
+
+        public async Task<Certification> GetCertificationById(int id)
+        {
+            return await _certificationRepository.GetCertificationById(id);
+        }
+
+        public async Task<List<Certification>> GetCertificationByUserId(int id)
+        {
+            return await _certificationRepository.GetCertificationByUserId(id);
         }
 
         public async void InsertCertification(List<CertificationUser> certificationUsers)

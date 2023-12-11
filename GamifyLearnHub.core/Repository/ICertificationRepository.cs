@@ -13,5 +13,11 @@ namespace GamifyLearnHub.Core.Repository
         Task<(List<CertificationUser>, int)> GetAllUsersPass(int CourseSequence);
         void InsertCertification(Certification usersections);
 
+        Task<List<Certification>> GetAllCertifications();
+
+        Task<Certification> GetCertificationById(int id);
+
+        Task<List<Certification>> GetCertificationByUserId(int id);
+
     }
 }
