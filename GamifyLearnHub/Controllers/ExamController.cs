@@ -44,7 +44,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpPost("CreateQuestionWithOptions/{examId}")]
 
-        public async Task<IActionResult> CreateQuestionWithOptions(int examId, QuestionWithOptions questionWithOptions)
+        public async Task<IActionResult> CreateQuestionWithOptions(int examId, /*[FromForm]*/ QuestionWithOptions questionWithOptions)
         {
             
             questionWithOptions.question.Examid = examId;
