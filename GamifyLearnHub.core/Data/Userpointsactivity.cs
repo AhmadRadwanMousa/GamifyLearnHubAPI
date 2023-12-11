@@ -8,7 +8,6 @@ namespace GamifyLearnHub.Core.Data
         public decimal Userpointsactivityid { get; set; }
         public decimal? Userid { get; set; }
         public decimal? Pointsactivityid { get; set; }
-        public decimal? Pointsearned { get; set; }
         public DateTime? Dateearned { get; set; }
         public decimal? Usersectionid { get; set; }
 

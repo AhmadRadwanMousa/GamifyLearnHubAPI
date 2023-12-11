@@ -56,13 +56,13 @@ namespace GamifyLearnHub.Core.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseOracle("USER ID=GamifyLearnHub;PASSWORD=12345678;DATA SOURCE=localhost:1521/xe");
+                optionsBuilder.UseOracle("USER ID=GamifyLearningHub;PASSWORD=Ahmadzuiod2;DATA SOURCE=localhost:1521/XEPDB1");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("GAMIFYLEARNHUB")
+            modelBuilder.HasDefaultSchema("GAMIFYLEARNINGHUB")
                 .UseCollation("USING_NLS_COMP");
 
             modelBuilder.Entity<Assignment>(entity =>
@@ -100,7 +100,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Assignments)
                     .HasForeignKey(d => d.Sectionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008796");
+                    .HasConstraintName("SYS_C008672");
             });
 
             modelBuilder.Entity<Assignmentsolution>(entity =>
@@ -129,19 +129,19 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Assignmentsolutions)
                     .HasForeignKey(d => d.Assignmentid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008799");
+                    .HasConstraintName("SYS_C008675");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Assignmentsolutions)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008800");
+                    .HasConstraintName("SYS_C008676");
             });
 
             modelBuilder.Entity<Assignmentsolutiondetail>(entity =>
             {
                 entity.HasKey(e => e.Assignmentsolutiondetailsid)
-                    .HasName("SYS_C008803");
+                    .HasName("SYS_C008679");
 
                 entity.ToTable("ASSIGNMENTSOLUTIONDETAILS");
 
@@ -166,13 +166,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Assignmentsolutiondetails)
                     .HasForeignKey(d => d.Assignmentid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008805");
+                    .HasConstraintName("SYS_C008681");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Assignmentsolutiondetails)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008804");
+                    .HasConstraintName("SYS_C008680");
             });
 
             modelBuilder.Entity<Attendence>(entity =>
@@ -196,13 +196,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Attendences)
                     .HasForeignKey(d => d.Sectionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008840");
+                    .HasConstraintName("SYS_C008712");
             });
 
             modelBuilder.Entity<Attendencedetail>(entity =>
             {
                 entity.HasKey(e => e.Attendencedetailsid)
-                    .HasName("SYS_C008842");
+                    .HasName("SYS_C008714");
 
                 entity.ToTable("ATTENDENCEDETAILS");
 
@@ -227,13 +227,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Attendencedetails)
                     .HasForeignKey(d => d.Attendenceid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008844");
+                    .HasConstraintName("SYS_C008716");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Attendencedetails)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008843");
+                    .HasConstraintName("SYS_C008715");
             });
 
             modelBuilder.Entity<Badgeactivity>(entity =>
@@ -290,19 +290,19 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.Paymentid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008833");
+                    .HasConstraintName("SYS_C008705");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008832");
+                    .HasConstraintName("SYS_C008704");
             });
 
             modelBuilder.Entity<Cartitem>(entity =>
             {
                 entity.HasKey(e => e.Cartitemsid)
-                    .HasName("SYS_C008835");
+                    .HasName("SYS_C008707");
 
                 entity.ToTable("CARTITEMS");
 
@@ -323,13 +323,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Cartitems)
                     .HasForeignKey(d => d.Cartid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008837");
+                    .HasConstraintName("SYS_C008709");
 
                 entity.HasOne(d => d.Program)
                     .WithMany(p => p.Cartitems)
                     .HasForeignKey(d => d.Programid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008880");
+                    .HasConstraintName("SYS_C008773");
             });
 
             modelBuilder.Entity<Certification>(entity =>
@@ -362,13 +362,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Certifications)
                     .HasForeignKey(d => d.Coursesequenceid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008879");
+                    .HasConstraintName("SYS_C008772");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Certifications)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008826");
+                    .HasConstraintName("SYS_C008735");
             });
 
             modelBuilder.Entity<Coupon>(entity =>
@@ -457,7 +457,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Coursesections)
                     .HasForeignKey(d => d.Courseid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008749");
+                    .HasConstraintName("SYS_C008721");
             });
 
             modelBuilder.Entity<Coursesequence>(entity =>
@@ -472,6 +472,10 @@ namespace GamifyLearnHub.Core.Data
                 entity.Property(e => e.Courseid)
                     .HasColumnType("NUMBER")
                     .HasColumnName("COURSEID");
+
+                entity.Property(e => e.Educationalperiodid)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("EDUCATIONALPERIODID");
 
                 entity.Property(e => e.Enddate)
                     .HasColumnType("DATE")
@@ -493,13 +497,19 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Coursesequences)
                     .HasForeignKey(d => d.Courseid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008875");
+                    .HasConstraintName("SYS_C008768");
+
+                entity.HasOne(d => d.Educationalperiod)
+                    .WithMany(p => p.Coursesequences)
+                    .HasForeignKey(d => d.Educationalperiodid)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SYS_C008769");
 
                 entity.HasOne(d => d.Program)
                     .WithMany(p => p.Coursesequences)
                     .HasForeignKey(d => d.Programid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008877");
+                    .HasConstraintName("SYS_C008770");
             });
 
             modelBuilder.Entity<Educationalperiod>(entity =>
@@ -563,7 +573,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Exams)
                     .HasForeignKey(d => d.Sectionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008774");
+                    .HasConstraintName("SYS_C008650");
             });
 
             modelBuilder.Entity<Examsolution>(entity =>
@@ -587,19 +597,19 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Examsolutions)
                     .HasForeignKey(d => d.Questionoptionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008787");
+                    .HasConstraintName("SYS_C008663");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Examsolutions)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008786");
+                    .HasConstraintName("SYS_C008662");
             });
 
             modelBuilder.Entity<Examsolutiondetail>(entity =>
             {
                 entity.HasKey(e => e.Examsolutiondetailsid)
-                    .HasName("SYS_C008866");
+                    .HasName("SYS_C008759");
 
                 entity.ToTable("EXAMSOLUTIONDETAILS");
 
@@ -624,13 +634,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Examsolutiondetails)
                     .HasForeignKey(d => d.Examid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008791");
+                    .HasConstraintName("SYS_C008667");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Examsolutiondetails)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008792");
+                    .HasConstraintName("SYS_C008668");
             });
 
             modelBuilder.Entity<Lecture>(entity =>
@@ -664,7 +674,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Lectures)
                     .HasForeignKey(d => d.Coursesectionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008755");
+                    .HasConstraintName("SYS_C008727");
             });
 
             modelBuilder.Entity<Payment>(entity =>
@@ -688,7 +698,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Payments)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008829");
+                    .HasConstraintName("SYS_C008701");
             });
 
             modelBuilder.Entity<Plan>(entity =>
@@ -771,13 +781,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Programs)
                     .HasForeignKey(d => d.Educationalperiodid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008885");
+                    .HasConstraintName("SYS_C008779");
 
                 entity.HasOne(d => d.Plan)
                     .WithMany(p => p.Programs)
                     .HasForeignKey(d => d.Planid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008731");
+                    .HasConstraintName("SYS_C008624");
             });
 
             modelBuilder.Entity<Question>(entity =>
@@ -806,7 +816,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Questions)
                     .HasForeignKey(d => d.Examid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008779");
+                    .HasConstraintName("SYS_C008655");
             });
 
             modelBuilder.Entity<Questionoption>(entity =>
@@ -835,7 +845,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Questionoptions)
                     .HasForeignKey(d => d.Questionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008783");
+                    .HasConstraintName("SYS_C008659");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -883,13 +893,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Sections)
                     .HasForeignKey(d => d.Coursesequenceid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008878");
+                    .HasConstraintName("SYS_C008771");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Sections)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008759");
+                    .HasConstraintName("SYS_C008635");
             });
 
             modelBuilder.Entity<Sectionannoncment>(entity =>
@@ -918,7 +928,7 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Sectionannoncments)
                     .HasForeignKey(d => d.Sectionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008767");
+                    .HasConstraintName("SYS_C008643");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -980,13 +990,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Userbadgeactivities)
                     .HasForeignKey(d => d.Badgeactivityid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008822");
+                    .HasConstraintName("SYS_C008698");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Userbadgeactivities)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008821");
+                    .HasConstraintName("SYS_C008697");
             });
 
             modelBuilder.Entity<Usercoupon>(entity =>
@@ -1018,20 +1028,20 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Usercoupons)
                     .HasForeignKey(d => d.Couponid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008857");
+                    .HasConstraintName("SYS_C008744");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Usercoupons)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008856");
+                    .HasConstraintName("SYS_C008743");
             });
 
             modelBuilder.Entity<Userlogin>(entity =>
             {
                 entity.ToTable("USERLOGIN");
 
-                entity.HasIndex(e => e.Username, "SYS_C008862")
+                entity.HasIndex(e => e.Username, "SYS_C008755")
                     .IsUnique();
 
                 entity.Property(e => e.Userloginid)
@@ -1078,13 +1088,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Userlogins)
                     .HasForeignKey(d => d.Roleid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008864");
+                    .HasConstraintName("SYS_C008757");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Userlogins)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008863");
+                    .HasConstraintName("SYS_C008756");
             });
 
             modelBuilder.Entity<Userpointsactivity>(entity =>
@@ -1104,11 +1114,6 @@ namespace GamifyLearnHub.Core.Data
                     .HasColumnType("NUMBER")
                     .HasColumnName("POINTSACTIVITYID");
 
-                entity.Property(e => e.Pointsearned)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("POINTSEARNED")
-                    .HasDefaultValueSql("0");
-
                 entity.Property(e => e.Userid)
                     .HasColumnType("NUMBER")
                     .HasColumnName("USERID");
@@ -1121,25 +1126,25 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Userpointsactivities)
                     .HasForeignKey(d => d.Pointsactivityid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008813");
+                    .HasConstraintName("SYS_C008689");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Userpointsactivities)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008812");
+                    .HasConstraintName("SYS_C008688");
 
                 entity.HasOne(d => d.Usersection)
                     .WithMany(p => p.Userpointsactivities)
                     .HasForeignKey(d => d.Usersectionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008814");
+                    .HasConstraintName("SYS_C008690");
             });
 
             modelBuilder.Entity<Userprogress>(entity =>
             {
                 entity.HasKey(e => e.Userprogessid)
-                    .HasName("SYS_C008846");
+                    .HasName("SYS_C008729");
 
                 entity.ToTable("USERPROGRESS");
 
@@ -1160,13 +1165,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Userprogresses)
                     .HasForeignKey(d => d.Lectureid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008848");
+                    .HasConstraintName("SYS_C008731");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Userprogresses)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008847");
+                    .HasConstraintName("SYS_C008730");
             });
 
             modelBuilder.Entity<Usersection>(entity =>
@@ -1189,7 +1194,7 @@ namespace GamifyLearnHub.Core.Data
                 entity.Property(e => e.Studentmark)
                     .HasColumnType("NUMBER")
                     .HasColumnName("STUDENTMARK")
-                    .HasDefaultValueSql("0 \n");
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Userid)
                     .HasColumnType("NUMBER")
@@ -1199,13 +1204,13 @@ namespace GamifyLearnHub.Core.Data
                     .WithMany(p => p.Usersections)
                     .HasForeignKey(d => d.Sectionid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008764");
+                    .HasConstraintName("SYS_C008640");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Usersections)
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008763");
+                    .HasConstraintName("SYS_C008639");
             });
 
             OnModelCreatingPartial(modelBuilder);
