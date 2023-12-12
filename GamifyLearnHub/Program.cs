@@ -50,6 +50,7 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<ILectureRepository, LectureRepository>();
             builder.Services.AddScoped<ISectionAnnouncementRepository, SectionAnnouncementRepository>();
             builder.Services.AddScoped<IUserProgressRepository, UserProgressRepository>();
+            builder.Services.AddScoped<IAttendenceRepository, AttendenceRepository>();
 
 
             builder.Services.AddScoped<ILectureService, LectureService>();
