@@ -67,10 +67,10 @@ namespace GamifyLearnHub.Controllers
         public async Task<IActionResult> GetSectionsByInstructor(int id) 
         { 
             var sections = await _sectionService.GetAllSections();
-            if (sections == null) return BadRequest("Sections is empty.");
+            if (sections == null) return NotFound("Sections is empty.");
 
             var InstructorSections = sections.Where(s=> s.Userid == id).ToList();
-            if (InstructorSections == null) return BadRequest("Sections is empty");
+            if (InstructorSections == null) return NotFound("Sections is empty");
 
             return Ok(InstructorSections);
         }
