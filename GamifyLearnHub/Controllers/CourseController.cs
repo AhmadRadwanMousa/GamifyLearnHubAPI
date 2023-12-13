@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Service;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpGet]
+        [CheckClaims("roleId", "1")]
         public async Task<List<Course>> GetAllCourses()
         {
             return await _courseService.GetAllCourses();
@@ -26,6 +28,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetById/{id}")]
+        [CheckClaims("roleId", "1")]
         public async Task<Course> GetCourseById(int id)
         {
             return await _courseService.GetCourseById(id);
@@ -34,6 +37,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpPost]
+        [CheckClaims("roleId", "1")]
         public async Task<IActionResult> CreateCourse([FromForm] Course course)
         {
             var createdId = await _courseService.CreateCourse(course);
@@ -49,6 +53,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpPost]
         [Route("UploadImage")]
+        [CheckClaims("roleId", "1")]
         public Course UploadImage()
         {
             var file = Request.Form.Files[0];
@@ -65,6 +70,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPut]
+        [CheckClaims("roleId", "1")]
         public async Task<IActionResult> UpdateCourse([FromForm] Course course)
 
         {
@@ -83,6 +89,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpDelete("{id}")]
+        [CheckClaims("roleId", "1")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             var rowsAffected = await _courseService.DeleteCourse(id);

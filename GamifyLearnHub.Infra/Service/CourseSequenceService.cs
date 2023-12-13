@@ -40,6 +40,11 @@ namespace GamifyLearnHub.Infra.Service
             return await _courseSequenceRepository.GetCourseSequenceById(id);
         }
 
+        public async Task<List<Coursesequence>> GetCoursesSequenceByProgramId(int programId)
+        {
+            return await _courseSequenceRepository.GetCoursesSequenceByProgramId(programId);
+        }
+
         public async Task<int> UpdateCourseSequence(Coursesequence coursesequence)
         {
             var rowsAffected = await _courseSequenceRepository.UpdateCourseSequence(coursesequence);

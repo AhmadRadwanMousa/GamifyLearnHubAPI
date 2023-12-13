@@ -14,5 +14,7 @@ namespace GamifyLearnHub.Core.Service
         Task<int> CreateCourseSequence(Coursesequence coursesequence);
         Task<int> UpdateCourseSequence(Coursesequence coursesequence);
         Task<int> DeleteCourseSequence(int id);
+        Task<List<Coursesequence>> GetCoursesSequenceByProgramId(int programId);
+
     }
 }
