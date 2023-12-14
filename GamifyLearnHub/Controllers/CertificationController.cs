@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Service;
@@ -20,6 +21,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpGet]
+        [CheckClaims("roleId", "1")]
         public async Task<List<Certification>> GetAllCertifications()
         {
             return await _certificationService.GetAllCertifications();
@@ -34,6 +36,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetByUserId/{id}")]
+        [CheckClaims("roleId", "3")]
         public async Task<List<Certification>> GetCertificationByUserId(int id)
         {
             return await _certificationService.GetCertificationByUserId(id);
@@ -41,6 +44,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("PassUser/{CourseSequence}")]
+        [CheckClaims("roleId", "1")]
         public async Task<IActionResult> GetAllUsersPass(int CourseSequence)
         {
             var (UsersPass, Date_End) = await _certificationService.GetAllUsersPass(CourseSequence);

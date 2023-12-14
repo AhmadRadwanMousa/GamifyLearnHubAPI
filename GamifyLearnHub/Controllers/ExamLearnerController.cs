@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Service;
@@ -51,6 +52,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetExamsToday/{sectionId}")]
+        [CheckClaims("roleId", "3")]
         public async Task<List<Exam>> GetExamsToday( int sectionId)
         {
             return await _examLearnerService.GetExamsToday(sectionId);
