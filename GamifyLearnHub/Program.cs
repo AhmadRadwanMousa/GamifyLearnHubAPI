@@ -22,6 +22,15 @@ namespace GamifyLearnHub
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("policy", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
             builder.Services.AddScoped<IDbContext, DbContext>();
 
             builder.Services.AddScoped<ICertificationRepository, CertificationRepository>();
@@ -29,6 +38,10 @@ namespace GamifyLearnHub
 
             builder.Services.AddScoped<IExamLearnerRepository, ExamLearnerRepository>();
             builder.Services.AddScoped<IExamLearnerService, ExamLearnerService>();
+
+
+            builder.Services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+            builder.Services.AddScoped<ITestimonialService, TestimonialService>();
 
 
             builder.Services.AddScoped<IRoleRepository, RoleRepository>();
@@ -128,6 +141,9 @@ namespace GamifyLearnHub
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("policy");
+
             app.UseAuthentication();
 
             app.UseAuthorization();
