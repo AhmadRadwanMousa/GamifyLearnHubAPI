@@ -18,10 +18,10 @@ namespace GamifyLearnHub.Infra.Repositroy
         {
             _dbContext = dbContext; 
         }
-        public async Task<int> CreateRole(string roleName)
+        public async Task<int> CreateRole(Role role)
         {
             var p = new DynamicParameters();
-            p.Add("Role_name",roleName,dbType:DbType.String,ParameterDirection.Input);
+            p.Add("Role_name", role.Rolename, dbType:DbType.String,ParameterDirection.Input);
             p.Add("created_id",dbType:DbType.Int32,direction:ParameterDirection.Output);
             p.Add("rows_affected",dbType:DbType.Int32,direction:ParameterDirection.Output);
             await _dbContext.Connection.ExecuteAsync("Role_Package.CreateRole",p,commandType:CommandType.StoredProcedure);

@@ -25,9 +25,9 @@ namespace GamifyLearnHub.Controllers
             return await _roleService.GetRoleById(roleId);
         }
         [HttpPost]
-        public async Task<int> CreateRole ([FromForm]string ?roleName)
+        public async Task<int> CreateRole ([FromBody] Role role)
         {
-            return await _roleService.CreateRole(roleName); 
+            return await _roleService.CreateRole(role); 
         }
         [HttpDelete("{roleId}")]
         public async Task<int> DeleteRole(int roleId)

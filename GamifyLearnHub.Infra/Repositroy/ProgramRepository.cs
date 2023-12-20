@@ -29,6 +29,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("Educational_PeriodId", program.Educationalperiodid, dbType:DbType.Int32, direction:ParameterDirection.Input);
             p.Add("Program_Price", program.Programprice, dbType:DbType.Int32, direction:ParameterDirection.Input);
             p.Add("Program_Sale", program.Programsale, dbType:DbType.Int32, direction:ParameterDirection.Input);
+            p.Add("Program_Image", program.Programimage, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("created_id", dbType:DbType.Int32, direction:ParameterDirection.Output);
             p.Add("rows_affected", dbType:DbType.Int32, direction:ParameterDirection.Output);
 
@@ -50,11 +51,65 @@ namespace GamifyLearnHub.Infra.Repositroy
             return p.Get<int>("rows_affected");
         }
 
+        //public async Task<List<Program>> GetAll()
+        //{
+        //    var result = await _dbContext.Connection.QueryAsync<Program , Plan , Educationalperiod , Coursesequence, Program>(
+        //        "Program_Package.GetAllPrograms",
+        //         (program , plan , educationalperiod , coursesequence) => {
+        //             program.Plan = plan;
+        //             program.Educationalperiod = educationalperiod;
+        //             program.Coursesequences.Add(coursesequence);
+        //             return program;
+        //         },
+        //          splitOn: "planid,educationalperiodid",
+        //        commandType: CommandType.StoredProcedure);
+        //    return result.ToList();
+        //}
+
+
+
+
         public async Task<List<Program>> GetAll()
         {
-            var result = await _dbContext.Connection.QueryAsync<Program>("Program_Package.GetAllPrograms", commandType: CommandType.StoredProcedure);
-            return result.ToList();
+            var result = await _dbContext.Connection.QueryAsync<Program, Plan, Educationalperiod, Coursesequence, Program>(
+                "Program_Package.GetAllPrograms",
+                (program, plan, educationalPeriod, courseSequence) =>
+                {
+                    program.Plan = plan;
+                    program.Educationalperiod = educationalPeriod;
+
+                    if (program.Coursesequences == null)
+                    {
+                        program.Coursesequences = new List<Coursesequence>();
+                    }
+
+                    program.Coursesequences.Add(courseSequence);
+
+                    return program;
+                },
+                splitOn: "planid,educationalperiodid,coursesequenceid", 
+                commandType: CommandType.StoredProcedure
+            );
+
+            var groupedPrograms = result
+                .GroupBy(p => p.Programid)
+                .Select(group =>
+                {
+                    var program = group.First();
+                    program.Coursesequences = group
+                        .SelectMany(p => p.Coursesequences)
+                        .ToList();
+                    return program;
+                })
+                .ToList();
+
+            return groupedPrograms;
         }
+
+
+
+
+
 
         public async Task<Program> GetProgramById(int id)
         {
@@ -78,6 +133,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("Educational_PeriodId", program.Educationalperiodid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("Program_Price", program.Programprice, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("Program_Sale", program.Programsale, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("Program_Image", program.Programimage, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("updated_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
             p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
