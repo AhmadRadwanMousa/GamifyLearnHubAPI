@@ -119,8 +119,13 @@ namespace GamifyLearnHub
                         Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345"))
                 };
             });
- 
-         
+
+            builder.Services.AddCors(o =>
+            {
+                o.AddPolicy("policy", b =>
+                b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            }
+            ); 
 
 
             builder.Services.AddControllers();

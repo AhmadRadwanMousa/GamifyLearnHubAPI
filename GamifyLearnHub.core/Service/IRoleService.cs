@@ -9,7 +9,7 @@ namespace GamifyLearnHub.Core.Service
 {
     public interface IRoleService
     {
-        Task<int> CreateRole(string roleName);
+        Task<int> CreateRole(Role role);
         Task<int> DeleteRole(int roleId);
         Task<int> UpdateRole(Role role);
         Task<Role> GetRoleById(int roleId);
