@@ -3,7 +3,6 @@ using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GamifyLearnHub.Core.Data;
-using GamifyLearnHub.Data;
 
 
 namespace GamifyLearnHub.Controllers
