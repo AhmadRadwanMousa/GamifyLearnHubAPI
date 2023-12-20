@@ -18,9 +18,9 @@ namespace GamifyLearnHub.Infra.Service
         {
             _roleRepository = roleRepository;
         }
-        public async Task<int> CreateRole(string roleName)
+        public async Task<int> CreateRole(Role role)
         {
-           return await _roleRepository.CreateRole(roleName);
+           return await _roleRepository.CreateRole(role);
         }
 
         public async Task<int> DeleteRole(int roleId)

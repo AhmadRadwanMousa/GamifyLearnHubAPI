@@ -20,7 +20,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpGet]
-        [CheckClaims("roleId", "1")]
+        //[CheckClaims("roleId", "1")]
         public async Task<List<Course>> GetAllCourses()
         {
             return await _courseService.GetAllCourses();

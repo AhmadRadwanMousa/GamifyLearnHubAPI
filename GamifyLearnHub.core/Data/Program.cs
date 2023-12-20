@@ -19,6 +19,7 @@ namespace GamifyLearnHub.Core.Data
         public decimal? Educationalperiodid { get; set; }
         public decimal? Programprice { get; set; }
         public decimal? Programsale { get; set; }
+        public string? Programimage { get; set; }
 
         public virtual Educationalperiod? Educationalperiod { get; set; }
         public virtual Plan? Plan { get; set; }

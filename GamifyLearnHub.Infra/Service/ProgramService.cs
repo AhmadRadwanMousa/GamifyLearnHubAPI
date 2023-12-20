@@ -1,6 +1,7 @@
 ﻿using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
+using GamifyLearnHub.Infra.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,14 @@ namespace GamifyLearnHub.Infra.Service
     public class ProgramService : IProgramService
     {
         private readonly IProgramRepository _programRepository;
+        private readonly IPlanRepository _planRepository;
+        private readonly IEducationalPeriodRepository _educationalPeriodRepository;
 
-        public ProgramService(IProgramRepository programRepository)
+        public ProgramService(IProgramRepository programRepository , IPlanRepository planRepository, IEducationalPeriodRepository educationalPeriodRepository)
         {
             _programRepository = programRepository;
+            _planRepository = planRepository;
+            _educationalPeriodRepository = educationalPeriodRepository;
         }
         public async Task<int> CreateProgram(Program program)
         {
@@ -30,7 +35,9 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<List<Program>> GetAll()
         {
             return await _programRepository.GetAll();
+          
         }
+
 
         public async Task<Program> GetProgramById(int id)
         {
