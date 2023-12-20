@@ -10,10 +10,12 @@ namespace GamifyLearnHub.Controllers
 	public class PlanController : ControllerBase
 	{
 		private readonly IPlanService _planService;
+	
 
         public PlanController(IPlanService planService)
         {
 			this._planService = planService;
+			
         }
 		[HttpGet]
 		[Route("GetAllPlans")]
@@ -23,13 +25,13 @@ namespace GamifyLearnHub.Controllers
 		}
 		[HttpPost]
 		[Route("CreatePlan")]
-		public async Task<int> CreatePlan([FromForm] Plan plan)
+		public async Task<int> CreatePlan([FromBody] Plan plan)
 		{
 			return await _planService.CreatePlan(plan);
 		}
 		[HttpPut]
 		[Route("UpdatePlan")]
-		public async Task<int> UpdatePlan([FromForm] Plan plan)
+		public async Task<int> UpdatePlan([FromBody] Plan plan)
 		{
 			return await _planService.UpdatePlan(plan);
 		}
@@ -44,5 +46,6 @@ namespace GamifyLearnHub.Controllers
 		{
 			return await _planService.GetPlanById(id);
 		}
+		
 	}
 }

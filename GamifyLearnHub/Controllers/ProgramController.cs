@@ -29,7 +29,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPost]
-        public async Task<int> CreateProgram([FromForm] Core.Data.Program program) 
+        public async Task<int> CreateProgram([FromBody] Core.Data.Program program) 
         { 
             return await _programService.CreateProgram(program);
         }

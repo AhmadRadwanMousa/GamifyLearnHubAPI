@@ -24,13 +24,13 @@ namespace GamifyLearnHub.Controllers
 		}
 		[HttpPost]
 		[Route("CreateEducationalperiod")]
-		public async Task<int> CreateEducationalperiod([FromForm] Educationalperiod educationalPeriod)
+		public async Task<int> CreateEducationalperiod([FromBody] Educationalperiod educationalPeriod)
 		{
 			return await _educationalPeriodService.CreateEducationalperiod(educationalPeriod);
 		}
 		[HttpPut]
 		[Route("UpdateEducationalperiod")]
-		public async Task<int> UpdateEducationalperiod([FromForm] Educationalperiod educationalPeriod)
+		public async Task<int> UpdateEducationalperiod([FromBody]Educationalperiod educationalPeriod)
 		{
 			return await _educationalPeriodService.UpdateEducationalperiod(educationalPeriod);
 		}

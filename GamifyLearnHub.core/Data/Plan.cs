@@ -12,6 +12,7 @@ namespace GamifyLearnHub.Core.Data
 
         public decimal Planid { get; set; }
         public string Planname { get; set; } = null!;
+        public string? Planimage { get; set; }
 
         public virtual ICollection<Program> Programs { get; set; }
     }

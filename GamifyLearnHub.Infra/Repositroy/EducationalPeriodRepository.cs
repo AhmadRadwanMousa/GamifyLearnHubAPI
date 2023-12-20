@@ -29,7 +29,7 @@ namespace GamifyLearnHub.Infra.Repository
 		{
 			var p = new DynamicParameters();
 			p.Add("Start_Date", educationalPeriod.Startdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-			p.Add("End_Date", educationalPeriod.Enddate, dbType: DbType.Int32, direction: ParameterDirection.Input);
+			p.Add("End_Date", educationalPeriod.Enddate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 			p.Add("created_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
 			p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 			await _dBContext.Connection.ExecuteAsync("EducationalPeriod_Package.CreateEducationalPeriod", p, commandType: CommandType.StoredProcedure);
@@ -58,8 +58,8 @@ namespace GamifyLearnHub.Infra.Repository
 		{
 			var p = new DynamicParameters();
 			p.Add("EducationalPeriod_Id", educationalPeriod.Educationalperiodid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-			p.Add("Start_Date", educationalPeriod.Startdate, dbType: DbType.String, direction: ParameterDirection.Input);
-			p.Add("End_Date", educationalPeriod.Enddate, dbType: DbType.String, direction: ParameterDirection.Input);
+			p.Add("Start_Date", educationalPeriod.Startdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+			p.Add("End_Date", educationalPeriod.Enddate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 			p.Add("updated_id", DbType.Int32, direction: ParameterDirection.Output);
 			p.Add("rows_affected", DbType.Int32, direction: ParameterDirection.Output);
 

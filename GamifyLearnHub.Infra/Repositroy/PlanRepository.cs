@@ -28,12 +28,11 @@ namespace GamifyLearnHub.Infra.Repository
 		{
 			var p = new DynamicParameters();
 			p.Add("Plan_Name", plan.Planname, dbType: DbType.String, direction: ParameterDirection.Input);
-			p.Add("created_id", plan.Planid, dbType: DbType.Int32, direction: ParameterDirection.Output);
+            p.Add("plan_image", plan.Planimage, dbType: DbType.String, direction: ParameterDirection.Input);;
+            p.Add("created_id", plan.Planid, dbType: DbType.Int32, direction: ParameterDirection.Output);
 			p.Add("rows_affected", DbType.Int32, direction: ParameterDirection.Output);
 			await _dBContext.Connection.ExecuteAsync("Plan_Package.CreatePlan", p, commandType: CommandType.StoredProcedure);
 			return p.Get<int>("created_id");
-
-
 		}
 
 		public async Task<int> DeletePlan(int id)
@@ -61,7 +60,9 @@ namespace GamifyLearnHub.Infra.Repository
 			var p = new DynamicParameters();
 			p.Add("Plan_Id", plan.Planid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 			p.Add("Plan_Name", plan.Planname, dbType: DbType.String, direction: ParameterDirection.Input);
-			p.Add("updated_id", DbType.Int32, direction: ParameterDirection.Output);
+            p.Add("plan_image", plan.Planimage, dbType: DbType.String, direction: ParameterDirection.Input); ;
+
+            p.Add("updated_id", DbType.Int32, direction: ParameterDirection.Output);
 			p.Add("rows_affected", DbType.Int32, direction: ParameterDirection.Output);
 
 			await _dBContext.Connection.ExecuteAsync("Plan_Package.UpdatePlan", p, commandType: CommandType.StoredProcedure);
