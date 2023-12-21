@@ -35,7 +35,7 @@ namespace GamifyLearnHub.Controllers
             return await _roleService.DeleteRole(roleId);
         }
         [HttpPut]
-        public async Task<int> UpdateRole(Role role)
+        public async Task<int> UpdateRole([FromBody] Role role)
         {
             return await _roleService.UpdateRole(role);
         }

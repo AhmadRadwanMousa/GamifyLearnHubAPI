@@ -1,11 +1,11 @@
-﻿using Dapper;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Dapper;
 using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Repository;
-using System;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GamifyLearnHub.Infra.Repository
 {
@@ -49,6 +49,7 @@ namespace GamifyLearnHub.Infra.Repository
             parameters.Add("p_user_id", section.Userid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_course_sequence_id", section.Coursesequenceid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_section_size", section.Sectionsize, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("p_image_name", section.ImageName, DbType.String, ParameterDirection.Input); // Add image name parameter
             parameters.Add("created_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -69,6 +70,7 @@ namespace GamifyLearnHub.Infra.Repository
             parameters.Add("p_user_id", section.Userid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_course_sequence_id", section.Coursesequenceid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_section_size", section.Sectionsize, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("p_image_name", section.ImageName, DbType.String, ParameterDirection.Input); // Add image name parameter
             parameters.Add("updated_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
