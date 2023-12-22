@@ -14,6 +14,10 @@ namespace GamifyLearnHub.Core.Repository
 		Task<int> CreatePlan(Plan plan);
 		Task<int> DeletePlan(int id);
 		Task<int> UpdatePlan(Plan plan);
+        Task<List<Plan>> GetAllPlansWithPrograms();
 
-	}
+
+
+
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -108,10 +109,7 @@ namespace GamifyLearnHub.Infra.Repositroy
 
 
 
-
-
-
-        public async Task<Program> GetProgramById(int id)
+public async Task<Program> GetProgramById(int id)
         {
             var p = new DynamicParameters();
             p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
@@ -140,6 +138,15 @@ namespace GamifyLearnHub.Infra.Repositroy
             await _dbContext.Connection.ExecuteAsync("Program_Package.UpdateProgram", p, commandType: CommandType.StoredProcedure);
 
             return p.Get<int>("rows_affected");
+        }
+
+        public async Task<List<ProgramsByPlanId>> GetAllProgramsWithPlanId(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<ProgramsByPlanId>("Program_Package.GetAllProgramsByPlanId", p ,commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
     }
 }

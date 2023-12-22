@@ -3,6 +3,7 @@ using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Infra.Service;
 
 
 namespace GamifyLearnHub.Controllers
@@ -17,6 +18,17 @@ namespace GamifyLearnHub.Controllers
         {
             _programService = programService;
         }
+
+
+
+
+        [HttpGet]
+        [Route("GetAllProgramsWithPlanId/{id}")]
+        public async Task<List<Core.DTO.ProgramsByPlanId>> GetAllProgramsWithPlanId(int id)
+        {
+            return await _programService.GetAllProgramsWithPlanId(id);
+        }
+
 
         [HttpGet("GetAllPrograms")]
 

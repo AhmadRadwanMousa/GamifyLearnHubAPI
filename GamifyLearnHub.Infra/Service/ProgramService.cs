@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Repository;
@@ -38,6 +39,10 @@ namespace GamifyLearnHub.Infra.Service
           
         }
 
+        public async Task<List<ProgramsByPlanId>> GetAllProgramsWithPlanId(int id)
+        {
+            return await _programRepository.GetAllProgramsWithPlanId(id);
+        }
 
         public async Task<Program> GetProgramById(int id)
         {

@@ -69,7 +69,44 @@ namespace GamifyLearnHub.Infra.Repository
 			return p.Get<int>("rows_affected");
 
 		}
-	}
+
+        public async Task<List<Plan>> GetAllPlansWithPrograms()
+        {
+            var plansWithPrograms = await _dBContext.Connection.QueryAsync<Plan, Program, Plan>(
+                "Plan_Package.GetAllPlansWithPrograms",
+                (plan, program) =>
+                {
+                    if (plan.Programs == null)
+                    {
+                        plan.Programs = new List<Program>();
+                    }
+
+                    if (program != null) 
+                    {
+                        plan.Programs.Add(program);
+                    }
+
+                    return plan;
+                },
+                splitOn: "planid,programid",
+                commandType: CommandType.StoredProcedure);
+
+            var groupedPlans = plansWithPrograms
+                .GroupBy(p => p.Planname)
+                .Select(g => new Plan
+                {
+                    Planid = g.First().Planid,
+                    Planname = g.Key,
+                    Planimage = g.First().Planimage,
+                    Programs = g.SelectMany(p => p.Programs).Where(p => p != null).ToList()
+                })
+                .ToList();
+
+            return groupedPlans;
+        }
+
+
+    }
 
 
 }

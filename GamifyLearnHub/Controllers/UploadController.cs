@@ -36,5 +36,32 @@ namespace GamifyLearnHub.Controllers
 
             return new JsonResult(new { path = "https://localhost:7036/Images/" + fileName });
         }
+
+
+
+
+
+
+        [HttpPost]
+        [Route("UploadFile")]
+
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            if (file == null)
+            {
+                return BadRequest("SomethingWentWrong!");
+            }
+
+            string fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var filePath = Path.Combine("Files/", fileName);
+            var fullPath = Path.Combine(_webHostEnvironment.WebRootPath, filePath);
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return new JsonResult(new { path = "https://localhost:7036/Files/" + fileName });
+        }
     }
 }

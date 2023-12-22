@@ -15,5 +15,6 @@ namespace GamifyLearnHub.Core.Repository
         Task<int> UpdateCourseSequence(Coursesequence coursesequence);
         Task<int> DeleteCourseSequence(int id);
         Task<List<Coursesequence>> GetCoursesSequenceByProgramId(int programId);
+
     }
 }

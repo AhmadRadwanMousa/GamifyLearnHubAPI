@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace GamifyLearnHub.Core.Service
         Task<int> CreateProgram(Program program);
         Task<int> UpdateProgram(Program program);
         Task<int> DeleteProgram(int id);
+        Task<List<ProgramsByPlanId>> GetAllProgramsWithPlanId(int id);
     }
 }

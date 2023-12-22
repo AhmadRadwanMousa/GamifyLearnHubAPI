@@ -23,7 +23,15 @@ namespace GamifyLearnHub.Controllers
 		{
 			return await _planService.GetAllPlans();
 		}
-		[HttpPost]
+
+        [HttpGet]
+        [Route("GetAllPlansWithPrograms")]
+        public async Task<List<Plan>> GetAllPlansWithPrograms()
+        {
+            return await _planService.GetAllPlansWithPrograms();
+        }
+
+        [HttpPost]
 		[Route("CreatePlan")]
 		public async Task<int> CreatePlan([FromBody] Plan plan)
 		{
