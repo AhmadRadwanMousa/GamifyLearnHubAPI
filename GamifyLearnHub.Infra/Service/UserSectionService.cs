@@ -42,5 +42,10 @@ namespace GamifyLearnHup.Infra.Service
         {
             return await _userSectionRepository.DeleteUserSection(userSectionId);
         }
+
+        public async Task<List<User>> GetAllUserStudents()
+        {
+           return await _userSectionRepository.GetAllUserStudents();
+        }
     }
 }

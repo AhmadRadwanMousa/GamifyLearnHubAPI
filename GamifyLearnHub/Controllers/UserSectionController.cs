@@ -24,6 +24,11 @@ namespace GamifyLearnHub.API.Controllers
             return await _userSectionService.GetAllUserSections();
         }
 
+        [HttpGet("GetAllStudentsUsers")]
+        public async Task<List<User>> GetAllStudentsUsers() {
+            return await _userSectionService.GetAllUserStudents();
+        }
+
         [HttpGet("{userSectionId}")]
         public async Task<Usersection> GetUserSectionById(decimal userSectionId)
         {
@@ -33,6 +38,8 @@ namespace GamifyLearnHub.API.Controllers
         [HttpPost]
         public async Task<ActionResult<decimal>> CreateUserSection(Usersection userSection)
         {
+            userSection.Enrollmentdate = DateTime.Now;
+            userSection.Studentmark = 0;
             decimal createdId = await _userSectionService.CreateUserSection(userSection);
             return CreatedAtAction(nameof(GetUserSectionById), new { userSectionId = createdId }, createdId);
         }

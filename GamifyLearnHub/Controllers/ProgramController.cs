@@ -30,6 +30,10 @@ namespace GamifyLearnHub.Controllers
         {
             return await _programService.GetProgramById(id);
         }
+        [HttpGet("NumOfStudentsInProgram/{id}")]
+        public async Task<int> GetNumberOfStudentsInProgram(int id) {
+            return await _programService.GetNumberOfStudentsInProgram(id);
+        }
 
         [HttpPost]
         public async Task<int> CreateProgram([FromBody] Core.Data.Program program) 

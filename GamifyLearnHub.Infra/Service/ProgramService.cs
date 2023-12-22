@@ -38,6 +38,10 @@ namespace GamifyLearnHub.Infra.Service
           
         }
 
+        public async Task<int> GetNumberOfStudentsInProgram(int id)
+        {
+            return await _programRepository.GetNumberOfStudentsInProgram(id);
+        }
 
         public async Task<Program> GetProgramById(int id)
         {

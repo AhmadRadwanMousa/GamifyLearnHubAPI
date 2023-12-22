@@ -11,6 +11,7 @@ namespace GamifyLearnHub.Core.Service
     {
         Task<List<Program>> GetAll();
         Task<Program> GetProgramById(int id);
+        Task<int> GetNumberOfStudentsInProgram(int id);
         Task<int> CreateProgram(Program program);
         Task<int> UpdateProgram(Program program);
         Task<int> DeleteProgram(int id);

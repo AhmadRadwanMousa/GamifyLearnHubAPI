@@ -41,5 +41,10 @@ namespace GamifyLearnHub.Infra.Service
             int rowsAffected = await _sectionRepository.DeleteSection(sectionId);
             return rowsAffected;
         }
+
+        public async Task<List<Section>> GetSectionByCourseId(decimal courseId)
+        {
+            return await _sectionRepository.GetSectionByCourseId(courseId);
+        }
     }
 }

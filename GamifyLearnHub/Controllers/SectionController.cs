@@ -53,6 +53,13 @@ namespace GamifyLearnHub.API.Controllers
             }
         }
 
+        [HttpGet("GetSectionByCourseId/{courseId}")]
+        public async Task<List<Section>> GetSectionByCourseId(decimal courseId) { 
+
+            return await _sectionService.GetSectionByCourseId(courseId);
+
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateSection([FromBody] Section section)
         {

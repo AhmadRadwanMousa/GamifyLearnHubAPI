@@ -96,5 +96,13 @@ namespace GamifyLearnHup.Infra.Repository
 
             return parameters.Get<int>("rows_affected");
         }
+
+        public async Task<List<User>> GetAllUserStudents()
+        {
+            var result = await _dbContext.Connection.QueryAsync<User>("UserSection_Package.GetAllUserStudents", commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+
+        }
     }
 }

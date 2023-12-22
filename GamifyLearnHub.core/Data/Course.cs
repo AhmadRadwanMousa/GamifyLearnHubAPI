@@ -8,7 +8,8 @@ namespace GamifyLearnHub.Core.Data
         public Course()
         {
             Coursesections = new HashSet<Coursesection>();
-            Coursesequences = new HashSet<Coursesequence>();
+            CoursesequenceCourses = new HashSet<Coursesequence>();
+            CoursesequencePerviouscourses = new HashSet<Coursesequence>();
         }
 
         public decimal Courseid { get; set; }
@@ -20,6 +21,7 @@ namespace GamifyLearnHub.Core.Data
         public decimal Quizzezweight { get; set; }
 
         public virtual ICollection<Coursesection> Coursesections { get; set; }
-        public virtual ICollection<Coursesequence> Coursesequences { get; set; }
+        public virtual ICollection<Coursesequence> CoursesequenceCourses { get; set; }
+        public virtual ICollection<Coursesequence> CoursesequencePerviouscourses { get; set; }
     }
 }
