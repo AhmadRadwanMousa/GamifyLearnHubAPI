@@ -20,27 +20,38 @@ namespace GamifyLearnHub.Infra.Repository
 
         public async Task<IEnumerable<Section>> GetAllSections()
         {
-            var result = await _dbContext.Connection.QueryAsync<Section, Assignment, Attendence, Exam, Sectionannoncment, Usersection,User, Section>(
-        "Section_Package.GetAllSections",
-        (section, assignment, attendence, exam, sectionAnnoncment, userSection, user) =>
-        {
-        section.Assignments ??= new List<Assignment>();
-        section.Attendences ??= new List<Attendence>();
-        section.Exams ??= new List<Exam>();
-        section.Sectionannoncments ??= new List<Sectionannoncment>();
-        section.Usersections ??= new List<Usersection>();
-        if (assignment != null) section.Assignments.Add(assignment);
-        if (attendence != null) section.Attendences.Add(attendence);
-        if (exam != null) section.Exams.Add(exam);
-        if (sectionAnnoncment != null) section.Sectionannoncments.Add(sectionAnnoncment);
-        if (userSection != null) section.Usersections.Add(userSection);
-        if (userSection != null) section.User = user;
+            var result = await _dbContext.Connection.QueryAsync<Section, Assignment, Attendence, Exam, Sectionannoncment, Usersection, User, Section>(
+                "Section_Package.GetAllSections",
+                (section, assignment, attendence, exam, sectionAnnoncment, userSection, user) =>
+                {
+                    section.Assignments ??= new List<Assignment>();
+                    section.Attendences ??= new List<Attendence>();
+                    section.Exams ??= new List<Exam>();
+                    section.Sectionannoncments ??= new List<Sectionannoncment>();
+                    section.Usersections ??= new List<Usersection>();
 
-        return section;
-        },
-        splitOn: "assignmentId,attendenceid,examId,sectionAnnoncmentId,userSectionId,Userid",
-        commandType: CommandType.StoredProcedure
-        );
+                    if (assignment != null) section.Assignments.Add(assignment);
+                    if (attendence != null) section.Attendences.Add(attendence);
+                    if (exam != null) section.Exams.Add(exam);
+                    if (sectionAnnoncment != null) section.Sectionannoncments.Add(sectionAnnoncment);
+                    if (userSection != null) section.Usersections.Add(userSection);
+
+                    // Check if the user information is present and set the User property
+                    if (user != null)
+                    {
+                        section.User = user;
+                    }
+                    else
+                    {
+                        // Create an empty user object if there is no related user information
+                        section.User = new User();
+                    }
+
+                    return section;
+                },
+                splitOn: "assignmentId,attendenceid,examId,sectionAnnoncmentId,userSectionId,Userid",
+                commandType: CommandType.StoredProcedure
+            );
 
             return result;
         }
@@ -66,6 +77,7 @@ namespace GamifyLearnHub.Infra.Repository
             parameters.Add("p_user_id", section.Userid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_course_sequence_id", section.Coursesequenceid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_section_size", section.Sectionsize, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("p_image_name", section.ImageName, DbType.String, ParameterDirection.Input);
             parameters.Add("created_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -113,18 +125,28 @@ namespace GamifyLearnHub.Infra.Repository
             var p = new DynamicParameters();
             p.Add("Course_id", courseId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            var result = await _dbContext.Connection.QueryAsync<Section, User,Section>("Section_Package.GetAllSectionsByCourseId",
-                
+            var result = await _dbContext.Connection.QueryAsync<Section, User, Section>("Section_Package.GetAllSectionsByCourseId",
+
                 (section, user) => {
                     section.User = user;
                     return section;
-                } 
-               
+                }
+
                 , p
-                , splitOn:"Userid"
+                , splitOn: "Userid"
                 , commandType: CommandType.StoredProcedure);
 
             return result.ToList();
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersWithRoleId2()
+        {
+            var result = await _dbContext.Connection.QueryAsync<User>(
+                "Section_Package.GetAllUsersWithRoleId2",
+                commandType: CommandType.StoredProcedure
+            );
+
+            return result;
         }
     }
 }

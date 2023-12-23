@@ -54,7 +54,8 @@ namespace GamifyLearnHub.API.Controllers
         }
 
         [HttpGet("GetSectionByCourseId/{courseId}")]
-        public async Task<List<Section>> GetSectionByCourseId(decimal courseId) { 
+        public async Task<List<Section>> GetSectionByCourseId(decimal courseId)
+        {
 
             return await _sectionService.GetSectionByCourseId(courseId);
 
@@ -101,5 +102,21 @@ namespace GamifyLearnHub.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
+
+
+        [HttpGet("GetAllUsersWithRoleId2")]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsersWithRoleId2()
+        {
+            try
+            {
+                var users = await _sectionService.GetAllUsersWithRoleId2();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
+
     }
 }

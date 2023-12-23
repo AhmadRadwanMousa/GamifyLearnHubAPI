@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GamifyLearnHub.Core.Data
+namespace GamifyLearnHub.Data
 {
     public partial class Section
     {
@@ -16,8 +16,6 @@ namespace GamifyLearnHub.Core.Data
 
         public decimal Sectionid { get; set; }
         public string? Sectionname { get; set; }
-        public string? ImageName { get; set; }
-
         public decimal? Userid { get; set; }
         public decimal Sectionsize { get; set; }
         public decimal? Coursesequenceid { get; set; }
