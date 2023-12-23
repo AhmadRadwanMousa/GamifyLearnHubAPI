@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
-using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Dapper;
 
 namespace GamifyLearnHub.API.Controllers
 {
@@ -16,78 +13,25 @@ namespace GamifyLearnHub.API.Controllers
     public class SectionController : ControllerBase
     {
         private readonly ISectionService _sectionService;
-        private readonly IDbContext _dbContext;
 
-        public SectionController(ISectionService sectionService, IDbContext dbContext)
+        public SectionController(ISectionService sectionService)
         {
             _sectionService = sectionService ?? throw new ArgumentNullException(nameof(sectionService));
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext)); // Inject _dbContext
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GamifyLearnHub.Core.Data.Section>>> GetAllSections()
+        public async Task<ActionResult<IEnumerable<Section>>> GetAllSections()
         {
             try
             {
-                var result = await _dbContext.Connection.QueryAsync<Section, Assignment, Attendence, Exam, Sectionannoncment, Usersection, Section>(
-                    "Section_Package.GetAllSections",
-                    (section, assignment, attendence, exam, sectionAnnoncment, userSection) =>
-                    {
-                        section.Assignments ??= new List<Assignment>();
-                        section.Attendences ??= new List<Attendence>();
-                        section.Exams ??= new List<Exam>();
-                        section.Sectionannoncments ??= new List<Sectionannoncment>();
-                        section.Usersections ??= new List<Usersection>();
-
-                        if (assignment != null) section.Assignments.Add(assignment);
-                        if (attendence != null) section.Attendences.Add(attendence);
-                        if (exam != null) section.Exams.Add(exam);
-                        if (sectionAnnoncment != null) section.Sectionannoncments.Add(sectionAnnoncment);
-                        if (userSection != null) section.Usersections.Add(userSection);
-
-                        return section;
-                    },
-                    splitOn: "assignmentId,attendenceid,examId,sectionAnnoncmentId,userSectionId",
-                    commandType: CommandType.StoredProcedure
-                );
-
-                var groupedSections = result
-                    .GroupBy(s => s.Sectionid)
-                    .Select(group =>
-                    {
-                        var section = group.First();
-                        section.Assignments = group
-                            .SelectMany(s => s.Assignments)
-                            .Where(a => a != null)  // Filter out null assignments
-                            .ToList();
-                        section.Attendences = group
-                            .SelectMany(s => s.Attendences)
-                            .Where(a => a != null)  // Filter out null attendences
-                            .ToList();
-                        section.Exams = group
-                            .SelectMany(s => s.Exams)
-                            .Where(e => e != null)  // Filter out null exams
-                            .ToList();
-                        section.Sectionannoncments = group
-                            .SelectMany(s => s.Sectionannoncments)
-                            .Where(sa => sa != null)  // Filter out null section announcements
-                            .ToList();
-                        section.Usersections = group
-                            .SelectMany(s => s.Usersections)
-                            .Where(us => us != null)  // Filter out null user sections
-                            .ToList();
-
-                        return section;
-                    });
-
-                return groupedSections.ToList();
+                var sections = await _sectionService.GetAllSections();
+                return Ok(sections);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
-
 
         [HttpGet("{sectionId}")]
         public async Task<ActionResult<Section>> GetSectionById(decimal sectionId)
@@ -107,6 +51,14 @@ namespace GamifyLearnHub.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
+        }
+
+        [HttpGet("GetSectionByCourseId/{courseId}")]
+        public async Task<List<Section>> GetSectionByCourseId(decimal courseId)
+        {
+
+            return await _sectionService.GetSectionByCourseId(courseId);
+
         }
 
         [HttpPost]
@@ -150,5 +102,21 @@ namespace GamifyLearnHub.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
+
+
+        [HttpGet("GetAllUsersWithRoleId2")]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsersWithRoleId2()
+        {
+            try
+            {
+                var users = await _sectionService.GetAllUsersWithRoleId2();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
+
     }
 }

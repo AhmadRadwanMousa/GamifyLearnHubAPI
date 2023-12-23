@@ -58,13 +58,26 @@ namespace GamifyLearnHub.Infra.Repositroy
             return result.FirstOrDefault();
         }
 
-        public async Task<List<Coursesequence>> GetCoursesSequenceByProgramId(int programId)
-        {
-            var p = new DynamicParameters();
-            p.Add("id", programId, DbType.Int32, direction: ParameterDirection.Input);
-            var result = await _dbContext.Connection.QueryAsync<Coursesequence>("CourseSequence_Package.GetCoursesSequenceByProgramId", p, commandType: CommandType.StoredProcedure);
-            return result.ToList();
-        }
+         public async Task<List<Coursesequence>> GetCoursesSequenceByProgramId(int programId)
+  {
+      var p = new DynamicParameters();
+      p.Add("id", programId, DbType.Int32, direction: ParameterDirection.Input);
+
+      var result = await _dbContext.Connection.QueryAsync<Coursesequence, Course, Course, Program, Coursesequence>(
+          "CourseSequence_Package.GetCoursesSequenceByProgramId",
+          (coursesequence, course, preCourse, program) =>
+          {
+              coursesequence.Course = course;
+              coursesequence.Perviouscourse = preCourse;
+              coursesequence.Program = program;
+              return coursesequence;
+          },
+          p,
+          splitOn: "courseid,courseid,programid", 
+          commandType: CommandType.StoredProcedure);
+
+      return result.ToList();
+  }
 
         public async Task<int> UpdateCourseSequence(Coursesequence coursesequence)
         {
