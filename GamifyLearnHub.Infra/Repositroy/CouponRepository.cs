@@ -27,7 +27,7 @@ namespace GamifyLearnHub.Infra.Repositroy
 			p.Add("points", coupon.Points, dbType: DbType.Int32, direction: ParameterDirection.Input);
 			p.Add("created_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-			await _dbContext.Connection.ExecuteAsync("Coupon_Package.CreateCoupon", p, commandType: CommandType.StoredProcedure);
+			await _dbContext.Connection.ExecuteAsync("Coupon_Package.CreateCoupon",p, commandType:CommandType.StoredProcedure);
 			return p.Get<int>("created_id");
 
 		}

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -107,14 +108,39 @@ namespace GamifyLearnHub.Infra.Repositroy
             return groupedPrograms;
         }
 
+        public async Task<int> GetNumberOfStudentsInProgram(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("num_students", dbType:DbType.Int32,direction:ParameterDirection.Output);
 
+            await _dbContext.Connection.ExecuteAsync("Program_Package.GetNumberOfStudentsInProgram",p,commandType:CommandType.StoredProcedure);
+            return p.Get<int>("num_students");
 
-public async Task<Program> GetProgramById(int id)
+        }
+
+        public async Task<Program> GetProgramById(int id)
         {
             var p = new DynamicParameters();
             p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            var result = await _dbContext.Connection.QueryAsync<Program>("Program_Package.GetProgramById",p,commandType:CommandType.StoredProcedure);
+            var result = await _dbContext.Connection.QueryAsync<Program, Plan,Educationalperiod, Program>(
+                "Program_Package.GetProgramById",
+                (program, plan, educationalperiod) => {
+
+                    if (program.Plan == null) {
+
+                        program.Plan = plan;
+                    }
+                    if (program.Educationalperiod == null) {
+
+                        program.Educationalperiod = educationalperiod;
+                    }
+                        return program;
+                },
+                p,
+                splitOn: "planid, educationalperiodid",
+                commandType:CommandType.StoredProcedure);
 
             return result.FirstOrDefault();
             

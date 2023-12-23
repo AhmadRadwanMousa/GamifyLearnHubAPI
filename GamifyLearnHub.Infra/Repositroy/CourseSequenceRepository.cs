@@ -74,7 +74,7 @@ namespace GamifyLearnHub.Infra.Repositroy
                     return coursesequence;
                 },
                 p,
-                splitOn: "courseid,courseid,programid", 
+                splitOn: "courseid,courseid,programid",
                 commandType: CommandType.StoredProcedure);
 
             return result.ToList();
