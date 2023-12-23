@@ -15,13 +15,13 @@ namespace GamifyLearnHub.Controllers
             _authenticationService= authenticationService;
         }
         [HttpPost]
-        public IActionResult Login([FromForm]LoginCredentails loginDetails)
+        public async Task<IActionResult> Login([FromBody]LoginCredentails loginDetails)
         {
-            var token = _authenticationService.Login(loginDetails);
+            var token = await _authenticationService.Login(loginDetails);
             if (token == null) { 
             return Unauthorized();
             }
-            return Ok(token);   
+            return new JsonResult(new { token=token });
         }
     }
 }

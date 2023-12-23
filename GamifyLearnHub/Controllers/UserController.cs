@@ -18,7 +18,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPost]
-        public async Task<int> CreateUser([FromForm] UserDetails? userDetails)
+        public async Task<int> CreateUser([FromBody] UserDetails? userDetails)
         {
             return await _userService.CreateUser(userDetails);
         }
@@ -28,14 +28,14 @@ namespace GamifyLearnHub.Controllers
            return await _userService.DeleteUser(userId);  
         }
         [HttpPut]
-        [Authorize]
-        public async Task<int> UpdateUser([FromForm]UserDetails userDetails)
+        //[Authorize]
+        public async Task<int> UpdateUser([FromBody]UserDetails ?userDetails)
         {
             return await _userService.UpdateUser(userDetails);
         }
         [HttpPut]
         [Route("EditProfile")]
-        public async Task<int> EditUserProfile([FromForm] UserDetails ?userDetails)
+        public async Task<int> EditUserProfile([FromBody] UserDetails ?userDetails)
         {
             return await _userService.EditUserProfile(userDetails); 
         }
