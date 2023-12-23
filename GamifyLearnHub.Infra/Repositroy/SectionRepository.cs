@@ -98,6 +98,8 @@ namespace GamifyLearnHub.Infra.Repository
             parameters.Add("p_user_id", section.Userid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_course_sequence_id", section.Coursesequenceid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_section_size", section.Sectionsize, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("p_image_name", section.ImageName, DbType.String, ParameterDirection.Input);
+
             parameters.Add("updated_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
