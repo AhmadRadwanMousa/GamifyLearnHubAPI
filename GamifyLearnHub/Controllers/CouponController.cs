@@ -23,13 +23,13 @@ namespace GamifyLearnHub.Controllers
 		}
 		[HttpPost]
 		[Route("CreateCoupon")]
-		public async Task<int> CreateCoupon([FromForm] Coupon coupon)
+		public async Task<int> CreateCoupon( Coupon coupon)
 		{
 			return await _couponService.CreateCoupon(coupon);
 		}
 		[HttpPut]
 		[Route("UpdateCoupon")]
-		public async Task<int> UpdateCoupon([FromForm] Coupon coupon)
+		public async Task<int> UpdateCoupon( Coupon coupon)
 		{
 			return await _couponService.UpdateCoupon(coupon);
 		}
