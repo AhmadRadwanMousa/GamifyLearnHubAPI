@@ -19,9 +19,9 @@ namespace GamifyLearnHub.Infra.Service
         {
             _authentication=authentication; 
         }
-        public string? Login(LoginCredentails loginDetails)
+        public async Task<string>? Login(LoginCredentails loginDetails)
         {
-         var existUser = _authentication.Login(loginDetails);
+         var existUser = await _authentication.Login(loginDetails);
             if ( existUser==null)
             {
                 return null;
@@ -30,9 +30,9 @@ namespace GamifyLearnHub.Infra.Service
             var signCredintails = new SigningCredentials(secretKey,SecurityAlgorithms.HmacSha256);
             var claimes = new List<Claim>
             {
-                new Claim ("userName",existUser.Result.Username),
-                new Claim ("roleId",existUser.Result.Roleid.ToString()),
-                new Claim ("userId",existUser.Result.Userid.ToString())
+                new Claim ("userName",existUser.Username),
+                new Claim ("roleId",existUser.Roleid.ToString()),
+                new Claim ("userId",existUser.Userid.ToString())
 
             };
             var tokenOptions = new JwtSecurityToken(

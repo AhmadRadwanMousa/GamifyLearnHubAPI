@@ -42,7 +42,7 @@ namespace GamifyLearnHub.Infra.Service
             return await _userRepository.GetUserById(id);   
         }
 
-        public async Task<int> UpdateUser(UserDetails userDetails)
+        public async Task<int> UpdateUser(UserDetails? userDetails)
         {
           return await _userRepository.UpdateUser(userDetails);    
         }

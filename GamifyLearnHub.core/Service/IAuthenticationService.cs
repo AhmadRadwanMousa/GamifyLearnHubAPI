@@ -9,7 +9,7 @@ namespace GamifyLearnHub.Core.Service
 {
     public interface IAuthenticationService
     {
-        public string? Login(LoginCredentails loginDetails);
+        public Task<string>? Login(LoginCredentails loginDetails);
 
     }
 }

@@ -23,7 +23,7 @@ namespace GamifyLearnHub.Core.DTO
         public decimal? Roleid { get; set; }
         public bool? Isonline { get; set; }
         public bool? Isaccepted { get; set; }
-        public DateTime Lastlogin { get; set; }
+        public DateTime ?Lastlogin { get; set; }
         public decimal? Dayscount { get; set; }
 
 
