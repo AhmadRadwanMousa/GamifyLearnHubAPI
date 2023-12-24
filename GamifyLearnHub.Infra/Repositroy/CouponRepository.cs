@@ -26,6 +26,8 @@ namespace GamifyLearnHub.Infra.Repositroy
 			p.Add("coupon_percent", coupon.Couponpercent, dbType: DbType.Int32, direction: ParameterDirection.Input);
 			p.Add("points", coupon.Points, dbType: DbType.Int32, direction: ParameterDirection.Input);
 			p.Add("created_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
 
 			await _dbContext.Connection.ExecuteAsync("Coupon_Package.CreateCoupon", p, commandType: CommandType.StoredProcedure);
 			return p.Get<int>("created_id");
@@ -36,10 +38,11 @@ namespace GamifyLearnHub.Infra.Repositroy
 		{
 			var p = new DynamicParameters();
 			p.Add("id", id, dbType: DbType.Int32, direction:ParameterDirection.Input);
-			p.Add("RowsAffected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("deleted_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
 			await _dbContext.Connection.ExecuteAsync("Coupon_Package.DeleteCoupon", p, commandType: CommandType.StoredProcedure);
-			return p.Get<int>("RowsAffected");
+			return p.Get<int>("rows_affected");
 
 		}
 
@@ -65,12 +68,13 @@ namespace GamifyLearnHub.Infra.Repositroy
 			p.Add("id", coupon.Couponid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 			p.Add("coupon_name", coupon.Couponname, dbType: DbType.String, direction: ParameterDirection.Input);
 			p.Add("coupon_percent", coupon.Couponpercent, dbType: DbType.Int32, direction: ParameterDirection.Input);
-			p.Add("points", coupon.Points, dbType: DbType.Int32, direction: ParameterDirection.Input);
-			p.Add("RowsAffected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("pointss", coupon.Points, dbType: DbType.Int32, direction: ParameterDirection.Input);
+			p.Add("updated_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
 			await _dbContext.Connection.ExecuteAsync("Coupon_Package.UpdateCoupon", p, commandType: CommandType.StoredProcedure);
 
-			return p.Get<int>("RowsAffected");
+			return p.Get<int>("rows_affected");
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPut]
-        public async Task<int> UpdateBadgeActivity([FromForm] Badgeactivity badgeactivity)
+        public async Task<int> UpdateBadgeActivity(Badgeactivity badgeactivity)
         {
             return await _badgeActivityService.UpdateBadgeActivity(badgeactivity);
         }
