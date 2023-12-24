@@ -22,8 +22,15 @@ namespace GamifyLearnHup.Infra.Repository
 
         public async Task<IEnumerable<Usersection>> GetAllUserSections()
         {
-            var result = await _dbContext.Connection.QueryAsync<Usersection>(
+            var result = await _dbContext.Connection.QueryAsync<Usersection, User, Usersection>(
                 "UserSection_Package.GetAllUserSections",
+                (usersection, user) => {
+                    if (usersection.User == null) {
+                        usersection.User = user;
+                    }
+                    return usersection;
+                },
+                splitOn:"Userid",
                 commandType: CommandType.StoredProcedure
             );
 
