@@ -16,11 +16,10 @@ namespace GamifyLearnHub.Core.Data
 
         public decimal Sectionid { get; set; }
         public string? Sectionname { get; set; }
-        public string? ImageName { get; set; }
-
         public decimal? Userid { get; set; }
         public decimal Sectionsize { get; set; }
         public decimal? Coursesequenceid { get; set; }
+        public string? Imagename { get; set; }
 
         public virtual Coursesequence? Coursesequence { get; set; }
         public virtual User? User { get; set; }
