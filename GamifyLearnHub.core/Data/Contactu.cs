@@ -7,10 +7,10 @@ namespace GamifyLearnHub.Core.Data
     {
         public decimal Id { get; set; }
         public string Name { get; set; } = null!;
+        public string Email { get; set; } = null!;
         public decimal Phonenumber { get; set; }
         public string Subject { get; set; } = null!;
         public string Message { get; set; } = null!;
-        public string Email { get; set; } = null!;
         public DateTime? Messagereceived { get; set; }
     }
 }

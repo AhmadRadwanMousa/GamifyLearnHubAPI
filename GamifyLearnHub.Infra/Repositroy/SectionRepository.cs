@@ -77,7 +77,7 @@ namespace GamifyLearnHub.Infra.Repository
             parameters.Add("p_user_id", section.Userid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_course_sequence_id", section.Coursesequenceid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_section_size", section.Sectionsize, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("p_image_name", section.ImageName, DbType.String, ParameterDirection.Input);
+            parameters.Add("p_image_name", section.Imagename, DbType.String, ParameterDirection.Input);
             parameters.Add("created_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
@@ -98,7 +98,7 @@ namespace GamifyLearnHub.Infra.Repository
             parameters.Add("p_user_id", section.Userid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_course_sequence_id", section.Coursesequenceid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("p_section_size", section.Sectionsize, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("p_image_name", section.ImageName, DbType.String, ParameterDirection.Input);
+            parameters.Add("p_image_name", section.Imagename, DbType.String, ParameterDirection.Input);
 
             parameters.Add("updated_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -149,6 +149,46 @@ namespace GamifyLearnHub.Infra.Repository
             );
 
             return result;
+        }
+
+        public async Task<List<Section>> GetAllSectionsByCourseSequenceId(int coursesequenceId)
+        {
+            var p = new DynamicParameters();
+            p.Add("CourseSequence_id", coursesequenceId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Section,  Coursesequence , User, Section>("Section_Package.GetAllSectionsByCourseSequenceId",
+
+                (section, coursesequence , user) => {
+                    section.User = user;
+                    section.Coursesequence = coursesequence;
+                    return section;
+                }
+
+                , p
+                , splitOn: "coursesequenceid,userId"
+                , commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+
+        }
+
+        public async Task<List<Section>> GetAllSectionsByUserId(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("User_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Section, User, Coursesequence, Section >("Section_Package.GetAllSectionsByUserId",
+
+                (section, user , coursesequence) => {
+                    section.User = user;
+                    section.Coursesequence = coursesequence;
+                    return section;
+                }
+                , p
+                , splitOn: "userId,coursesequenceid"
+                , commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
         }
     }
 }

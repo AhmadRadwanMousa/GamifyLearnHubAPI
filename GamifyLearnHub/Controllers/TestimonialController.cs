@@ -19,7 +19,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpGet]
-        [CheckClaims("roleId", "1")]
+        //[CheckClaims("roleId", "1")]
         public async Task<List<Testimonial>> GetAllTestimonials()
         {
             return await _testimonialService.GetAllTestimonials();
@@ -27,7 +27,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetById/{id}")]
-        [CheckClaims("roleId", "1")]
+        //[CheckClaims("roleId", "1")]
         public async Task<Testimonial> GetTestimonialById(int id)
         {
             return await _testimonialService.GetTestimonialById(id);
@@ -36,7 +36,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpPost]
-        [CheckClaims("roleId", "3")]
+        //[CheckClaims("roleId", "3")]
         public async Task<IActionResult> CreateTestimonial([FromForm] Testimonial testimonial)
         {
             var createdId = await _testimonialService.CreateTestimonial(testimonial);
@@ -51,7 +51,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("AcceptTestimonial/{id}")]
-        [CheckClaims("roleId", "1")]
+        //[CheckClaims("roleId", "1")]
         public async Task<IActionResult> AcceptTestimonial(int id)
         {
             var rowsAffected = await _testimonialService.AcceptTestimonial(id);
@@ -71,7 +71,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("RejectTestimonial/{id}")]
-        [CheckClaims("roleId", "1")]
+        //[CheckClaims("roleId", "1")]
         public async Task<IActionResult> RejectTestimonial(int id)
         {
             var rowsAffected = await _testimonialService.RejectTestimonial(id);
@@ -110,7 +110,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpDelete("{id}")]
-        [CheckClaims("roleId", "1")]
+        //[CheckClaims("roleId", "1")]
         public async Task<IActionResult> DeleteTestimonial(int id)
         {
             var rowsAffected = await _testimonialService.DeleteTestimonial(id);

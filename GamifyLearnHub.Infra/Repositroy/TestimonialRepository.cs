@@ -51,12 +51,26 @@ namespace GamifyLearnHub.Infra.Repositroy
             return p.Get<int>("RowsAffected");
         }
 
+
         public async Task<List<Testimonial>> GetAllTestimonials()
         {
-            var result = await _dbContext.Connection.QueryAsync<Testimonial>("Testimonial_Package.GetAllTestimonials", commandType: CommandType.StoredProcedure);
+            var result = await _dbContext.Connection.QueryAsync<Testimonial, User, Userlogin, Role, Testimonial>(
+                "Testimonial_Package.GetAllTestimonials",
+                (testimonial, user, userlogin, role) =>
+                {
+                    userlogin.Role = role;
+                    user.Userlogins.Add(userlogin);
+                    testimonial.User = user;
+
+
+                    return testimonial;
+                },
+                splitOn: "userid,userloginid,roleid",
+                commandType: CommandType.StoredProcedure
+            );
             return result.ToList();
         }
-    
+
 
         public async Task<Testimonial> GetTestimonialById(int id)
         {
