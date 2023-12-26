@@ -47,5 +47,10 @@ namespace GamifyLearnHup.Infra.Service
         {
            return await _userSectionRepository.GetAllUserStudents();
         }
+
+        public Task<IEnumerable<Usersection>> GetUserSectionsBySectionId(decimal sectionId)
+        {
+            return _userSectionRepository.GetUserSectionsBySectionId(sectionId);
+        }
     }
 }

@@ -24,9 +24,17 @@ namespace GamifyLearnHub.API.Controllers
             return await _userSectionService.GetAllUserSections();
         }
 
+
         [HttpGet("GetAllStudentsUsers")]
         public async Task<List<User>> GetAllStudentsUsers() {
             return await _userSectionService.GetAllUserStudents();
+        }
+
+        [HttpGet("GetAllUserSectionsBySectionId/{id}")]
+        public async Task<IEnumerable<Usersection>> GetAllUserSectionsBySectionId(int id)
+        {
+            var result = await _userSectionService.GetAllUserSections();
+            return result.Where(s => s.Sectionid == id).ToList();
         }
 
         [HttpGet("{userSectionId}")]
@@ -68,5 +76,16 @@ namespace GamifyLearnHub.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
+
+        [HttpGet("GetUserSectionsBySectionId/{sectionId}")]
+        public async Task<IEnumerable<Usersection>> GetUserSectionsBySectionId(decimal sectionId)
+        {
+            return await _userSectionService.GetUserSectionsBySectionId(sectionId);
+        }
     }
+
+
+
+
+
 }

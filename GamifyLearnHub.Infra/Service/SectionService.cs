@@ -51,5 +51,16 @@ namespace GamifyLearnHub.Infra.Service
         {
             return await _sectionRepository.GetAllUsersWithRoleId2();
         }
+
+        public async Task<List<Section>> GetAllSectionsByCourseSequenceId(int coursesequenceId)
+        {
+            return await _sectionRepository.GetAllSectionsByCourseSequenceId(coursesequenceId);
+        }
+
+        public async Task<List<Section>> GetAllSectionsByUserId(int userId)
+        {
+            return await _sectionRepository.GetAllSectionsByUserId(userId);
+        }
     }
 }
+
