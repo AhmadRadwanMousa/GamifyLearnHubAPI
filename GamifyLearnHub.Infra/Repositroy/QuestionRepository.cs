@@ -47,7 +47,6 @@ namespace GamifyLearnHub.Infra.Repositroy
         public async Task<List<Question>> GetAllQuestions()
         {
             var result = await _dbContext.Connection.QueryAsync<Question>("Question_Package.GetAllQuestions", commandType: CommandType.StoredProcedure);
-
             return result.ToList();
         }
 

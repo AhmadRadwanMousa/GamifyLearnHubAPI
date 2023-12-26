@@ -42,20 +42,14 @@ namespace GamifyLearnHub.Infra.Repositroy
 
             return p.Get<int>("rows_effected");
         }
-
-        public Task<List<Questionoption>> GetAllQuestionOpstions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Questionoption> GetQuestionOpstionById(int id)
+        public async Task<List<Questionoption>> GetQuestionOpstionById(int id)
         {
             var p = new DynamicParameters();
             p.Add("question_Id", id, dbType: DbType.Decimal, direction: ParameterDirection.Input);
 
             var result = await _dbContext.Connection.QueryAsync<Questionoption>("QuestionOption_Package.GetQuestionOptionByQuestionId", p, commandType: CommandType.StoredProcedure);
 
-            return result.FirstOrDefault();
+            return result.ToList();
         }
 
         public async Task<int> UpdateQuestionOption(Questionoption questionoption)
