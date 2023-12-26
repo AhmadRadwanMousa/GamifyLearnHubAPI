@@ -25,6 +25,7 @@ namespace GamifyLearnHub.Core.Data
         public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<Cartitem> Cartitems { get; set; } = null!;
         public virtual DbSet<Certification> Certifications { get; set; } = null!;
+        public virtual DbSet<Contactu> Contactus { get; set; } = null!;
         public virtual DbSet<Coupon> Coupons { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<Coursesection> Coursesections { get; set; } = null!;
@@ -117,10 +118,18 @@ namespace GamifyLearnHub.Core.Data
                     .HasColumnType("NUMBER")
                     .HasColumnName("ASSIGNMENTID");
 
+                entity.Property(e => e.Assignmentsolutionmark)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("ASSIGNMENTSOLUTIONMARK");
+
                 entity.Property(e => e.Assignmentsolutionvalue)
                     .HasMaxLength(500)
                     .IsUnicode(false)
                     .HasColumnName("ASSIGNMENTSOLUTIONVALUE");
+
+                entity.Property(e => e.Submittedat)
+                    .HasColumnType("DATE")
+                    .HasColumnName("SUBMITTEDAT");
 
                 entity.Property(e => e.Userid)
                     .HasColumnType("NUMBER")
@@ -372,6 +381,44 @@ namespace GamifyLearnHub.Core.Data
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("SYS_C008735");
+            });
+
+            modelBuilder.Entity<Contactu>(entity =>
+            {
+                entity.ToTable("CONTACTUS");
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("NUMBER")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("EMAIL");
+
+                entity.Property(e => e.Message)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("MESSAGE");
+
+                entity.Property(e => e.Messagereceived)
+                    .HasColumnType("DATE")
+                    .HasColumnName("MESSAGERECEIVED");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("NAME");
+
+                entity.Property(e => e.Phonenumber)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("PHONENUMBER");
+
+                entity.Property(e => e.Subject)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("SUBJECT");
             });
 
             modelBuilder.Entity<Coupon>(entity =>

@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using System;
@@ -35,6 +36,11 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<int> UpdateAssignmentSolution(Assignmentsolution assignmentsolution)
         {
             return await _assignmentSolutionRepository.UpdateAssignmentSolution(assignmentsolution);
+        }
+
+        public async Task<int> UpdateAssignmentSolutionMark(AssignmentMark mark)
+        {
+            return await _assignmentSolutionRepository.UpdateAssignmentSolutionMark(mark);  
         }
     }
 }

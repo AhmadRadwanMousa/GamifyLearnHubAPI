@@ -59,18 +59,18 @@ namespace GamifyLearnHub.Infra.Repositroy
 
         public async Task<List<User>> GetAllUsers()
         {
-            var result = await _dbContext.Connection.QueryAsync<User,Userlogin,User>(
+            var result = await _dbContext.Connection.QueryAsync<User, Userlogin, User>(
             "User_Package.GetAllUsers",
             (user, userLogin) =>
             {
                 if (user.Userlogins == null)
                 {
-                    user.Userlogins = new List<Userlogin>(); 
+                    user.Userlogins = new List<Userlogin>();
                 }
                 user.Userlogins.Add(userLogin);
                 return user;
             },
-            splitOn: "userId", 
+            splitOn: "userId",
             commandType: CommandType.StoredProcedure
         );
             return result.ToList();
@@ -121,7 +121,34 @@ namespace GamifyLearnHub.Infra.Repositroy
             return p.Get<int>("rows_effected");
         }
 
+        public async Task<List<User>> GetUnAcceptedUsers()
+        {
+            var result = await _dbContext.Connection.QueryAsync<User, Userlogin, User>
+                ("User_Package.GetAllUnAcceptedInstructors", (user, userLogin) =>
+                {
+                    if (user.Userlogins == null)
+                    {
+                        user.Userlogins = new List<Userlogin>();
+                    }
+                    user.Userlogins.Add(userLogin);
+                    return user;
+                },
+            splitOn: "userId",
+            commandType: CommandType.StoredProcedure
+        );
+            return result.ToList();
 
 
+        }
+
+        public async Task<int> UpdateUserStatus(int userId, bool isAccepted)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("is_accepted", isAccepted, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("rows_effected",dbType:DbType.Int32,direction: ParameterDirection.Output);
+            await _dbContext.Connection.ExecuteAsync("User_Package.UpdateuserStatus",p,commandType:CommandType.StoredProcedure);
+            return p.Get<int>("rows_effected");
+        }
     }
 }

@@ -74,7 +74,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("updated_id", DbType.Int32, direction: ParameterDirection.Output);
             p.Add("rows_affected", DbType.Int32, direction: ParameterDirection.Output);
 
-            _dbContext.Connection.ExecuteAsync("Course_Package.UpdateCourse", p, commandType: CommandType.StoredProcedure);
+           await _dbContext.Connection.ExecuteAsync("Course_Package.UpdateCourse", p, commandType: CommandType.StoredProcedure);
             return p.Get<int>("rows_affected");
         }
     }

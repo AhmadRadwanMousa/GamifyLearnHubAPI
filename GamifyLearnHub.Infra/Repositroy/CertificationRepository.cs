@@ -67,7 +67,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("Certification_Image", certification.Certificationimage, DbType.String, direction: ParameterDirection.Input);
             p.Add("CreatedId", DbType.Int32, direction: ParameterDirection.Output);
 
-            _dbContext.Connection.ExecuteAsync("Certification_Package.CreateCertification", p, commandType: CommandType.StoredProcedure);
+            await _dbContext.Connection.ExecuteAsync("Certification_Package.CreateCertification", p, commandType: CommandType.StoredProcedure);
 
         }
     }

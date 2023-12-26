@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GamifyLearnHub.Attributes;
 using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
@@ -117,6 +118,12 @@ namespace GamifyLearnHub.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
-
+        [HttpGet]
+        [Route("GetSectionsByInstructorId/{instructorId}")]
+        [CheckClaims("roleId","2")]
+         public async Task<List<Section>>GetSectionByInstructorId(int instructorId)
+        {
+            return await _sectionService.GetSectionByInstructorId(instructorId);
+        }
     }
 }

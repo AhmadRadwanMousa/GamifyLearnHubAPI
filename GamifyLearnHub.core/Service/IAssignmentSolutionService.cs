@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace GamifyLearnHub.Core.Service
         Task<int> CreateAssignmentSolution(Assignmentsolution assignmentsolution);
         Task<int> UpdateAssignmentSolution(Assignmentsolution assignmentsolution);
         Task<int> DeleteAssignmentSolution(int assignmentSolutionId);
-        public  Task<List<Assignmentsolution>> GetAssignmentSolutionByAssignmentId(int assignmentId);
+          Task<List<Assignmentsolution>> GetAssignmentSolutionByAssignmentId(int assignmentId);
+        Task<int> UpdateAssignmentSolutionMark(AssignmentMark mark);
+
     }
 }

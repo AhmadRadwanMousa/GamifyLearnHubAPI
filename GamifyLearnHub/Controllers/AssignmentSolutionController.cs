@@ -1,5 +1,6 @@
 ﻿using GamifyLearnHub.Attributes;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,21 +18,21 @@ namespace GamifyLearnHub.Controllers
             _assignmentSolutionService= assignmentSolutionService;
         }
         [HttpGet("{assignmentId}")]
-        [CheckClaims("roleId","2")]
+        //[CheckClaims("roleId","2")]
         public async Task<List<Assignmentsolution>> GetAssignmentSolutionByAssignmentId(int assignmentId)
         {
             return await _assignmentSolutionService.GetAssignmentSolutionByAssignmentId(assignmentId);
         }
         [HttpPost]
-        [CheckClaims("roleId", "3")]
+        //[CheckClaims("roleId", "3")]
         public async Task<int> CreateAssignmentSolution([FromForm]Assignmentsolution assignmentsolution)
         {
           return await _assignmentSolutionService.CreateAssignmentSolution(assignmentsolution);    
         }
         [HttpPut]
-        [CheckClaims("roleId", "3")]
+        //[CheckClaims("roleId", "3")]
 
-        public async Task<int> UpdateAssignmentSolution([FromForm]Assignmentsolution assignmentsolution)
+        public async Task<int> UpdateAssignmentSolution([FromForm] Assignmentsolution assignmentsolution)
         {
             return await _assignmentSolutionService.UpdateAssignmentSolution(assignmentsolution);
         }
@@ -41,6 +42,16 @@ namespace GamifyLearnHub.Controllers
         {
             return await _assignmentSolutionService.DeleteAssignmentSolution(assignmentSolutionId);
         }
+        [HttpPut]
+        [CheckClaims("roleId","2")]
+        [Route("UpdateAssignmentSolutionMark")]
+
+        public async Task<int> UpdateAssignmentSolutionMark(AssignmentMark mark)
+        {
+            return await _assignmentSolutionService.UpdateAssignmentSolutionMark(mark);
+        }
+
+
 
     }
 

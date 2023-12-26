@@ -140,7 +140,7 @@ namespace GamifyLearnHub.Infra.Repository
 
             return result.ToList();
         }
-
+        
         public async Task<IEnumerable<User>> GetAllUsersWithRoleId2()
         {
             var result = await _dbContext.Connection.QueryAsync<User>(
@@ -149,6 +149,14 @@ namespace GamifyLearnHub.Infra.Repository
             );
 
             return result;
+        }
+
+        public async Task<List<Section>> GetSectionByInstructorId(int instructorId)
+        {
+            var p = new DynamicParameters();
+            p.Add("instructor_id", instructorId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Section>("Section_Package.GetSectionByInstructorId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
     }
 }

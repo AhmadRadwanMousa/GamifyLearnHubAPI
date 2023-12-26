@@ -9,6 +9,8 @@ namespace GamifyLearnHub.Core.Data
         public decimal? Assignmentid { get; set; }
         public decimal? Userid { get; set; }
         public string? Assignmentsolutionvalue { get; set; }
+        public decimal? Assignmentsolutionmark { get; set; }
+        public DateTime? Submittedat { get; set; }
 
         public virtual Assignment? Assignment { get; set; }
         public virtual User? User { get; set; }

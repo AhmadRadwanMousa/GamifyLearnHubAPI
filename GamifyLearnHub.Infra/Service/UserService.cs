@@ -37,6 +37,11 @@ namespace GamifyLearnHub.Infra.Service
             return await _userRepository.GetAllUsers(); 
         }
 
+        public async Task<List<User>> GetUnAcceptedUsers()
+        {
+           return await _userRepository.GetUnAcceptedUsers();
+        }
+
         public async Task<User> GetUserById(int id)
         {
             return await _userRepository.GetUserById(id);   
@@ -47,6 +52,9 @@ namespace GamifyLearnHub.Infra.Service
           return await _userRepository.UpdateUser(userDetails);    
         }
 
-   
+        public async Task<int> UpdateUserStatus(int userId, bool isAccepted)
+        {
+            return await _userRepository.UpdateUserStatus(userId, isAccepted);  
+        }
     }
 }

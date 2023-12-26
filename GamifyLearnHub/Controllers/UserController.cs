@@ -44,12 +44,23 @@ namespace GamifyLearnHub.Controllers
         {
             return await _userService.GetAllUsers();
         }
-        
-
         [HttpGet("{userId}")]
         public async Task<User> GetUserById(int userId)
         {
             return await _userService.GetUserById(userId);
         }
+        [HttpGet]
+        [Route("GetUnAcceptedUsers")]
+        public async Task<List<User>> GetUnAcceptedUsers()
+        {
+           return await _userService.GetUnAcceptedUsers();    
+        }
+        [HttpPut]
+        [Route("UpdatedUserStatus")]
+        public async Task<int> UpdateUserStatus([FromForm]int userId, [FromForm] bool isAccepted)
+        {
+           return await _userService.UpdateUserStatus(userId, isAccepted);
+        }
+
     }
 }
