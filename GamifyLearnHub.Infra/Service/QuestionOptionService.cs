@@ -28,12 +28,9 @@ namespace GamifyLearnHub.Infra.Service
             return await _questionOptionRepository.DeleteQuestionOption(id);
         }
 
-        public async Task<List<Questionoption>> GetAllQuestionOpstions()
-        {
-            return await _questionOptionRepository.GetAllQuestionOpstions();
-        }
+        
 
-        public async Task<Questionoption> GetQuestionOpstionById(int id)
+        public async Task<List<Questionoption>> GetQuestionOpstionById(int id)
         {
             return await _questionOptionRepository.GetQuestionOpstionById(id);
         }

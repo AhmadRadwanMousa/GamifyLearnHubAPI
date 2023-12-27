@@ -12,8 +12,8 @@ namespace GamifyLearnHub.Core.Data
         public decimal? Roleid { get; set; }
         public bool? Isonline { get; set; }
         public bool? Isaccepted { get; set; }
-        public DateTime Lastlogin { get; set; }
         public decimal? Dayscount { get; set; }
+        public DateTime? Lastlogin { get; set; }
 
         public virtual Role? Role { get; set; }
         public virtual User? User { get; set; }

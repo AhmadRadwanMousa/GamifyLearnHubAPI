@@ -28,23 +28,51 @@ namespace GamifyLearnHub.Controllers
             return await _examService.GetAllExams();
         }
 
+        [HttpGet("GetAllExamsBySectionId/{id}")]
+        public async Task<List<Exam>> GetAllExamsBySectionId(int id)
+        {
+            var result =  await _examService.GetAllExams();
+            return result.Where(e=> e.Sectionid == id).ToList();
+        }
+
         [HttpGet("GetExamById/{id}")]
         public async Task<Exam> GetExamById(int id)
         {
             return await _examService.GetExamById(id);
         }
 
+        [HttpGet("GetAllQuestionByExamId/{id}")]
+        public async Task<List<Question>> GetAllQuestionByExamId(int id)
+        {
+            var result = await _questionService.GetAllQuestions();
+            
+
+            foreach (var question in result)
+            {
+                question.Questionoptions = await _questionOptionService.GetQuestionOpstionById((int)question.Questionid);
+            }
+
+            return result.Where(q => q.Examid == id).ToList();
+        }
+
+        [HttpDelete("DeleteQuestion/{id}")]
+
+        public async Task<int> DeleteQuestion(int id)
+        {
+            return await _questionService.DeleteQuestion(id);
+        }
+
 
         [HttpPost]
 
-        public async Task<int> CreateExam([FromForm] Exam exam)
+        public async Task<int> CreateExam(Exam exam)
         {
             return await _examService.CreateExam(exam);
         }
 
         [HttpPost("CreateQuestionWithOptions/{examId}")]
 
-        public async Task<IActionResult> CreateQuestionWithOptions(int examId, /*[FromForm]*/ QuestionWithOptions questionWithOptions)
+        public async Task<IActionResult> CreateQuestionWithOptions(int examId,QuestionWithOptions questionWithOptions)
         {
             
             questionWithOptions.question.Examid = examId;
