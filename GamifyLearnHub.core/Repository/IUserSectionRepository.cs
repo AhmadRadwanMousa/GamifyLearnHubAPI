@@ -19,5 +19,8 @@ namespace GamifyLearnHub.Core.Repository
         //I add 
         Task<IEnumerable<Usersection>> GetUserSectionsBySectionId(decimal sectionId);
 
+        Task<IEnumerable<User>> GetUsersBySectionId(decimal sectionId);
+
+
     }
 }

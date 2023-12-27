@@ -125,5 +125,19 @@ namespace GamifyLearnHup.Infra.Repository
 
             return result;
         }
+
+        public async Task<IEnumerable<User>> GetUsersBySectionId(decimal sectionId)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("p_section_id", sectionId, DbType.Decimal, ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<User>(
+                "UserSection_Package.GetUsersBySectionId",
+                parameters,
+                commandType: CommandType.StoredProcedure
+            );
+
+            return result;
+        }
     }
 }
