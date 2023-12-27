@@ -490,10 +490,6 @@ namespace GamifyLearnHub.Core.Data
                     .ValueGeneratedOnAdd()
                     .HasColumnName("COURSESECTIONID");
 
-                entity.Property(e => e.Courseid)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("COURSEID");
-
                 entity.Property(e => e.Coursesectionduration)
                     .HasColumnType("NUMBER")
                     .HasColumnName("COURSESECTIONDURATION");
@@ -503,11 +499,14 @@ namespace GamifyLearnHub.Core.Data
                     .IsUnicode(false)
                     .HasColumnName("COURSESECTIONNAME");
 
-                entity.HasOne(d => d.Course)
+                entity.Property(e => e.Sectionid)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("SECTIONID");
+
+                entity.HasOne(d => d.Section)
                     .WithMany(p => p.Coursesections)
-                    .HasForeignKey(d => d.Courseid)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008721");
+                    .HasForeignKey(d => d.Sectionid)
+                    .HasConstraintName("FK_COURSESECTION_SECTIONID");
             });
 
             modelBuilder.Entity<Coursesequence>(entity =>
