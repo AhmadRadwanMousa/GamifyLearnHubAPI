@@ -150,12 +150,51 @@ namespace GamifyLearnHub.Infra.Repository
 
             return result;
         }
-
         public async Task<List<Section>> GetSectionByInstructorId(int instructorId)
         {
             var p = new DynamicParameters();
             p.Add("instructor_id", instructorId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = await _dbContext.Connection.QueryAsync<Section>("Section_Package.GetSectionByInstructorId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<List<Section>> GetAllSectionsByCourseSequenceId(int coursesequenceId)
+        {
+            var p = new DynamicParameters();
+            p.Add("CourseSequence_id", coursesequenceId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Section,  Coursesequence , User, Section>("Section_Package.GetAllSectionsByCourseSequenceId",
+
+                (section, coursesequence , user) => {
+                    section.User = user;
+                    section.Coursesequence = coursesequence;
+                    return section;
+                }
+
+                , p
+                , splitOn: "coursesequenceid,userId"
+                , commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
+
+        }
+
+        public async Task<List<Section>> GetAllSectionsByUserId(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("User_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Section, User, Coursesequence, Section >("Section_Package.GetAllSectionsByUserId",
+
+                (section, user , coursesequence) => {
+                    section.User = user;
+                    section.Coursesequence = coursesequence;
+                    return section;
+                }
+                , p
+                , splitOn: "userId,coursesequenceid"
+                , commandType: CommandType.StoredProcedure);
+
             return result.ToList();
         }
     }

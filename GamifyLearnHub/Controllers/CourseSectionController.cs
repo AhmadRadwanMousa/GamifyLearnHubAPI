@@ -59,5 +59,13 @@ namespace GamifyLearnHub.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
+
+
+        [HttpGet("GetCoursesSectionBySectionId/{sectionId}")]
+        public async Task<List<Coursesection>> GetCoursesSectionBySectionId(int sectionId)
+        {
+            return await _courseSectionService.GetCoursesSectionBySectionId(sectionId);
+        }
+
     }
 }

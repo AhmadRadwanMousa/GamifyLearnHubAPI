@@ -11,6 +11,7 @@ namespace GamifyLearnHub.Core.Service
     {
         Task<IEnumerable<Coursesection>> GetAllCourseSections();
         Task<Coursesection> GetCourseSectionById(decimal courseSectionId);
+        Task<List<Coursesection>> GetCoursesSectionBySectionId(int sectionId);
         Task<decimal> CreateCourseSection(Coursesection courseSection);
         Task<int> UpdateCourseSection(Coursesection courseSection);
         Task<int> DeleteCourseSection(decimal courseSectionId);

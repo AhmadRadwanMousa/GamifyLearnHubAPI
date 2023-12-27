@@ -47,7 +47,7 @@ namespace GamifyLearnHub.Infra.Repositroy
         public async Task<decimal> CreateCourseSection(Coursesection courseSection)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("p_course_id", courseSection.Courseid, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("p_section_id", courseSection.Sectionid, DbType.Int32, ParameterDirection.Input);
             parameters.Add("p_course_section_name", courseSection.Coursesectionname, DbType.String, ParameterDirection.Input);
             parameters.Add("p_course_section_duration", courseSection.Coursesectionduration, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("created_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
@@ -66,6 +66,7 @@ namespace GamifyLearnHub.Infra.Repositroy
         {
             var parameters = new DynamicParameters();
             parameters.Add("p_course_section_id", courseSection.Coursesectionid, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("p_section_id", courseSection.Sectionid, DbType.Int32, ParameterDirection.Input);
             parameters.Add("p_course_section_name", courseSection.Coursesectionname, DbType.String, ParameterDirection.Input);
             parameters.Add("p_course_section_duration", courseSection.Coursesectionduration, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
@@ -93,5 +94,43 @@ namespace GamifyLearnHub.Infra.Repositroy
 
             return parameters.Get<int>("rows_affected");
         }
+
+        public async Task<List<Coursesection>> GetCoursesSectionBySectionId(int sectionId)
+        {
+            var p = new DynamicParameters();
+            p.Add("section_Id", sectionId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Coursesection, Lecture, Coursesection>(
+                "CourseSection_Package.GetCoursesSectionBySectionId",
+                (coursesection, lecture) =>
+                {
+                    if (lecture != null)
+                    {
+                        coursesection.Lectures.Add(lecture);
+                    }
+                    return coursesection;
+                },
+                p,
+                splitOn: "coursesectionid,lectureid",
+                commandType: CommandType.StoredProcedure
+            );
+
+            var groupedResult = result
+                .GroupBy(p => p.Coursesectionid)
+                .Select(group =>
+                {
+                    var coursesection = group.First();
+                    coursesection.Lectures = group
+                        .SelectMany(p => p.Lectures)
+                        .Where(lecture => lecture != null) 
+                        .ToList();
+                    return coursesection;
+                })
+                .ToList();
+
+            return groupedResult;
+        }
+
+
     }
 }

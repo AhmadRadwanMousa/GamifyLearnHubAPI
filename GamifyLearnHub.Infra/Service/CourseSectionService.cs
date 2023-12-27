@@ -42,5 +42,10 @@ namespace GamifyLearnHub.Infra.Service
         {
             return await _courseSectionRepository.DeleteCourseSection(courseSectionId);
         }
+
+        public async Task<List<Coursesection>> GetCoursesSectionBySectionId(int sectionId)
+        {
+            return await _courseSectionRepository.GetCoursesSectionBySectionId(sectionId);
+        }
     }
 }
