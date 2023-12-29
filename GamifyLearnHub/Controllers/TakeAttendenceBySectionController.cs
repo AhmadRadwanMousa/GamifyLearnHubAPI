@@ -24,7 +24,7 @@ namespace GamifyLearnHub.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAttendenceForSection(AttendenceWithDetails attendenceWithDetails) 
         {
-            attendenceWithDetails.attendence.Attenddate.Value.AddDays(1);
+           
             int? attendenceId = await _attendenceService.CreateAttendence(attendenceWithDetails.attendence);
 
             if (attendenceId != null)
