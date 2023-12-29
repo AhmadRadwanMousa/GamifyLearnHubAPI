@@ -43,24 +43,19 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpGet("GetAttendenceBySection/{id}")]
-        public async Task<IActionResult> GetAttendenceBySection(int id) 
+        public async Task<IActionResult> GetAttendenceBySection(int id)
         {
-            
+
             var AllAttendences = await _attendenceService.GetAllAttendence();
-            var Attendence = AllAttendences.FirstOrDefault(a => a.Sectionid == id);
-            if (Attendence == null) return NotFound();
-
-            var AllattendenceDetails = await _attendenceDetailService.GetAllAttendenceDetails();
-            if (AllattendenceDetails == null) return NotFound();
-
-            var attendenceDetails = AllattendenceDetails.Where(at => at.Attendenceid == Attendence.Attendenceid).ToList();
-            var attendenceWithDetails = new AttendenceWithDetails()
+            var AllAttendencesDetails = await _attendenceDetailService.GetAllAttendenceDetails();
+            var Attendences = AllAttendences.Where(a => a.Sectionid == id).ToList();
+            foreach (var at in Attendences)
             {
-                attendence = Attendence,
-                attendencedetail = attendenceDetails
-            };
+                at.Attendencedetails = AllAttendencesDetails.Where(a => a.Attendenceid == at.Attendenceid).ToList();
+            }
 
-            return Ok(attendenceWithDetails);
+
+            return Ok(Attendences);
         }
 
         [HttpGet("GetSectionsByInstructor/{id}")]
