@@ -12,10 +12,12 @@ namespace GamifyLearnHub.Infra.Service
     public class AttendenceDetailService : IAttendenceDetailService
     {
         private readonly IAttendenceDetailRepository _attendenceDetailRepository;
+        private readonly IUserService _userService;
 
-        public AttendenceDetailService(IAttendenceDetailRepository attendenceDetailRepository)
+        public AttendenceDetailService(IAttendenceDetailRepository attendenceDetailRepository, IUserService userService)
         {
             _attendenceDetailRepository = attendenceDetailRepository;
+            _userService = userService;
         }
 
         public async Task<int> CreateAttendenceDetails(Attendencedetail attendencedetail)
@@ -30,7 +32,14 @@ namespace GamifyLearnHub.Infra.Service
 
         public async Task<List<Attendencedetail>> GetAllAttendenceDetails()
         {
-            return await _attendenceDetailRepository.GetAllAttendenceDetails();
+            var result = await _attendenceDetailRepository.GetAllAttendenceDetails();
+            var users = await _userService.GetAllUsers();
+            foreach (var item in result) 
+            {
+                item.User = users.Where(u=> u.Userid == item.Userid).FirstOrDefault();
+            }
+
+            return result;
         }
 
         public async Task<Attendencedetail> GetAttendenceDetailsById(int id)
