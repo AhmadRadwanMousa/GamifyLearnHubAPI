@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using System;
@@ -16,9 +17,9 @@ namespace GamifyLearnHub.Infra.Service
         {
             _paymentRepository = paymentRepository; 
         }
-        public async Task<int> CreatePayment(Payment payment)
+        public async Task<int> CreatePayment(PaymentDetails paymentDetails)
         {
-           return await _paymentRepository.CreatePayment(payment);  
+           return await _paymentRepository.CreatePayment(paymentDetails);  
         }
 
         public async Task<int> DeletePayment(int paymentId)

@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,14 @@ namespace GamifyLearnHub.Infra.Repositroy
             _dbContext = dbContext;
         }
 
-        public async Task<int> CreatePayment(Payment payment)
+        public async Task<int> CreatePayment(PaymentDetails payment)
         {
             var p = new DynamicParameters();
             p.Add("Payment_Date",payment.Paymentdate,dbType:DbType.DateTime,direction:ParameterDirection.Input);
             p.Add("User_Id", payment.Userid,dbType:DbType.Int32,direction:ParameterDirection.Input);
             p.Add("Created_Id",dbType:DbType.Int32,direction:ParameterDirection.Output);
+            p.Add("cart_id", payment.Cartid,dbType: DbType.Int32, direction: ParameterDirection.Output);
+
             await _dbContext.Connection.ExecuteAsync("Payment_Package.CreatePayment",p,commandType:CommandType.StoredProcedure);
             return p.Get<int>("Created_Id");
         }

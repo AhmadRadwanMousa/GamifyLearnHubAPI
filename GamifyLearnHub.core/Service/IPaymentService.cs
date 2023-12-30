@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace GamifyLearnHub.Core.Service
     public interface IPaymentService
     {
         Task<Payment> GetPaymentById(int paymentId);
-        Task<int> CreatePayment(Payment payment);
+        Task<int> CreatePayment(PaymentDetails paymentdetails);
         Task<int> UpdatePayment(Payment payment);
         Task<int> DeletePayment(int paymentId);
     }

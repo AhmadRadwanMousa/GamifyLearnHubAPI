@@ -14,5 +14,6 @@ namespace GamifyLearnHub.Core.Repository
         Task<int> DeleteCart(int cartId);
         Task<Cart> GetCartById(int cartId);
         Task<List<Cart>> GetAllCarts(); 
+      
     }
 }

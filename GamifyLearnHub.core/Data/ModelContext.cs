@@ -522,10 +522,6 @@ namespace GamifyLearnHub.Core.Data
                     .HasColumnType("NUMBER")
                     .HasColumnName("COURSEID");
 
-                entity.Property(e => e.Educationalperiodid)
-                    .HasColumnType("NUMBER")
-                    .HasColumnName("EDUCATIONALPERIODID");
-
                 entity.Property(e => e.Enddate)
                     .HasColumnType("DATE")
                     .HasColumnName("ENDDATE");
@@ -547,12 +543,6 @@ namespace GamifyLearnHub.Core.Data
                     .HasForeignKey(d => d.Courseid)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("SYS_C008768");
-
-                entity.HasOne(d => d.Educationalperiod)
-                    .WithMany(p => p.Coursesequences)
-                    .HasForeignKey(d => d.Educationalperiodid)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("SYS_C008769");
 
                 entity.HasOne(d => d.Perviouscourse)
                     .WithMany(p => p.CoursesequencePerviouscourses)
