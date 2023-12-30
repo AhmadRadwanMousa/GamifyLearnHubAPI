@@ -10,6 +10,11 @@ namespace GamifyLearnHub.Core.DTO
     {
         public decimal? Userid { get; set; }
         public decimal Coursesequenceid { get; set; }
+        public string Firsname { get; set; } = null!;
+        public string Lastname { get; set; } = null!;
+        public string Coursename { get; set; } = null!;
+        public decimal Sectionid { get; set; }
+
 
     }
 }

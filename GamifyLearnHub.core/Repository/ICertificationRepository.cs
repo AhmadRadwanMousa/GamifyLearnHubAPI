@@ -12,9 +12,13 @@ namespace GamifyLearnHub.Core.Repository
     {
         Task<(List<CertificationUser>, int)> GetAllUsersPass(int CourseSequence);
         void InsertCertification(Certification usersections);
+        void GoToNextCourse(List<CertificationUser> userPass);
+        Task<int> CreateNewSection(int prevSectionId ,int  numberOfUsersPass);
 
+        Task<int> UpdateCertificationStatus(int CourseSequenceId);
+        Task<int> CreateUserSection(int newSectionId, int userId);
         Task<List<Certification>> GetAllCertifications();
-
+          
         Task<Certification> GetCertificationById(int id);
 
         Task<List<Certification>> GetCertificationByUserId(int id);
