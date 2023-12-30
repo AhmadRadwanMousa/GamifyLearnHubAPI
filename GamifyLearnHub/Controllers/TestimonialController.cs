@@ -37,7 +37,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpPost]
         //[CheckClaims("roleId", "3")]
-        public async Task<IActionResult> CreateTestimonial([FromForm] Testimonial testimonial)
+        public async Task<IActionResult> CreateTestimonial([FromBody] Testimonial testimonial)
         {
             var createdId = await _testimonialService.CreateTestimonial(testimonial);
             if (createdId != null)

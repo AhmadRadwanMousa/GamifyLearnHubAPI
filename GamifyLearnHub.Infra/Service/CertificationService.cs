@@ -41,17 +41,35 @@ namespace GamifyLearnHub.Infra.Service
             return await _certificationRepository.GetCertificationByUserId(id);
         }
 
-        public async void InsertCertification(List<CertificationUser> certificationUsers)
+        public async void GoToNextCourse(List<CertificationUser> userPass)
         {
-            for (int i = 0; i < certificationUsers.Count; i++)
+            var groupedUsers = userPass.GroupBy(u => u.Sectionid);
+            foreach (var group in groupedUsers)
             {
-                Certification certification = new Certification();
-                certification.Certificationimage = "xx.png";
-                certification.Userid = certificationUsers[i].Userid;
-                certification.Dateearned = DateTime.Today;
-                certification.Coursesequenceid = certificationUsers[i].Coursesequenceid;
-                _certificationRepository.InsertCertification(certification);
+                int prevSectionId = (int)group.Key;
+                int numberOfUsersPass = group.Count();
+                 var newSectionId = await _certificationRepository.CreateNewSection(prevSectionId , numberOfUsersPass);
+                int sectionId = Convert.ToInt32(newSectionId);
+                foreach (var user in group)
+                {
+                    int userId = Convert.ToInt32(user.Userid);
+                    var numberAffect = await _certificationRepository.CreateUserSection( sectionId, userId);
+                   
+                }
+
             }
+          
+        }
+
+        public async void InsertCertification(Certification certification)
+        {
+            _certificationRepository.InsertCertification(certification);
+
+        }
+
+        public async Task<int> UpdateCertificationStatus(int CourseSequenceId)
+        {
+          return await  _certificationRepository.UpdateCertificationStatus(CourseSequenceId);
         }
     }
 }
