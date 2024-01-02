@@ -17,10 +17,10 @@ namespace GamifyLearnHub.Controllers
 		}
 
 
-		[HttpGet]
-		public async Task<List<InstructorReport>> GetAllReportsByInstructorId(int Id)
+		[HttpGet("GetSectionReport/{id}")]
+		public async Task<List<InstructorReport>> GetAllReportsByInstructorId(int id)
 		{
-			return await _reportService.GetAllReportsByInstructorId(Id);
+			return await _reportService.GetAllReportsByInstructorId(id);
 		}
 
 		

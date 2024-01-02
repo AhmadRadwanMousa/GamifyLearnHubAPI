@@ -14,6 +14,7 @@ namespace GamifyLearnHub.Core.Data
         public string Password { get; set; } = null!;
         public DateTime? Lastlogin { get; set; }
         public decimal? Dayscount { get; set; }
+        public DateTime? Lastlogin { get; set; }
 
         public virtual Role? Role { get; set; }
         public virtual User User { get; set; } = null!;

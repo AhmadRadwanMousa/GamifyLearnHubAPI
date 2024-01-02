@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace GamifyLearnHub.Core.Repository
 {
 	public interface IReportRepository
-	{
-		
+	{ 
 		Task<List<InstructorReport>> GetAllReportsByInstructorId(int Id);
 	}
 }
