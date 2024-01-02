@@ -150,5 +150,31 @@ namespace GamifyLearnHub.Infra.Repositroy
             await _dbContext.Connection.ExecuteAsync("User_Package.UpdateuserStatus",p,commandType:CommandType.StoredProcedure);
             return p.Get<int>("rows_effected");
         }
+
+        public async Task<List<ReportsUser>> ReportsByUserId(int userId, int programId)
+        {
+
+            var p = new DynamicParameters();
+            p.Add("user_Id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("program_Id", programId, dbType: DbType.String, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<ReportsUser>(
+                "User_Package.ReportsByUserId",p,
+                commandType: CommandType.StoredProcedure
+            );
+
+            return result.ToList();
+        }
+
+        public async Task<List<Program>> GetProgramsByUserId(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_Id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Program>(
+                "User_Package.GetProgramsByUserId", p,
+                commandType: CommandType.StoredProcedure
+            );
+
+            return result.ToList();
+        }
     }
 }

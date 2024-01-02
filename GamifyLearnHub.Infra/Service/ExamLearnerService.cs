@@ -49,10 +49,15 @@ namespace GamifyLearnHub.Infra.Service
             return complete;
         }
 
+        public async Task<List<Exam>> GetAllExamByUserSection(int userId, int sectionId)
+        {
+            return await _examLearnerRepository.GetAllExamByUserSection(userId, sectionId);
+        }
 
-
-
-      
+        public async Task<List<Section>> GetAllSectionsByLearnerId(int userId)
+        {
+            return await _examLearnerRepository.GetAllSectionsByLearnerId(userId);
+        }
 
         public async Task<List<ExamLearner>> GetExamDetails(int id)
         {

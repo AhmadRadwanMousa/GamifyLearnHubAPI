@@ -17,5 +17,10 @@ namespace GamifyLearnHub.Core.Service
         Task<List<SolutionUserDetails>> GetSolutionUserDetails(int examId, int userId);
 
         Task<List<Exam>> GetExamsToday(int sectionId);
+
+        Task<List<Section>> GetAllSectionsByLearnerId(int userId);
+        Task<List<Exam>> GetAllExamByUserSection(int userId, int sectionId);
+
+
     }
 }

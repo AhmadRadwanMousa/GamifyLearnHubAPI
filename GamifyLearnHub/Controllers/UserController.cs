@@ -62,5 +62,20 @@ namespace GamifyLearnHub.Controllers
            return await _userService.UpdateUserStatus(userId, isAccepted);
         }
 
+        [HttpGet]
+        [Route("ReportsByUserId/{userId}/{programId}")]
+        public async Task<List<ReportsUser>> ReportsByUserId(int userId, int programId)
+        {
+            return await _userService.ReportsByUserId(userId, programId);
+        }
+
+        [HttpGet]
+        [Route("GetProgramsByUserId/{userId}")]
+        public async Task<List<Core.Data.Program>> GetProgramsByUserId(int userId)
+        {
+            return await _userService.GetProgramsByUserId(userId);
+        }
+
+
     }
 }
