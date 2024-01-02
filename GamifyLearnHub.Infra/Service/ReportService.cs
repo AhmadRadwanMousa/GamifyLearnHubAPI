@@ -18,8 +18,6 @@ namespace GamifyLearnHub.Infra.Service
 			_reportRepository = reportRepository;
 		}
 
-		
-
 		public async Task<List<InstructorReport>> GetAllReportsByInstructorId(int Id)
 		{
 			return await _reportRepository.GetAllReportsByInstructorId(Id);

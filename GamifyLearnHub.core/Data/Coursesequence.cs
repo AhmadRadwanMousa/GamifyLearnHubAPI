@@ -7,7 +7,7 @@ namespace GamifyLearnHub.Core.Data
     {
         public Coursesequence()
         {
-            Certifications = new HashSet<Certification>();
+            CertificationsNavigation = new HashSet<Certification>();
             Sections = new HashSet<Section>();
         }
 
@@ -17,11 +17,12 @@ namespace GamifyLearnHub.Core.Data
         public decimal? Perviouscourseid { get; set; }
         public DateTime Startdate { get; set; }
         public DateTime? Enddate { get; set; }
+        public decimal? Certifications { get; set; }
 
         public virtual Course? Course { get; set; }
         public virtual Course? Perviouscourse { get; set; }
         public virtual Program? Program { get; set; }
-        public virtual ICollection<Certification> Certifications { get; set; }
+        public virtual ICollection<Certification> CertificationsNavigation { get; set; }
         public virtual ICollection<Section> Sections { get; set; }
     }
 }

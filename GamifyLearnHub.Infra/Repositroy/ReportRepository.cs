@@ -20,13 +20,11 @@ namespace GamifyLearnHub.Infra.Repositroy
 			_dbContext = dbContext;
 		}
 
-		
-
 		public async Task<List<InstructorReport>> GetAllReportsByInstructorId(int Id)
 		{
 			var p = new DynamicParameters();
 
-			p.Add("p_UserID", Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+			p.Add("p_SectionID", Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
 			var result = await _dbContext.Connection.QueryAsync<InstructorReport>("Report_Package.GetAllReports", p, commandType: CommandType.StoredProcedure);
 

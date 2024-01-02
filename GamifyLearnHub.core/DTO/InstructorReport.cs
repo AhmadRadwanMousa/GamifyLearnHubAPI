@@ -9,7 +9,6 @@ namespace GamifyLearnHub.Core.DTO
 	public class InstructorReport
 	{
 		// User Info
-		public decimal Userid { get; set; }
 		public string Firsname { get; set; }
 		public string Lastname { get; set; }
 		public decimal? Totalpoints { get; set; }
@@ -30,5 +29,8 @@ namespace GamifyLearnHub.Core.DTO
 
 		//Points Activity 
 		public decimal Points { get; set; }
+
+		// Abscences
+		public int ABSENCES { get; set; }
 	}
 }

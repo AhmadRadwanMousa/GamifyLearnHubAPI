@@ -9,8 +9,6 @@ namespace GamifyLearnHub.Core.Service
 {
 	public interface IReportService
 	{
-		
-
 		Task<List<InstructorReport>> GetAllReportsByInstructorId(int Id);
 	}
 }
