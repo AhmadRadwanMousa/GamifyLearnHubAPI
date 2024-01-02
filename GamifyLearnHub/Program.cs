@@ -84,7 +84,7 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IExamRepository, ExamRepository>();
             builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>();
             builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
-
+            builder.Services.AddScoped<IAdminReportRepository, AdminReportRepository>();
             builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
             builder.Services.AddScoped<IAssignmentSolutionRepository, AssignmentSolutionRepository>();
             
@@ -113,6 +113,7 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IQuestionOptionService, QuestionOptionService>();
             builder.Services.AddScoped<IAttendenceService, AttendenceService>();
             builder.Services.AddScoped<IAttendenceDetailService, AttendenceDetailService>();
+            builder.Services.AddScoped<IAdminReportService, AdminReportService>();
             builder.Services.AddAuthentication((opt) => {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme;
