@@ -27,9 +27,9 @@ namespace GamifyLearnHub.Infra.Service
            return await _cartRepository.DeleteCart(cartId); 
         }
 
-        public async Task<List<Cart>> GetAllCarts()
+        public async Task<List<Cartitem>> GetAllCarts(int userId)
         {
-            return await _cartRepository.GetAllCarts(); 
+            return await _cartRepository.GetAllCarts(userId); 
         }
 
         public async Task<Cart> GetCartById(int cartId)

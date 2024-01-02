@@ -64,7 +64,12 @@ namespace GamifyLearnHub.Infra.Service
 
         public async Task<List<Section>> GetSectionByInstructorId(int instructorId)
         {
-           return await _sectionRepository.GetSectionByInstructorId(instructorId); 
+            return await _sectionRepository.GetSectionByInstructorId(instructorId);
+        }
+
+        public async Task<Section> GetSectionByUserIdAndCourseSequenceId(int userId, int coursesequenceId)
+        {
+            return await _sectionRepository.GetSectionByUserIdAndCourseSequenceId(userId, coursesequenceId);
         }
     }
 }

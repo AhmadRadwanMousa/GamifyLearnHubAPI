@@ -74,9 +74,10 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IAttendenceRepository, AttendenceRepository>();
             builder.Services.AddScoped<IAttendenceDetailRepository, AttendenceDetailRepository>();
             builder.Services.AddScoped<ICartItemsRepository, CartItemsRepository>();
-            
+            builder.Services.AddScoped<ICartRepository, CartRepository>();  
             
             builder.Services.AddScoped<ICartItemsService, CartItemsService>();
+            builder.Services.AddScoped<ICartService, CartService>();    
             builder.Services.AddScoped<ILectureService, LectureService>();
             builder.Services.AddScoped<ICourseSectionService, CourseSectionService>();
             builder.Services.AddScoped<ISectionAnnouncementService, SectionAnnouncementService>();

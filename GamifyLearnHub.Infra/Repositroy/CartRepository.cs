@@ -40,9 +40,17 @@ namespace GamifyLearnHub.Infra.Repositroy
             return p.Get<int>("RowsAffected");
         }
 
-        public async Task<List<Cart>> GetAllCarts()
+        public async Task<List<Cartitem>> GetAllCarts(int userId)
         {
-            var result = await _dbContext.Connection.QueryAsync<Cart>("Cart_Package.GetAllCarts",commandType:CommandType.StoredProcedure);
+            var p = new DynamicParameters();
+            p.Add("user_id",userId,dbType:DbType.Int32, direction:ParameterDirection.Input);    
+            var result = await _dbContext.Connection.QueryAsync<Cartitem,Program,Plan,Cartitem>
+            ("Cart_Package.GetAllCarts", ( cartItems,program,plan) =>
+            {
+                program.Plan = plan;
+               cartItems.Program = program; 
+                return cartItems;
+            },  p,splitOn:"programId,planId", commandType:CommandType.StoredProcedure);
             return result.ToList();
         }
 

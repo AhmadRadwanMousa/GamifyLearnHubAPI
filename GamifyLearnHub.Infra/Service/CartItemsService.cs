@@ -17,9 +17,9 @@ namespace GamifyLearnHub.Infra.Service
             _cartItemsRepository=cartItemsRepository;
         }
 
-        public async Task<int> AddCartItem(int userId, int programId)
+        public async Task<int> AddCartItem(int userId, int programId,int sectionId)
         {
-           return await _cartItemsRepository.AddCartItem(userId, programId);
+           return await _cartItemsRepository.AddCartItem(userId, programId, sectionId);
         }
 
         public async Task<int> CreateCartItems(Cartitem cartitem)

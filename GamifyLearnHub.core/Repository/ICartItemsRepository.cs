@@ -14,7 +14,7 @@ namespace GamifyLearnHub.Core.Repository
         Task<List<Cartitem>> GetAllCartItems();
         Task<int> UpdateCartItems(Cartitem cartitem);
         Task<List<Cartitem>>GetCartItemsByUserId(int userId);   
-        Task<int>AddCartItem(int userId,int programId);
+        Task<int>AddCartItem(int userId,int programId,int sectionId);
 
     }
 }

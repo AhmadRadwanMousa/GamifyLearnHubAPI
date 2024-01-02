@@ -174,5 +174,13 @@ namespace GamifyLearnHub.Infra.Repositroy
             var result = await _dbContext.Connection.QueryAsync<ProgramsByPlanId>("Program_Package.GetAllProgramsByPlanId", p ,commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+
+        public async Task<List<Program>> GetAllUserPrograms(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_id",userId, dbType:DbType.Int32, direction: ParameterDirection.Input);
+            var resul= await _dbContext.Connection.QueryAsync<Program>("Program_Package.GetUserPrograms", p, commandType: CommandType.StoredProcedure);
+            return resul.ToList();
+        }
     }
 }

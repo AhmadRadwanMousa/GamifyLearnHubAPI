@@ -23,9 +23,9 @@ namespace GamifyLearnHub.Controllers
         }
         [HttpPost]
 
-       public async Task<int> AddCartItem([FromForm]int userId, [FromForm]int programId)
+       public async Task<int> AddCartItem([FromForm]int userId, [FromForm]int programId,[FromForm]int sectionId )
         {
-            return await _cartItemsService.AddCartItem(userId,programId);
+            return await _cartItemsService.AddCartItem(userId,programId,sectionId);
         }
         [HttpDelete("{cartItemId}/{cartItemPrice}")]
         public async Task<int> DeleteCartItems(int cartItemId,int cartItemPrice)

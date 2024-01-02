@@ -18,6 +18,7 @@ namespace GamifyLearnHub.Core.Repository
         Task<int> DeleteProgram(int id);
 
         Task<List<ProgramsByPlanId>> GetAllProgramsWithPlanId(int id);
+        Task<List<Program>> GetAllUserPrograms(int userId);
 
 
     }

@@ -19,8 +19,10 @@ namespace GamifyLearnHub.Core.Repository
         Task<decimal> CreateSection(Section section);
         Task<int> UpdateSection(decimal sectionId, Section section);
         Task<int> DeleteSection(decimal sectionId);
-        Task<List<Section>>GetSectionByInstructorId(int instructorId);  
+        Task<List<Section>> GetSectionByInstructorId(int instructorId);
         Task<IEnumerable<User>> GetAllUsersWithRoleId2();
+
+        Task<Section>GetSectionByUserIdAndCourseSequenceId(int userId, int coursesequenceId);   
 
     }
 }

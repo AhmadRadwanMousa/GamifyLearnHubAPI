@@ -16,6 +16,7 @@ namespace GamifyLearnHub.Core.Data
         {
         }
 
+        public virtual DbSet<Announcement> Announcements { get; set; } = null!;
         public virtual DbSet<Assignment> Assignments { get; set; } = null!;
         public virtual DbSet<Assignmentsolution> Assignmentsolutions { get; set; } = null!;
         public virtual DbSet<Assignmentsolutiondetail> Assignmentsolutiondetails { get; set; } = null!;
@@ -66,6 +67,31 @@ namespace GamifyLearnHub.Core.Data
         {
             modelBuilder.HasDefaultSchema("GAMIFYLEARNINGHUB")
                 .UseCollation("USING_NLS_COMP");
+
+            modelBuilder.Entity<Announcement>(entity =>
+            {
+                entity.ToTable("ANNOUNCEMENT");
+
+                entity.Property(e => e.Announcementid)
+                    .HasColumnType("NUMBER")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("ANNOUNCEMENTID");
+
+                entity.Property(e => e.Declaration)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false)
+                    .HasColumnName("DECLARATION");
+
+                entity.Property(e => e.Sectionid)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("SECTIONID");
+
+                entity.HasOne(d => d.Section)
+                    .WithMany(p => p.Announcements)
+                    .HasForeignKey(d => d.Sectionid)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SYS_C008795");
+            });
 
             modelBuilder.Entity<Assignment>(entity =>
             {
@@ -329,6 +355,10 @@ namespace GamifyLearnHub.Core.Data
                     .HasColumnType("NUMBER")
                     .HasColumnName("PROGRAMID");
 
+                entity.Property(e => e.Sectionid)
+                    .HasColumnType("NUMBER")
+                    .HasColumnName("SECTIONID");
+
                 entity.HasOne(d => d.Cart)
                     .WithMany(p => p.Cartitems)
                     .HasForeignKey(d => d.Cartid)
@@ -340,6 +370,12 @@ namespace GamifyLearnHub.Core.Data
                     .HasForeignKey(d => d.Programid)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("SYS_C008773");
+
+                entity.HasOne(d => d.Section)
+                    .WithMany(p => p.Cartitems)
+                    .HasForeignKey(d => d.Sectionid)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("SYS_C008797");
             });
 
             modelBuilder.Entity<Certification>(entity =>
@@ -371,7 +407,7 @@ namespace GamifyLearnHub.Core.Data
                     .HasColumnName("USERID");
 
                 entity.HasOne(d => d.Coursesequence)
-                    .WithMany(p => p.Certifications)
+                    .WithMany(p => p.CertificationsNavigation)
                     .HasForeignKey(d => d.Coursesequenceid)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("SYS_C008772");
@@ -506,6 +542,7 @@ namespace GamifyLearnHub.Core.Data
                 entity.HasOne(d => d.Section)
                     .WithMany(p => p.Coursesections)
                     .HasForeignKey(d => d.Sectionid)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_COURSESECTION_SECTIONID");
             });
 
@@ -517,6 +554,11 @@ namespace GamifyLearnHub.Core.Data
                     .HasColumnType("NUMBER")
                     .ValueGeneratedOnAdd()
                     .HasColumnName("COURSESEQUENCEID");
+
+                entity.Property(e => e.Certifications)
+                    .HasColumnType("NUMBER(38)")
+                    .HasColumnName("CERTIFICATIONS")
+                    .HasDefaultValueSql("0");
 
                 entity.Property(e => e.Courseid)
                     .HasColumnType("NUMBER")

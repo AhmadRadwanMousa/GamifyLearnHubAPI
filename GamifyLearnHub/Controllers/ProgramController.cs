@@ -20,8 +20,6 @@ namespace GamifyLearnHub.Controllers
         }
 
 
-
-
         [HttpGet]
         [Route("GetAllProgramsWithPlanId/{id}")]
         public async Task<List<Core.DTO.ProgramsByPlanId>> GetAllProgramsWithPlanId(int id)
@@ -83,6 +81,12 @@ namespace GamifyLearnHub.Controllers
         public async Task<int> DeleteProgram(int id) 
         { 
             return await _programService.DeleteProgram(id);
+        }
+        [HttpGet]
+        [Route("GetProgramsByUserId/{userId}")]
+        public async Task<List<Core.Data.Program>> GetAllUserPrograms(int userId)
+        {
+         return await _programService.GetAllUserPrograms(userId);    
         }
 
 

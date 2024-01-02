@@ -19,6 +19,8 @@ namespace GamifyLearnHub.Core.Service
         Task<int> DeleteSection(decimal sectionId);
         Task<List<Section>> GetSectionByInstructorId(int instructorId);
         Task<IEnumerable<User>> GetAllUsersWithRoleId2();
+        Task<Section> GetSectionByUserIdAndCourseSequenceId(int userId, int coursesequenceId);
+
 
     }
 }
