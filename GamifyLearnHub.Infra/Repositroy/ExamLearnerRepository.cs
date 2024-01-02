@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace GamifyLearnHub.Infra.Repositroy
 {
@@ -82,6 +83,25 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("p_sectionId", sectionId, DbType.Int32, direction: ParameterDirection.Input);
 
             var result = await _dbContext.Connection.QueryAsync<Exam>("LearnerExam_Package.GetExamsToday", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<List<Core.Data.Section>> GetAllSectionsByLearnerId(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_Id", userId, DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Core.Data.Section>("UserExam_Package.GetAllSectionsByLearnerId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<List<Exam>> GetAllExamByUserSection(int userId, int sectionId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_Id", userId, DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("section_Id", sectionId, DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Exam>("UserExam_Package.GetAllExamByUserSection", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
     }
