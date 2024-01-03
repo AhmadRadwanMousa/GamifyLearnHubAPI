@@ -33,6 +33,11 @@ namespace GamifyLearnHub.Infra.Service
             return await _assignmentSolutionRepository.GetAssignmentSolutionByAssignmentId(assignmentId);
         }
 
+        public async Task<Assignmentsolution> GetAssignmentSolutionByUserId(int assignmentId, int userId)
+        {
+           return await _assignmentSolutionRepository.GetAssignmentSolutionByUserId(assignmentId, userId);    
+        }
+
         public async Task<int> UpdateAssignmentSolution(Assignmentsolution assignmentsolution)
         {
             return await _assignmentSolutionRepository.UpdateAssignmentSolution(assignmentsolution);

@@ -63,7 +63,17 @@ namespace GamifyLearnHub.Infra.Repositroy
 
         }
 
-        
+        public async Task<Assignmentsolution> GetAssignmentSolutionByUserId(int assignmentId, int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("assignment_id", assignmentId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("user_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+         var result=await _dbContext.Connection.QueryAsync<Assignmentsolution>
+           ("AssignmentSolution_Package.GetAssignmentSolutionByUserId",p,commandType:CommandType.StoredProcedure);
+            return result.FirstOrDefault(); 
+        }
+
         public async Task<int> UpdateAssignmentSolution(Assignmentsolution assignmentsolution)
         {
             var p = new DynamicParameters();

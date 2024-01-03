@@ -207,5 +207,14 @@ namespace GamifyLearnHub.Infra.Repository
                 ("Section_Package.GetSectionDetailsByCourseSequenceIdAndUserId", p, commandType: CommandType.StoredProcedure);
             return result.FirstOrDefault();
         }
+
+        public async Task<List<Section>> GetSectionsByUserId(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result =await _dbContext.Connection.QueryAsync<Section>
+            ("Section_Package.GetSectionByUserId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }

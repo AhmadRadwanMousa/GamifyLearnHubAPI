@@ -22,7 +22,8 @@ namespace GamifyLearnHub.Core.Repository
         Task<List<Section>> GetSectionByInstructorId(int instructorId);
         Task<IEnumerable<User>> GetAllUsersWithRoleId2();
 
-        Task<Section>GetSectionByUserIdAndCourseSequenceId(int userId, int coursesequenceId);   
+        Task<Section>GetSectionByUserIdAndCourseSequenceId(int userId, int coursesequenceId);
+        Task<List<Section>> GetSectionsByUserId(int userId);
 
     }
 }

@@ -25,14 +25,14 @@ namespace GamifyLearnHub.Controllers
         }
         [HttpPost]
         //[CheckClaims("roleId", "3")]
-        public async Task<int> CreateAssignmentSolution([FromForm]Assignmentsolution assignmentsolution)
+        public async Task<int> CreateAssignmentSolution([FromBody]Assignmentsolution assignmentsolution)
         {
           return await _assignmentSolutionService.CreateAssignmentSolution(assignmentsolution);    
         }
         [HttpPut]
         //[CheckClaims("roleId", "3")]
 
-        public async Task<int> UpdateAssignmentSolution([FromForm] Assignmentsolution assignmentsolution)
+        public async Task<int> UpdateAssignmentSolution([FromBody] Assignmentsolution assignmentsolution)
         {
             return await _assignmentSolutionService.UpdateAssignmentSolution(assignmentsolution);
         }
@@ -50,6 +50,13 @@ namespace GamifyLearnHub.Controllers
         {
             return await _assignmentSolutionService.UpdateAssignmentSolutionMark(mark);
         }
+        [HttpGet]
+        [Route("GetAssignmentSolutionByUserId/{assignmentId}/{userId}")]
+        public async Task<Assignmentsolution> GetAssignmentSolutionByUserId(int assignmentId, int userId)
+        {
+            return await _assignmentSolutionService.GetAssignmentSolutionByUserId(assignmentId, userId);    
+        }
+
 
 
 

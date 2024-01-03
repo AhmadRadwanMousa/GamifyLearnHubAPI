@@ -15,6 +15,7 @@ namespace GamifyLearnHub.Core.Repository
         Task<int> DeleteAssignmentSolution(int assignmentSolutionId);
         Task<List<Assignmentsolution>> GetAssignmentSolutionByAssignmentId(int assignmentId);
         Task<int>UpdateAssignmentSolutionMark (AssignmentMark mark);
+        Task<Assignmentsolution> GetAssignmentSolutionByUserId(int assignmentId, int userId);
 
     }
 }
