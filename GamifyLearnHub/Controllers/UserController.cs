@@ -12,6 +12,7 @@ namespace GamifyLearnHub.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -47,7 +48,9 @@ namespace GamifyLearnHub.Controllers
         [HttpGet("{userId}")]
         public async Task<User> GetUserById(int userId)
         {
-            return await _userService.GetUserById(userId);
+            var user =  await _userService.GetAllUsers();
+
+            return user.Where(u => u.Userid == userId).FirstOrDefault();
         }
         [HttpGet]
         [Route("GetUnAcceptedUsers")]
