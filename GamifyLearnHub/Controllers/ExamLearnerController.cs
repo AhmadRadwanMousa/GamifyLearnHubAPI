@@ -70,9 +70,16 @@ namespace GamifyLearnHub.Controllers
         [HttpGet]
         [Route("GetAllExamByUserSection/{userId}/{sectionId}")]
         //[CheckClaims("roleId", "3")]
-        public async Task<List<Exam>> GetAllExamByUserSection(int userId , int sectionId)
+        public async Task<List<ExamsBySection>> GetAllExamByUserSection(int userId , int sectionId)
         {
             return await _examLearnerService.GetAllExamByUserSection(userId , sectionId);
+        }
+
+        [HttpGet]
+        [Route("GetExamDetailsByUserId/{userId}/{examId}")]
+        public async Task<Examsolutiondetail> GetExamDetailsByUserId(int userId, int examId)
+        {
+            return await _examLearnerService.GetExamDetailsByUserId(userId, examId);
         }
 
     }
