@@ -56,5 +56,10 @@ namespace GamifyLearnHub.Infra.Service
             var rowsAffected = await _testimonialRepository.UpdateTestimonial(testimonial);
             return rowsAffected;
         }
-    }
+		public async Task<List<Testimonial>> GetTestimonialByUserId(int id) 
+		{
+			return await _testimonialRepository.GetTestimonialByUserId(id);
+		}
+
+	}
 }

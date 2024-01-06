@@ -101,5 +101,13 @@ namespace GamifyLearnHub.Infra.Repositroy
             _dbContext.Connection.ExecuteAsync("Testimonial_Package.UpdateTestimonial", p, commandType: CommandType.StoredProcedure);
             return p.Get<int>("RowsAffected");
         }
-    }
+
+		public async Task<List<Testimonial>> GetTestimonialByUserId(int id)
+		{
+			var p = new DynamicParameters();
+			p.Add("User_Id", id, DbType.Int32, direction: ParameterDirection.Input);
+			var result = await _dbContext.Connection.QueryAsync<Testimonial>("Testimonial_Package.GetTestimonialByUserId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+		}
+	}
 }
