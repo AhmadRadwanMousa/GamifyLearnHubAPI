@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,18 @@ namespace GamifyLearnHub.Infra.Repositroy
             var result = await _dbContext.Connection.QueryAsync<Exam>("Exam_Package.GetExamById",p,commandType:CommandType.StoredProcedure);
 
             return result.FirstOrDefault();
+        }
+
+        public async Task<List<StudentsMark>> GetUserMarks(int examId, int sectionId)
+        {
+            var p = new DynamicParameters();
+
+            p.Add("exam_Id", examId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("section_Id", sectionId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<StudentsMark>("Exam_Package.GetUserMarks", p, commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
         }
 
         public async Task<int> UpdateExam(Exam exam)

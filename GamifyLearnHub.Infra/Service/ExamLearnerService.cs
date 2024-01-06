@@ -49,7 +49,7 @@ namespace GamifyLearnHub.Infra.Service
             return complete;
         }
 
-        public async Task<List<Exam>> GetAllExamByUserSection(int userId, int sectionId)
+        public async Task<List<ExamsBySection>> GetAllExamByUserSection(int userId, int sectionId)
         {
             return await _examLearnerRepository.GetAllExamByUserSection(userId, sectionId);
         }
@@ -62,6 +62,11 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<List<ExamLearner>> GetExamDetails(int id)
         {
            return await _examLearnerRepository.GetExamDetails(id);
+        }
+
+        public async Task<Examsolutiondetail> GetExamDetailsByUserId(int userId, int examid)
+        {
+            return await _examLearnerRepository.GetExamDetailsByUserId(userId, examid);
         }
 
         public async Task<List<Exam>> GetExamsToday(int sectionId)

@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace GamifyLearnHub.Core.Service
         Task<int> CreateExam(Exam exam);
         Task<int> UpdateExam(Exam exam);
         Task<int> DeleteExam(int id);
+        Task<List<StudentsMark>> GetUserMarks(int examId, int sectionId);
     }
 }

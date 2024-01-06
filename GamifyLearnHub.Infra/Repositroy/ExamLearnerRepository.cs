@@ -95,14 +95,34 @@ namespace GamifyLearnHub.Infra.Repositroy
             return result.ToList();
         }
 
-        public async Task<List<Exam>> GetAllExamByUserSection(int userId, int sectionId)
+        public async Task<List<ExamsBySection>> GetAllExamByUserSection(int userId, int sectionId)
         {
             var p = new DynamicParameters();
             p.Add("user_Id", userId, DbType.Int32, direction: ParameterDirection.Input);
             p.Add("section_Id", sectionId, DbType.Int32, direction: ParameterDirection.Input);
 
-            var result = await _dbContext.Connection.QueryAsync<Exam>("UserExam_Package.GetAllExamByUserSection", p, commandType: CommandType.StoredProcedure);
+            var result = await _dbContext.Connection.QueryAsync<ExamsBySection>("UserExam_Package.GetAllExamByUserSection",
+                p,
+                commandType: CommandType.StoredProcedure);
             return result.ToList();
+        }
+
+        public async Task<Examsolutiondetail> GetExamDetailsByUserId(int userId, int examid)
+        {
+            var p = new DynamicParameters();
+            p.Add("p_examId", examid, DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_userId", userId, DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<Examsolutiondetail,Exam, Examsolutiondetail>("LearnerExam_Package.GetExamDetailsByUserId",
+                  (examdet, exam) =>
+                  {
+                      examdet.Exam = exam;
+                      return examdet;
+                  },
+                p,
+                splitOn: "examid", 
+               commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
         }
     }
 }

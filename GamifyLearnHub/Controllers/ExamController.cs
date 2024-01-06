@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,14 @@ namespace GamifyLearnHub.Controllers
         public async Task<List<Exam>> GetAllExams()
         {
             return await _examService.GetAllExams();
+        }
+
+
+        [HttpGet("GetUserMarks/{examId}/{sectionId}")]
+        //[CheckClaims("roleId", "2")]
+        public async Task<List<StudentsMark>> GetUserMarks(int examId, int sectionId)
+        {
+            return await _examService.GetUserMarks(examId , sectionId);
         }
 
         [HttpGet("GetAllExamsBySectionId/{id}")]

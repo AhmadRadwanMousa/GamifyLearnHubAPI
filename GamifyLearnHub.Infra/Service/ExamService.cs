@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using System;
@@ -37,6 +38,11 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<Exam> GetExamById(int id)
         {
             return await _examRepository.GetExamById(id);
+        }
+
+        public async Task<List<StudentsMark>> GetUserMarks(int examId, int sectionId)
+        {
+            return await _examRepository.GetUserMarks(examId, sectionId);
         }
 
         public async Task<int> UpdateExam(Exam exam)
