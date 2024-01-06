@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +40,7 @@ namespace GamifyLearnHub.Controllers
         [HttpPost]
         public async Task<ActionResult<decimal>> CreateUserProgress(Userprogress userProgress)
         {
-            decimal createdId = await _userProgressService.CreateUserProgress(userProgress.Userid ?? 0, userProgress.Lectureid ?? 0);
+            decimal createdId = await _userProgressService.CreateUserProgress(userProgress);
             return CreatedAtAction(nameof(GetUserProgressById), new { id = createdId }, createdId);
         }
 
@@ -72,5 +73,17 @@ namespace GamifyLearnHub.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
+        [HttpGet]
+        [Route("GetAllUserProgressPerSection/{userId}/{sectionId}")]
+        public async Task<List<Userprogress>>GetUserProgressBySectionAndUserId(int userId,int sectionId)
+        {
+            return await _userProgressService.GetUserProgressBySectionAndUserId(userId, sectionId); 
+        }
+        [HttpGet]
+        [Route("GetProgressPerCourse/{userId}/{programId}")]
+        public async Task<List<UserProgressPerCourse>>GetProgressPerCourse(int userId,int programId)
+        {
+            return await _userProgressService.GetProgressPerCourse(userId, programId);  
+        } 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using System;
@@ -28,9 +29,9 @@ namespace GamifyLearnHub.Infra.Service
             return await _userProgressRepository.GetUserProgressById(id);
         }
 
-        public async Task<decimal> CreateUserProgress(decimal user_id, decimal lecture_id)
+        public async Task<decimal> CreateUserProgress(Userprogress userprogress)
         {
-            return await _userProgressRepository.CreateUserProgress(user_id, lecture_id);
+            return await _userProgressRepository.CreateUserProgress(userprogress);
         }
 
         public async Task<int> UpdateUserProgress(decimal id, decimal user_id, decimal lecture_id)
@@ -41,6 +42,16 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<int> DeleteUserProgress(decimal id)
         {
             return await _userProgressRepository.DeleteUserProgress(id);
+        }
+
+        public async Task<List<Userprogress>> GetUserProgressBySectionAndUserId(int userId, int sectionId)
+        {
+           return await _userProgressRepository.GetUserProgressBySectionAndUserId(userId, sectionId);
+        }
+
+        public async Task<List<UserProgressPerCourse>> GetProgressPerCourse(int userId, int programId)
+        {
+          return await _userProgressRepository.GetProgressPerCourse(userId, programId);   
         }
     }
 }

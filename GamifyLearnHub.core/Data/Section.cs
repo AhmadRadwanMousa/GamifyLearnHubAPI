@@ -14,6 +14,7 @@ namespace GamifyLearnHub.Core.Data
             Coursesections = new HashSet<Coursesection>();
             Exams = new HashSet<Exam>();
             Sectionannoncments = new HashSet<Sectionannoncment>();
+            Userprogresses = new HashSet<Userprogress>();
             Usersections = new HashSet<Usersection>();
         }
 
@@ -33,6 +34,7 @@ namespace GamifyLearnHub.Core.Data
         public virtual ICollection<Coursesection> Coursesections { get; set; }
         public virtual ICollection<Exam> Exams { get; set; }
         public virtual ICollection<Sectionannoncment> Sectionannoncments { get; set; }
+        public virtual ICollection<Userprogress> Userprogresses { get; set; }
         public virtual ICollection<Usersection> Usersections { get; set; }
     }
 }

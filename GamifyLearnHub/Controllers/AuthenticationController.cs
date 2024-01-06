@@ -12,12 +12,13 @@ namespace GamifyLearnHub.Controllers
         private readonly IAuthenticationService _authenticationService;
         public AuthenticationController(IAuthenticationService authenticationService)
         {
-            _authenticationService= authenticationService;
+            _authenticationService = authenticationService;
         }
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]LoginCredentails loginDetails)
         {
             var token = await _authenticationService.Login(loginDetails);
+           
             if (token == null) { 
             return Unauthorized();
             }

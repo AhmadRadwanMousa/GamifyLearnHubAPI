@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -44,11 +45,12 @@ namespace GamifyLearnHub.Infra.Repositroy
             return result.FirstOrDefault();
         }
 
-        public async Task<decimal> CreateUserProgress(decimal user_id, decimal lecture_id)
+        public async Task<decimal> CreateUserProgress(Userprogress userprogress)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("user_id", user_id, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("lecture_id", lecture_id, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("user_id", userprogress.Userid, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("lecture_id", userprogress.Lectureid, DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("section_id",userprogress.Sectionid , DbType.Decimal, ParameterDirection.Input);
             parameters.Add("created_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
 
             await _dbContext.Connection.ExecuteAsync(
@@ -92,6 +94,25 @@ namespace GamifyLearnHub.Infra.Repositroy
             return parameters.Get<int>("rows_deleted");
         }
 
+        public async Task<List<Userprogress>> GetUserProgressBySectionAndUserId(int userId, int sectionId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_id",userId,dbType:DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("section_id", sectionId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
+            var result = await _dbContext.Connection.QueryAsync<Userprogress>
+                ("UserProgress_Package.GetUserProgessBySectionAndUserId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<List<UserProgressPerCourse>> GetProgressPerCourse(int userId, int programId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_id",userId, dbType:DbType.Int32, direction:ParameterDirection.Input);
+            p.Add("program_id",programId, dbType: DbType.Int32, direction:ParameterDirection.Input) ;
+            var result=await _dbContext.Connection.QueryAsync<UserProgressPerCourse>
+            ("UserProgress_Package.GetProgressPerCourse", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }

@@ -12,14 +12,25 @@ namespace GamifyLearnHub.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UserController(IUserService userService)
+        private readonly IMailService _mailService;
+        
+        public UserController(IUserService userService,IMailService mailService)
         {
             _userService = userService;
+            _mailService = mailService; 
         }
 
         [HttpPost]
         public async Task<int> CreateUser([FromBody] UserDetails? userDetails)
         {
+            MailData mailData = new MailData
+            {
+                EmailTo = "Subaruk898@gmail.com",
+                EmailSubject = "Hello",
+                EmailBody = $"<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Product Review</title>\r\n</head>\r\n<body style=\"font-family: Arial, sans-serif;\">\r\n\r\n    <h1>Hello ,</h1>\r\n\r\n    <p>Thank you for submitting a review for Product ID: .</p>\r\n\r\n    <h2>Your Review:</h2>\r\n        <p>We appreciate your feedback!</p>\r\n\r\n    <p>Best regards,</p>\r\n    <p>Ahmad Mousa</p>\r\n\r\n</body>\r\n</html>",
+                EmailToName = "Ahmad Subaruk"
+            };
+            _mailService.SendEmail(mailData);
             return await _userService.CreateUser(userDetails);
         }
         [HttpDelete("{userId}")]

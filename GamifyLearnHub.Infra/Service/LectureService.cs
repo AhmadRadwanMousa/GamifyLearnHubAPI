@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using System;
@@ -41,6 +42,11 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<int> DeleteLecture(decimal lectureId)
         {
             return await _lectureRepository.DeleteLecture(lectureId);
+        }
+
+        public async Task<List<LecturesPerCourse>> GetLecturesCountByCourse(int userId, int programId)
+        {
+           return await _lectureRepository.GetLecturesCountByCourse(userId, programId); 
         }
     }
 }

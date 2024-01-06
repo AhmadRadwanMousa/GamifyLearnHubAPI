@@ -12,6 +12,9 @@ using GamifyLearnHub.Infra.Repository;
 
 using GamifyLearnHup.Infra.Repository;
 using GamifyLearnHup.Infra.Service;
+using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
+
 
 
 
@@ -115,6 +118,9 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IAttendenceService, AttendenceService>();
             builder.Services.AddScoped<IAttendenceDetailService, AttendenceDetailService>();
             builder.Services.AddScoped<IAdminReportService, AdminReportService>();
+          
+
+       
             builder.Services.AddAuthentication((opt) => {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme;
@@ -130,21 +136,19 @@ namespace GamifyLearnHub
                         Encoding.UTF8.GetBytes("superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345superSecretKey@345"))
                 };
             });
- 
-         
-
+            builder.Services.Configure<MailDetails>(builder.Configuration.GetSection("MailDetails"));
+            builder.Services.AddTransient<IMailService, MailService>();
 
             builder.Services.AddControllers();
           
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-        
 
        
             var app = builder.Build();
-		
 
-           
+         
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

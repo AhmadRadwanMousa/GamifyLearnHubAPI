@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using System;
 using System.Collections.Generic;
@@ -94,6 +95,18 @@ namespace GamifyLearnHub.Infra.Repositroy
             );
 
             return parameters.Get<int>("rows_affected");
+        }
+
+       public async Task<List<LecturesPerCourse>> GetLecturesCountByCourse(int userId, int programId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_id",userId, DbType.Int32,direction:ParameterDirection.Input);
+            p.Add("program_id", programId, DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<LecturesPerCourse>
+                ("Lecture_Package.GetLectureCountPerCourse", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,12 @@ namespace GamifyLearnHub.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
+        }
+        [HttpGet]
+        [Route("GetLecturesCountPerCourse/{userId}/{programId}")]
+        public async Task<List<LecturesPerCourse>>GetLecturesCountPerCourse(int userId,int programId)
+        {
+            return await _lectureService.GetLecturesCountByCourse(userId, programId);   
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace GamifyLearnHub.Core.Repository
         Task<decimal> CreateLecture(Lecture lecture);
         Task<int> UpdateLecture(Lecture lecture);
         Task<int> DeleteLecture(decimal lectureId);
+
+        Task<List<LecturesPerCourse>> GetLecturesCountByCourse(int userId, int programId);
     }
 }
