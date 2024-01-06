@@ -11,7 +11,9 @@ namespace GamifyLearnHub.Core.Repository
     {
         Task<List<Testimonial>> GetAllTestimonials();
         Task<Testimonial> GetTestimonialById(int id);
-        Task<int> CreateTestimonial(Testimonial testimonial);
+		Task<List<Testimonial>> GetTestimonialByUserId(int id);
+
+		Task<int> CreateTestimonial(Testimonial testimonial);
         Task<int> UpdateTestimonial(Testimonial testimonial);
         Task<int> DeleteTestimonial(int id);
         Task<int> AcceptTestimonial(int id);

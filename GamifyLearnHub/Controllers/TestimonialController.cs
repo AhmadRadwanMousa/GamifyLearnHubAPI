@@ -125,5 +125,13 @@ namespace GamifyLearnHub.Controllers
             }
 
         }
-    }
+
+		[HttpGet]
+		[Route("GetByUserId/{id}")]
+
+		public async Task<List<Testimonial>> GetTestimonialByUserId(int id)
+		{
+			return await _testimonialService.GetTestimonialByUserId(id);
+		}
+	}
 }
