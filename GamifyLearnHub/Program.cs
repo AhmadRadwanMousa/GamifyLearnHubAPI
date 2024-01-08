@@ -119,7 +119,8 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IAttendenceService, AttendenceService>();
             builder.Services.AddScoped<IAttendenceDetailService, AttendenceDetailService>();
             builder.Services.AddScoped<IAdminReportService, AdminReportService>();
-          
+            builder.Services.AddScoped<IUserPointsRepository, UserPointsRepository>();  
+            builder.Services.AddScoped<IUserPointsService, UserPointsService>();    
 
        
             builder.Services.AddScoped<IUserDashboardInfoService, UserDashboardInfoService>(); 

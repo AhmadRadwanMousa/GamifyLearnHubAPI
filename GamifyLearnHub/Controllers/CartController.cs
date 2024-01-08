@@ -19,6 +19,11 @@ namespace GamifyLearnHub.Controllers
         {
             return await _cartService.GetAllCarts(userId);
         }
+        [HttpPut]
+        public async Task<int>UpdateCartTotal(Cart cart)
+        {
+            return await _cartService.UpdateCart(cart); 
+        }
 
     }
 }

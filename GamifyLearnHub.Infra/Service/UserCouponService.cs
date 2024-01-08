@@ -31,7 +31,17 @@ namespace GamifyLearnHub.Infra.Service
 			return await _userCouponRepository.GetAllUserCoupon();
 		}
 
-		public async Task<Usercoupon> GetUserCouponById(int id)
+        public async Task<List<Usercoupon>> GetAllUserCoupons(int userId)
+        {
+           return await _userCouponRepository.GetAllUserCoupons(userId);	
+        }
+
+        public async Task<Usercoupon> GetCouponByNameAndUserId(string couponName, int userId)
+        {
+			return await _userCouponRepository.GetCouponByNameAndUserId(couponName, userId);	
+        }
+
+        public async Task<Usercoupon> GetUserCouponById(int id)
 		{
 			return await _userCouponRepository.GetUserCouponById(id);
 		}
@@ -40,5 +50,10 @@ namespace GamifyLearnHub.Infra.Service
 		{
 			return await _userCouponRepository.UpdateUserCoupon(userCoupon);
 		}
-	}
+
+        public async Task<int> UpdateUserCouponStatus(int userCouponId)
+        {
+          return await _userCouponRepository.UpdateUserCouponStatus(userCouponId);	
+        }
+    }
 }

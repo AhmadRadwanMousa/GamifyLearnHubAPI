@@ -14,5 +14,10 @@ namespace GamifyLearnHub.Core.Service
 		Task<int> CreateUserCoupon(Usercoupon userCoupon);
 		Task<int> UpdateUserCoupon(Usercoupon userCoupon);
 		Task<int> DeleteUserCoupon(int id);
-	}
+        Task<Usercoupon> GetCouponByNameAndUserId(string couponName, int userId);
+        Task<int> UpdateUserCouponStatus(int userCouponId);
+		Task<List<Usercoupon>> GetAllUserCoupons(int userId);
+
+
+    }
 }

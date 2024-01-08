@@ -58,9 +58,10 @@ namespace GamifyLearnHub.Controllers
         }
 
 
+
         [HttpPost]
         [Route("UploadImage")]
-        //[CheckClaims("roleId", "1")]
+        [CheckClaims("roleId", "1")]
         public Core.Data.Program UploadImage()
         {
             var file = Request.Form.Files[0];

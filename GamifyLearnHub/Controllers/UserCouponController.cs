@@ -22,6 +22,12 @@ namespace GamifyLearnHub.Controllers
 		{
 			return await _userCouponService.GetAllUserCoupon();
 		}
+		[HttpGet]
+		[Route("GetAllUserCouponsByUserId/{userId}")]
+		public async Task<List<Usercoupon>>GetAllUserCouponsByUserId(int userId)
+		{
+			return await _userCouponService.GetAllUserCoupons(userId);
+		}
 		[HttpPost]
 		[Route("CreateUserCoupon")]
 		public async Task<int> CreateUserCoupon([FromForm] Usercoupon userCoupon)
@@ -44,6 +50,18 @@ namespace GamifyLearnHub.Controllers
 		public async Task<Usercoupon> GetUserCouponById(int id)
 		{
 			return await _userCouponService.GetUserCouponById(id);
+		}
+		[HttpGet]
+		[Route("GetUserCouponByUserIdAndCouponName/{userId}/{couponName}")]
+		public async Task<Usercoupon>GetUserCouponByNameAndUserId(int userId, string couponName)
+		{
+			return await _userCouponService.GetCouponByNameAndUserId(couponName, userId);	
+		}
+		[HttpPut("{userCouponId}")]
+
+		public async Task<int> UpdateUserCoupon(int userCouponId)
+		{
+			return await _userCouponService.UpdateUserCouponStatus(userCouponId);	
 		}
 
 	}
