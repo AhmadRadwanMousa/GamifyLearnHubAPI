@@ -28,7 +28,6 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("pointsActivity_Name", pointsactivity.Pointsactivityname, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("number_Of_Courses", pointsactivity.Numberofcourses, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("number_Of_Days", pointsactivity.Numberofdays, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
             await _dbContext.Connection.ExecuteAsync("PointsActivity_Package.CreateNewPointsActivity", p, commandType: CommandType.StoredProcedure);
 
             return p.Get<int>("pointsActivity_Id");

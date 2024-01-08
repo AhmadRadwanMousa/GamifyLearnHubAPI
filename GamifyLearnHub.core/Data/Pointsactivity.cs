@@ -14,6 +14,7 @@ namespace GamifyLearnHub.Core.Data
         public string Pointsactivityname { get; set; } = null!;
         public decimal Points { get; set; }
         public decimal? Numberofcourses { get; set; }
+        public decimal? Numberofdays { get; set; }
 
         public virtual ICollection<Userpointsactivity> Userpointsactivities { get; set; }
     }
