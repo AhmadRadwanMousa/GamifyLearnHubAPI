@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GamifyLearnHub.Core.Common;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using System;
 using System.Data;
@@ -214,6 +215,15 @@ namespace GamifyLearnHub.Infra.Repository
             p.Add("user_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result =await _dbContext.Connection.QueryAsync<Section>
             ("Section_Package.GetSectionByUserId", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<List<Top3BySectionId>> Top3BySectionId(int sectionId)
+        {
+            var p = new DynamicParameters();
+            p.Add("section_Id", sectionId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Top3BySectionId>
+            ("Section_Package.Top3BySectionId", p, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 
 namespace GamifyLearnHub.Core.Repository
 {
@@ -24,6 +25,8 @@ namespace GamifyLearnHub.Core.Repository
 
         Task<Section>GetSectionByUserIdAndCourseSequenceId(int userId, int coursesequenceId);
         Task<List<Section>> GetSectionsByUserId(int userId);
+
+        Task<List<Top3BySectionId>> Top3BySectionId(int sectionId);
 
     }
 }

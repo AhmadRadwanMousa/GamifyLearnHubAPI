@@ -16,6 +16,12 @@ namespace GamifyLearnHub.Infra.Service
         {
             _pointsActivityRepository = pointsActivityRepository;   
         }
+
+        public async Task<int> CreateNewPointsActivity(Pointsactivity pointsactivity)
+        {
+            return await _pointsActivityRepository.CreateNewPointsActivity(pointsactivity);
+        }
+
         public async Task<List<Pointsactivity>> GetAll()
         {
             return await _pointsActivityRepository.GetAll();

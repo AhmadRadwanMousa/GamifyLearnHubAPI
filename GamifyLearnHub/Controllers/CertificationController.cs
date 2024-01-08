@@ -118,6 +118,19 @@ namespace GamifyLearnHub.Controllers
                 title.Alignment = Element.ALIGN_CENTER;
                 doc.Add(title);
 
+
+
+                string logoPath = "wwwroot/Images/IQ_Logo.png";
+                Image logoImage = Image.GetInstance(logoPath);
+                logoImage.ScaleToFit(100f, 60f);
+                logoImage.SetAbsolutePosition(100f, 490f);
+                doc.Add(logoImage);
+
+
+
+              
+               
+
                 // Add space to center content vertically
                 doc.Add(new iTextSharp.text.Paragraph(" "));
 

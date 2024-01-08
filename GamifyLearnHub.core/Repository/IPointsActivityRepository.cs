@@ -11,5 +11,6 @@ namespace GamifyLearnHub.Core.Repository
     {
         Task<List<Pointsactivity>> GetAll();
         Task<int> UpdatePointsActivity(Pointsactivity pointsactivity);
+        Task<int> CreateNewPointsActivity(Pointsactivity pointsactivity);
     }
 }

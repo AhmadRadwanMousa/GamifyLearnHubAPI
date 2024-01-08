@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 
@@ -75,6 +76,11 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<List<Section>> GetSectionsByUserId(int userId)
         {
            return await _sectionRepository.GetSectionsByUserId(userId);
+        }
+
+        public async Task<List<Top3BySectionId>> Top3BySectionId(int sectionId)
+        {
+            return await _sectionRepository.Top3BySectionId(sectionId);
         }
     }
 }

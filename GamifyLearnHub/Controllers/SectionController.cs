@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GamifyLearnHub.Attributes;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -154,6 +155,14 @@ namespace GamifyLearnHub.API.Controllers
         public async Task<List<Section>> GetSectionsByUserId(int userId)
         {
             return await _sectionService.GetSectionsByUserId(userId);
+        }
+
+
+        [HttpGet]
+        [Route("Top3BySectionId/{sectionId}")]
+        public async Task<List<Top3BySectionId>> Top3BySectionId(int sectionId)
+        {
+            return await _sectionService.Top3BySectionId(sectionId);
         }
 
     }

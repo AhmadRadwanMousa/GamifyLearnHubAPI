@@ -50,7 +50,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             var parameters = new DynamicParameters();
             parameters.Add("user_id", userprogress.Userid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("lecture_id", userprogress.Lectureid, DbType.Decimal, ParameterDirection.Input);
-            parameters.Add("section_id",userprogress.Sectionid , DbType.Decimal, ParameterDirection.Input);
+            parameters.Add("section_id", userprogress.Sectionid, DbType.Decimal, ParameterDirection.Input);
             parameters.Add("created_id", dbType: DbType.Decimal, direction: ParameterDirection.Output);
 
             await _dbContext.Connection.ExecuteAsync(
