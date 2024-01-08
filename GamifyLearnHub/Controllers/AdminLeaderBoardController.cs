@@ -38,5 +38,11 @@ namespace GamifyLearnHub.Controllers
         {
             return await _adminLeaderBoardService.InstructorStudents(id);
         }
+
+        [HttpGet("InstructorPointsStudents/{id}")]
+        public async Task<List<RankByPoints>> InstructorPointsStudents(int id)
+        {
+            return await _adminLeaderBoardService.RankByPointsInstructorStudents(id);
+        }
     }
 }

@@ -41,6 +41,14 @@ namespace GamifyLearnHub.Infra.Repositroy
             return result.ToList();
         }
 
+        public async Task<List<RankByPoints>> RankByPointsInstructorStudents(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<RankByPoints>("Admin_leaderboard_Package.OrderByPointsInstructor", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
         public async Task<List<RankByPoints>> RankByPointsStudents()
         {
             var result = await _dbContext.Connection.QueryAsync<RankByPoints>("Admin_leaderboard_Package.OrderByPoints",commandType:CommandType.StoredProcedure);

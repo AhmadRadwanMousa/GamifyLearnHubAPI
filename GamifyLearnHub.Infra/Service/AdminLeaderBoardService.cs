@@ -32,6 +32,11 @@ namespace GamifyLearnHub.Infra.Service
             return await _adminLeaderBoardRepository.RankByBadgesStudents();
         }
 
+        public async Task<List<RankByPoints>> RankByPointsInstructorStudents(int id)
+        {
+            return await _adminLeaderBoardRepository.RankByPointsInstructorStudents(id);
+        }
+
         public async Task<List<RankByPoints>> RankByPointsStudents()
         {
             return await _adminLeaderBoardRepository.RankByPointsStudents();
