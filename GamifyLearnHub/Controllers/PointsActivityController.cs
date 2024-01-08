@@ -28,5 +28,11 @@ namespace GamifyLearnHub.Controllers
         {
             return await _pointsActivityService.UpdatePointsActivity(pointsactivity);
         }
+
+        [HttpPost]
+        public async Task<int> CreateNewPointsActivity(Pointsactivity pointsactivity)
+        {
+            return await _pointsActivityService.CreateNewPointsActivity(pointsactivity);
+        }
     }
 }

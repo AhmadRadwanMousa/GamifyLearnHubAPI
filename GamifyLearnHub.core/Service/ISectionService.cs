@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace GamifyLearnHub.Core.Service
         Task<IEnumerable<User>> GetAllUsersWithRoleId2();
         Task<Section> GetSectionByUserIdAndCourseSequenceId(int userId, int coursesequenceId);
         Task<List<Section>> GetSectionsByUserId(int userId);
+        Task<List<Top3BySectionId>> Top3BySectionId(int sectionId);
 
 
     }

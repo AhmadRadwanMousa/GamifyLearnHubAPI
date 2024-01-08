@@ -19,6 +19,21 @@ namespace GamifyLearnHub.Infra.Repositroy
         {
             _dbContext = dbContext;
         }
+
+        public async Task<int> CreateNewPointsActivity(Pointsactivity pointsactivity)
+        {
+            var p = new DynamicParameters();
+            p.Add("pointsActivity_Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            p.Add("activityPoints", pointsactivity.Points, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("pointsActivity_Name", pointsactivity.Pointsactivityname, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("number_Of_Courses", pointsactivity.Numberofcourses, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("number_Of_Days", pointsactivity.Numberofdays, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            await _dbContext.Connection.ExecuteAsync("PointsActivity_Package.CreateNewPointsActivity", p, commandType: CommandType.StoredProcedure);
+
+            return p.Get<int>("pointsActivity_Id");
+        }
+
         public async Task<List<Pointsactivity>> GetAll()
         {
             var result = await _dbContext.Connection.QueryAsync<Pointsactivity>("PointsActivity_Package.GetAllPointsActivity", commandType: CommandType.StoredProcedure);
