@@ -13,6 +13,7 @@ namespace GamifyLearnHub.Core.Data
         public decimal Pointsactivityid { get; set; }
         public string Pointsactivityname { get; set; } = null!;
         public decimal Points { get; set; }
+        public decimal? Numberofcourses { get; set; }
 
         public virtual ICollection<Userpointsactivity> Userpointsactivities { get; set; }
     }

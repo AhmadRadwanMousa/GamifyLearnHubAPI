@@ -67,5 +67,25 @@ namespace GamifyLearnHub.Infra.Service
         {
             return await _userRepository.UpdateUserStatus(userId, isAccepted);  
         }
+
+        public async Task<int> CreateInstructorDetails(Instructordetail instructordetail)
+        {
+            return await _userRepository.CreateInstructorDetails(instructordetail);
+        }
+
+        public async Task<int> UpdateInstructorDetails(Instructordetail instructordetail)
+        {
+            return await _userRepository.UpdateInstructorDetails(instructordetail);
+        }
+
+        public async Task<int> DeleteInstructorDetails(decimal instructorId)
+        {
+            return await _userRepository.DeleteInstructorDetails(instructorId);
+        }
+
+        public async Task<Instructordetail> GetInstructorDetailsById(decimal instructorId)
+        {
+            return await _userRepository.GetInstructorDetailsById(instructorId);
+        }
     }
 }

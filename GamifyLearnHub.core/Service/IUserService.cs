@@ -22,5 +22,10 @@ namespace GamifyLearnHub.Core.Service
         Task<List<ReportsUser>> ReportsByUserId(int userId, int programId);
         Task<List<Program>> GetProgramsByUserId(int userId);
 
+        Task<int> CreateInstructorDetails(Instructordetail instructordetail);
+        Task<int> UpdateInstructorDetails(Instructordetail instructordetail);
+        Task<int> DeleteInstructorDetails(decimal instructorId);
+        Task<Instructordetail> GetInstructorDetailsById(decimal instructorId);
+
     }
 }

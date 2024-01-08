@@ -176,5 +176,73 @@ namespace GamifyLearnHub.Infra.Repositroy
 
             return result.ToList();
         }
+
+        public async Task<int> CreateInstructorDetails(Instructordetail instructordetail)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_Id", instructordetail.Userid, DbType.Int32, ParameterDirection.Input);
+            p.Add("title", instructordetail.Title, DbType.String, ParameterDirection.Input);
+            p.Add("description", instructordetail.Description, DbType.String, ParameterDirection.Input);
+            p.Add("facebookLink", instructordetail.Facebooklink, DbType.String, ParameterDirection.Input);
+            p.Add("instagramLink", instructordetail.Instagramlink, DbType.String, ParameterDirection.Input);
+            p.Add("linkedinLink", instructordetail.Linkedinlink, DbType.String, ParameterDirection.Input);
+            p.Add("twitterLink", instructordetail.Twitterlink, DbType.String, ParameterDirection.Input);
+            p.Add("experience", instructordetail.Experience, DbType.String, ParameterDirection.Input);
+
+            p.Add("instructor_Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            await _dbContext.Connection.ExecuteAsync("User_Package.CreateInstructorDetails", p, commandType: CommandType.StoredProcedure);
+
+            int instructorId = p.Get<int>("instructor_Id");
+            int rowsAffected = p.Get<int>("rows_affected");
+
+
+            return instructorId;
+        }
+
+
+        public async Task<int> UpdateInstructorDetails(Instructordetail instructordetail)
+        {
+            var p = new DynamicParameters();
+            p.Add("instructor_Id", instructordetail.Instructorid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("user_Id", instructordetail.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("title", instructordetail.Title, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("description", instructordetail.Description, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("facebookLink", instructordetail.Facebooklink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("instagramLink", instructordetail.Instagramlink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("linkedinLink", instructordetail.Linkedinlink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("twitterLink", instructordetail.Twitterlink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("experience", instructordetail.Experience, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("rows_effected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            await _dbContext.Connection.ExecuteAsync("User_Package.UpdateInstructorDetails", p, commandType: CommandType.StoredProcedure);
+
+            int rowsAffected = p.Get<int>("rows_effected");
+            return rowsAffected;
+        }
+
+        public async Task<int> DeleteInstructorDetails(decimal instructorId)
+        {
+            var p = new DynamicParameters();
+            p.Add("instructor_Id", instructorId, DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("deleted_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            await _dbContext.Connection.ExecuteAsync("User_Package.DeleteInstructorDetails", p, commandType: CommandType.StoredProcedure);
+
+            int deletedId = p.Get<int>("deleted_id");
+            int rowsAffected = p.Get<int>("rows_affected");
+            return rowsAffected;
+        }
+
+
+        public async Task<Instructordetail> GetInstructorDetailsById(decimal instructorId)
+        {
+            var p = new DynamicParameters();
+            p.Add("instructor_Id", instructorId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Instructordetail>("User_Package.GetInstructorDetailsById", p, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
     }
 }

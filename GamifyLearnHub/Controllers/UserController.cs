@@ -89,6 +89,34 @@ namespace GamifyLearnHub.Controllers
             return await _userService.GetProgramsByUserId(userId);
         }
 
+        [HttpPost]
+        [Route("CreateInstructorDetails")]
+        public async Task<int> CreateInstructorDetails([FromBody] Instructordetail instructordetail)
+        {
+            return await _userService.CreateInstructorDetails(instructordetail);
+        }
+
+        [HttpPut]
+        [Route("UpdateInstructorDetails")]
+        public async Task<int> UpdateInstructorDetails([FromBody] Instructordetail instructordetail)
+        {
+            return await _userService.UpdateInstructorDetails(instructordetail);
+        }
+
+        [HttpDelete]
+        [Route("DeleteInstructorDetails/{instructorId}")]
+        public async Task<int> DeleteInstructorDetails(decimal instructorId)
+        {
+            return await _userService.DeleteInstructorDetails(instructorId);
+        }
+
+        [HttpGet]
+        [Route("GetInstructorDetailsById/{instructorId}")]
+        public async Task<Instructordetail> GetInstructorDetailsById(decimal instructorId)
+        {
+            return await _userService.GetInstructorDetailsById(instructorId);
+        }
+
 
     }
 }
