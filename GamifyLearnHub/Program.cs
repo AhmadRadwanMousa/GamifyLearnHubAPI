@@ -92,6 +92,7 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IAdminReportRepository, AdminReportRepository>();
             builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
             builder.Services.AddScoped<IAssignmentSolutionRepository, AssignmentSolutionRepository>();
+            builder.Services.AddScoped<IAdminLeaderBoardRepository, AdminLeaderBoardRepository>();
             
             builder.Services.AddScoped<IAssignmentSolutionService, AssignmentSolutionService>();
             builder.Services.AddScoped<IAssignmentService, AssignmentService>();    
@@ -119,6 +120,7 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IAttendenceService, AttendenceService>();
             builder.Services.AddScoped<IAttendenceDetailService, AttendenceDetailService>();
             builder.Services.AddScoped<IAdminReportService, AdminReportService>();
+            builder.Services.AddScoped<IAdminLeaderBoardService, AdminLeaderBoardService>();
           
 
        
