@@ -26,6 +26,15 @@ namespace GamifyLearnHub.Infra.Repositroy
             return result.ToList();
         }
 
+        public async Task<int> InstructorLectures(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("numOfLectures", dbType: DbType.Int32, direction: ParameterDirection.Output);
+            await _dbContext.Connection.ExecuteAsync("Admin_leaderboard_Package.InstructorLectures", p, commandType: CommandType.StoredProcedure);
+            return p.Get<int>("numOfLectures");
+        }
+
         public async Task<int> InstructorStudents(int id)
         {
             var p = new DynamicParameters();
@@ -46,6 +55,12 @@ namespace GamifyLearnHub.Infra.Repositroy
             var p = new DynamicParameters();
             p.Add("id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = await _dbContext.Connection.QueryAsync<RankByPoints>("Admin_leaderboard_Package.OrderByPointsInstructor", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<List<RankByPoints>> RankByPointsInstructorStudents2()
+        {
+            var result = await _dbContext.Connection.QueryAsync<RankByPoints>("admin_leaderboard_package.orderbypointsinstructor2", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
