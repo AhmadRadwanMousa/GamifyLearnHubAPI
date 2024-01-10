@@ -146,5 +146,17 @@ namespace GamifyLearnHup.Infra.Repository
 
             return result;
         }
+
+        public async Task<int> SetUserAssignmentMark(int mark, int assignmentId, int studentId)
+        {
+            var p = new DynamicParameters();
+            p.Add("mark",mark, DbType.Int32,direction: ParameterDirection.Input);
+            p.Add("assignment_id", assignmentId, DbType.Int32,direction: ParameterDirection.Input);
+            p.Add("user_id", studentId, DbType.Int32,direction: ParameterDirection.Input);
+            p.Add("rows_effected", DbType.Int32,direction: ParameterDirection.Output);
+            await _dbContext.Connection.ExecuteAsync
+                ("UserSection_Package.SetUserAssignmentMark", p, commandType: CommandType.StoredProcedure);
+            return p.Get<int>("rows_effected");
+        }
     }
 }

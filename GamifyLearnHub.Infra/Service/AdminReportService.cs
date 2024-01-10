@@ -17,6 +17,11 @@ namespace GamifyLearnHub.Infra.Service
             _adminReportRepository = adminReportRepository;
         }
 
+        public async Task<AdminDetails> GetAdminStatisticsReport()
+        {
+            return await _adminReportRepository.GetAdminStatisticsReport();
+        }
+
         public async Task<List<AdminReportSections>> GetAllSectionsReport()
         {
             return await _adminReportRepository.GetAllSectionsReport();

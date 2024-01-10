@@ -23,6 +23,11 @@ namespace GamifyLearnHub.Infra.Service
            return await _badgeActivityRepository.GetAll();
         }
 
+        public async Task<List<Userbadgeactivity>> GetUserBadgesByUserId(int userId)
+        {
+            return await _badgeActivityRepository.GetUserBadgesByUserId(userId);
+        }
+
         public async Task<int> UpdateBadgeActivity(Badgeactivity badgeactivity)
         {
             return await _badgeActivityRepository.UpdateBadgeActivity(badgeactivity);

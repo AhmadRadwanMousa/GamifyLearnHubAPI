@@ -32,5 +32,10 @@ namespace GamifyLearnHub.Controllers
         {
             return await _adminReportService.GetAllSectionsReport();
         }
+        [HttpGet("GetAdminReportStatistics")]
+        public async Task<AdminDetails> GetAdminReportsStatistics()
+        {
+            return await _adminReportService.GetAdminStatisticsReport();    
+        }
     }
 }

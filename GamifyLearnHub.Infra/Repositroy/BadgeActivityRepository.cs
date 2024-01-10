@@ -25,6 +25,20 @@ namespace GamifyLearnHub.Infra.Repositroy
             return result.ToList();
         }
 
+        public async Task<List<Userbadgeactivity>> GetUserBadgesByUserId(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Userbadgeactivity, Badgeactivity, Userbadgeactivity>
+                ("UserBadgeActivity_Package.GetUserBadgesByUserID",
+                (userbadge, badge) =>
+                {
+                    userbadge.Badgeactivity = badge;
+                    return userbadge;
+                }, p, splitOn: "badgeactivityid");
+            return result.ToList();
+        }
+
         public async Task<int> UpdateBadgeActivity(Badgeactivity badgeactivity)
         {
             var p = new DynamicParameters();

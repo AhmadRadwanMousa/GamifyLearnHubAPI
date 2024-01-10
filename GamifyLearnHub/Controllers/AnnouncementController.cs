@@ -24,21 +24,23 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPost]
-        //[CheckClaims("roleId", "2")]
+        [CheckClaims("roleId", "2")]
+
         public async Task<int> CreateAnnouncement([FromBody] Announcement announcement)
         {
             return await _announcementService.CreateAnnouncement(announcement);
         }
 
         [HttpPut]
-        //[CheckClaims("roleId", "2")]
+        [CheckClaims("roleId", "2")]
         public async Task<int> UpdateAnnouncement([FromBody] Announcement announcement)
         {
             return await _announcementService.UpdateAnnouncement(announcement);
         }
 
         [HttpDelete("{id}")]
-        //[CheckClaims("roleId", "2")]
+        [CheckClaims("roleId", "2")]
+
         public async Task<int> DeleteAnnouncement(int id)
         {
             return await _announcementService.DeleteAnnouncement(id);

@@ -12,5 +12,6 @@ namespace GamifyLearnHub.Core.Repository
         Task<List<AdminReportStudents>> GetAllStudentsReport();
         Task<List<AdminReportStudentsDetails>> GetAllStudentsReportDetails(int id);
         Task<List<AdminReportSections>> GetAllSectionsReport();
+        Task<AdminDetails> GetAdminStatisticsReport();
     }
 }

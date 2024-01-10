@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.DTO;
+﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Repository;
 using GamifyLearnHub.Core.Service;
 using System;
@@ -20,6 +21,7 @@ namespace GamifyLearnHub.Infra.Service
 
 		public async Task<List<InstructorReport>> GetAllReportsByInstructorId(int Id)
 		{
+			
 			return await _reportRepository.GetAllReportsByInstructorId(Id);
 		}
 	}

@@ -82,6 +82,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("user_Id", assignmentsolution.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("assignmetSolution_Value", assignmentsolution.Assignmentsolutionvalue, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("assignmentsolution_mark", assignmentsolution.Assignmentsolutionmark, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("submitted_at", assignmentsolution.Submittedat, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             p.Add("rows_effected", dbType: DbType.Int32, direction: ParameterDirection.Output);
             await _dbContext.Connection.ExecuteAsync("AssignmentSolution_Package.UpdateAssginmentSolution", p, commandType: CommandType.StoredProcedure);
             return p.Get<int>("rows_effected");

@@ -57,5 +57,10 @@ namespace GamifyLearnHup.Infra.Service
         {
             return _userSectionRepository.GetUsersBySectionId(sectionId);
         }
+
+        public Task<int> SetUserAssignmentMark(int mark, int assignmentId, int studentId)
+        {
+            return _userSectionRepository.SetUserAssignmentMark(mark, assignmentId, studentId); 
+        }
     }
 }

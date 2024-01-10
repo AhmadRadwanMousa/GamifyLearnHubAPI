@@ -19,6 +19,7 @@ namespace GamifyLearnHub.Core.Service
         Task<IEnumerable<Usersection>> GetUserSectionsBySectionId(decimal sectionId);
 
         Task<IEnumerable<User>> GetUsersBySectionId(decimal sectionId);
+        Task<int> SetUserAssignmentMark(int mark, int assignmentId, int studentId);
 
     }
 }

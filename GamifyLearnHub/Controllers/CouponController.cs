@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using GamifyLearnHub.Infra.Service;
 using Microsoft.AspNetCore.Http;
@@ -17,30 +18,35 @@ namespace GamifyLearnHub.Controllers
         }
 		[HttpGet]
 		[Route("GetAllCoupons")]
-		public async Task<List<Coupon>> GetAllCoupons()
+        [CheckClaims("roleId", "1")]
+        public async Task<List<Coupon>> GetAllCoupons()
 		{
 			return await _couponService.GetAllCoupons();
 		}
 		[HttpPost]
 		[Route("CreateCoupon")]
-		public async Task<int> CreateCoupon( Coupon coupon)
+        [CheckClaims("roleId", "1")]
+        public async Task<int> CreateCoupon( Coupon coupon)
 		{
 			return await _couponService.CreateCoupon(coupon);
 		}
 		[HttpPut]
 		[Route("UpdateCoupon")]
-		public async Task<int> UpdateCoupon( Coupon coupon)
+        [CheckClaims("roleId", "1")]
+        public async Task<int> UpdateCoupon( Coupon coupon)
 		{
 			return await _couponService.UpdateCoupon(coupon);
 		}
 		[HttpDelete("{id}")]
-		public async Task<int> DeleteCoupon(int id)
+        [CheckClaims("roleId", "1")]
+        public async Task<int> DeleteCoupon(int id)
 		{
 			return await _couponService.DeleteCoupon(id);
 		}
 		[HttpGet]
 		[Route("GetCouponById/{id}")]
-		public async Task<Coupon> GetCouponById(int id)
+        [CheckClaims("roleId", "1")]
+        public async Task<Coupon> GetCouponById(int id)
 		{
 			return await _couponService.GetCouponById(id);
 		}
