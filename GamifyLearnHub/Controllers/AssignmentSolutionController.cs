@@ -27,6 +27,7 @@ namespace GamifyLearnHub.Controllers
         //[CheckClaims("roleId", "3")]
         public async Task<int> CreateAssignmentSolution([FromBody]Assignmentsolution assignmentsolution)
         {
+            assignmentsolution.Submittedat = DateTime.Now;
           return await _assignmentSolutionService.CreateAssignmentSolution(assignmentsolution);    
         }
         [HttpPut]
@@ -34,6 +35,7 @@ namespace GamifyLearnHub.Controllers
 
         public async Task<int> UpdateAssignmentSolution([FromBody] Assignmentsolution assignmentsolution)
         {
+            assignmentsolution.Submittedat = DateTime.Now;
             return await _assignmentSolutionService.UpdateAssignmentSolution(assignmentsolution);
         }
         [HttpDelete("{assignmentSolutionId}")]

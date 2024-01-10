@@ -89,6 +89,12 @@ namespace GamifyLearnHub.API.Controllers
         {
             return await _userSectionService.GetUsersBySectionId(sectionId);
         }
+        [HttpPut]
+        [Route("SetAssignmentMark")]
+        public async Task<int> SetAssignmentMark([FromForm] int studentId, [FromForm] int assignmentId , [FromForm] int mark)
+        {
+            return await _userSectionService.SetUserAssignmentMark(mark,assignmentId, studentId);   
+        }
     }
 
 
