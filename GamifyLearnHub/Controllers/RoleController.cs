@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,16 +26,19 @@ namespace GamifyLearnHub.Controllers
             return await _roleService.GetRoleById(roleId);
         }
         [HttpPost]
+        [CheckClaims("roleId", "1")]
         public async Task<int> CreateRole ([FromBody] Role role)
         {
             return await _roleService.CreateRole(role); 
         }
         [HttpDelete("{roleId}")]
+        [CheckClaims("roleId", "1")]
         public async Task<int> DeleteRole(int roleId)
         {
             return await _roleService.DeleteRole(roleId);
         }
         [HttpPut]
+        [CheckClaims("roleId", "1")]
         public async Task<int> UpdateRole([FromBody] Role role)
         {
             return await _roleService.UpdateRole(role);

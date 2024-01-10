@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPost]
+        [CheckClaims("roleId", "2")]
         public async Task<ActionResult<decimal>> CreateCourseSection(Coursesection courseSection)
         {
             decimal createdId = await _courseSectionService.CreateCourseSection(courseSection);
@@ -36,6 +38,8 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPut("{courseSectionId}")]
+        [CheckClaims("roleId", "2")]
+
         public async Task<IActionResult> UpdateCourseSection(decimal courseSectionId, Coursesection courseSection)
         {
             courseSection.Coursesectionid = courseSectionId;
@@ -47,6 +51,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpDelete("{courseSectionId}")]
+        [CheckClaims("roleId", "2")]
         public async Task<IActionResult> DeleteCourseSection(decimal courseSectionId)
         {
             try

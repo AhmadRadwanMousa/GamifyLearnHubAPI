@@ -31,13 +31,14 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpGet("GetUserMarks/{examId}/{sectionId}")]
-        //[CheckClaims("roleId", "2")]
+        [CheckClaims("roleId", "2")]
         public async Task<List<StudentsMark>> GetUserMarks(int examId, int sectionId)
         {
             return await _examService.GetUserMarks(examId , sectionId);
         }
 
         [HttpGet("GetAllExamsBySectionId/{id}")]
+        [CheckClaims("roleId", "2")]
         public async Task<List<Exam>> GetAllExamsBySectionId(int id)
         {
             var result =  await _examService.GetAllExams();
@@ -45,12 +46,14 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpGet("GetExamById/{id}")]
+        [CheckClaims("roleId", "3")]
         public async Task<Exam> GetExamById(int id)
         {
             return await _examService.GetExamById(id);
         }
 
         [HttpGet("GetAllQuestionByExamId/{id}")]
+        //[CheckClaims("roleId", "2")]
         public async Task<List<Question>> GetAllQuestionByExamId(int id)
         {
             var result = await _questionService.GetAllQuestions();
@@ -65,7 +68,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpDelete("DeleteQuestion/{id}")]
-
+        [CheckClaims("roleId", "2")]
         public async Task<int> DeleteQuestion(int id)
         {
             return await _questionService.DeleteQuestion(id);
@@ -73,14 +76,14 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpPost]
-
+        [CheckClaims("roleId", "2")]
         public async Task<int> CreateExam(Exam exam)
         {
             return await _examService.CreateExam(exam);
         }
 
         [HttpPost("CreateQuestionWithOptions/{examId}")]
-
+        [CheckClaims("roleId", "2")]
         public async Task<IActionResult> CreateQuestionWithOptions(int examId,QuestionWithOptions questionWithOptions)
         {
             
@@ -107,7 +110,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpPut]
-
+        [CheckClaims("roleId", "2")]
         public async Task<IActionResult> UpdateExam([FromForm] Exam exam)
         {
             var AfftectedRows = await _examService.UpdateExam(exam);
@@ -118,7 +121,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpDelete("DeleteExam/{id}")]
-
+        [CheckClaims("roleId", "2")]
         public async Task<IActionResult> DeleteExam(int id)
         {
             var AfftectedRows = await _examService.DeleteExam(id);

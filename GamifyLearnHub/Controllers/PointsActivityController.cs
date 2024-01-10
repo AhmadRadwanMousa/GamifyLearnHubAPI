@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,21 +19,30 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
 
-        public async Task<List<Pointsactivity>> GetAll() 
-        { 
+        public async Task<List<Pointsactivity>> GetAll()
+        {
             return await _pointsActivityService.GetAll();
         }
 
         [HttpPut]
-        public async Task<int> UpdatePointsActivity( Pointsactivity pointsactivity) 
+        [CheckClaims("roleId", "1")]
+        public async Task<int> UpdatePointsActivity(Pointsactivity pointsactivity)
         {
             return await _pointsActivityService.UpdatePointsActivity(pointsactivity);
         }
 
         [HttpPost]
+        [CheckClaims("roleId", "1")]
         public async Task<int> CreateNewPointsActivity(Pointsactivity pointsactivity)
         {
             return await _pointsActivityService.CreateNewPointsActivity(pointsactivity);
+        }
+
+        [HttpDelete("{id}")]
+        [CheckClaims("roleId", "1")]
+        public async Task<int> DeletePointsActivity(int id)
+        {
+            return await _pointsActivityService.DeletePointsActivity(id);
         }
     }
 }

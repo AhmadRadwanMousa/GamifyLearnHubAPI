@@ -37,7 +37,7 @@ namespace GamifyLearnHub.Infra.Service
 		}
 
 		public async Task<int> UpdateCoupon(Coupon coupon)
-		{
+		{ 
 			return await _couponRepository.UpdateCoupon(coupon);
 		}
 	}

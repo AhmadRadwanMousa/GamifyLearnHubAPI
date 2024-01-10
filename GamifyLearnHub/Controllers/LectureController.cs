@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPost]
+        [CheckClaims("roleId", "2")]
         public async Task<ActionResult<decimal>> CreateLecture(Lecture lecture)
         {
             decimal createdId = await _lectureService.CreateLecture(lecture);
@@ -37,6 +39,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPut("{lectureId}")]
+        [CheckClaims("roleId", "2")]
         public async Task<IActionResult> UpdateLecture(decimal lectureId, Lecture lecture)
         {
             lecture.Lectureid = lectureId;
@@ -48,6 +51,7 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpDelete("{lectureId}")]
+        [CheckClaims("roleId", "2")]
         public async Task<IActionResult> DeleteLecture(decimal lectureId)
         {
             try
@@ -62,6 +66,7 @@ namespace GamifyLearnHub.Controllers
         }
         [HttpGet]
         [Route("GetLecturesCountPerCourse/{userId}/{programId}")]
+        [CheckClaims("roleId", "3")]
         public async Task<List<LecturesPerCourse>>GetLecturesCountPerCourse(int userId,int programId)
         {
             return await _lectureService.GetLecturesCountByCourse(userId, programId);   

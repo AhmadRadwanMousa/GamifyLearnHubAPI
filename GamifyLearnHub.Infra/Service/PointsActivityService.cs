@@ -22,6 +22,11 @@ namespace GamifyLearnHub.Infra.Service
             return await _pointsActivityRepository.CreateNewPointsActivity(pointsactivity);
         }
 
+        public async Task<int> DeletePointsActivity(int id)
+        {
+            return await _pointsActivityRepository.DeletePointsActivity(id);
+        }
+
         public async Task<List<Pointsactivity>> GetAll()
         {
             return await _pointsActivityRepository.GetAll();

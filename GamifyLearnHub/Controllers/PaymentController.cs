@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.DTO;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ namespace GamifyLearnHub.Controllers
             _paymentService = paymentService;            
         }
         [HttpPost]
+        [CheckClaims("roleId", "3")]
         public async Task<int> CreatePayment([FromBody]PaymentDetails paymentdetails)
         {
           return  await _paymentService.CreatePayment(paymentdetails);

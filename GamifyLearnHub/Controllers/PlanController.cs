@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.Data;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.Data;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace GamifyLearnHub.Controllers
         }
 		[HttpGet]
 		[Route("GetAllPlans")]
+
 		public async Task<List<Plan>> GetAllPlans()
 		{
 			return await _planService.GetAllPlans();
@@ -33,18 +35,21 @@ namespace GamifyLearnHub.Controllers
 
         [HttpPost]
 		[Route("CreatePlan")]
-		public async Task<int> CreatePlan([FromBody] Plan plan)
+        [CheckClaims("roleId", "1")]
+        public async Task<int> CreatePlan([FromBody] Plan plan)
 		{
 			return await _planService.CreatePlan(plan);
 		}
 		[HttpPut]
 		[Route("UpdatePlan")]
-		public async Task<int> UpdatePlan([FromBody] Plan plan)
+        [CheckClaims("roleId", "1")]
+        public async Task<int> UpdatePlan([FromBody] Plan plan)
 		{
 			return await _planService.UpdatePlan(plan);
 		}
 		[HttpDelete("{id}")]
-		public async Task<int> DeletePlan(int id)
+        [CheckClaims("roleId", "1")]
+        public async Task<int> DeletePlan(int id)
 		{
 			return await _planService.DeletePlan(id);
 		}
