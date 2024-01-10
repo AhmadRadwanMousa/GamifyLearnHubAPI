@@ -12,9 +12,15 @@ namespace GamifyLearnHub.Controllers
     public class CourseSequenceController : ControllerBase
     {
         private readonly ICourseSequenceService _courseSequenceService;
-        public CourseSequenceController(ICourseSequenceService courseSequenceService)
+        private readonly ISectionService _sectionService;
+        private readonly IUserSectionService _userSectionService;
+
+
+        public CourseSequenceController(ICourseSequenceService courseSequenceService, ISectionService sectionService, IUserSectionService userSectionService)
         {
             _courseSequenceService = courseSequenceService;
+            _sectionService = sectionService;
+            _userSectionService = userSectionService;
         }
 
 
@@ -95,9 +101,27 @@ namespace GamifyLearnHub.Controllers
 
         }
 
+        [HttpGet("GetSectionByCourseSequenceId/{courseSequenceId}/{userId}")]
+        public async Task<int> GetSectionByCourseSequenceId(int courseSequenceId, int userId)
+        {
+            var sections = await _sectionService.GetAllSectionsByCourseSequenceId(courseSequenceId);
+            var userSections = await _userSectionService.GetAllUserSections();
+            var userSectionForUser = userSections.Where(u => u.Userid == userId);
+            int sectionId = 0;
 
+            foreach (var section in sections) 
+            {
+                foreach(var usersection in userSectionForUser) 
+                {
+                    if (usersection.Sectionid == section.Sectionid) 
+                    {
+                        sectionId = (int)section.Sectionid;
+                    }
+                }
+            }
 
-
+            return sectionId;
+        }
 
 
 

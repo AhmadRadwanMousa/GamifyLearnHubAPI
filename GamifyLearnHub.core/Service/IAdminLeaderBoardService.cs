@@ -13,6 +13,8 @@ namespace GamifyLearnHub.Core.Service
         Task<List<RankByBadges>> RankByBadgesStudents();
         Task<List<AdminStatistics>> AdminStatistics();
         Task<int> InstructorStudents(int id);
+        Task<int> InstructorLectures(int id);
         Task<List<RankByPoints>> RankByPointsInstructorStudents(int id);
+        Task<List<RankByPoints>> RankByPointsInstructorStudents2();
     }
 }

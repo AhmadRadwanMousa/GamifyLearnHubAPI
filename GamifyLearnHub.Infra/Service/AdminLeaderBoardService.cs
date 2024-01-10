@@ -22,6 +22,11 @@ namespace GamifyLearnHub.Infra.Service
             return await _adminLeaderBoardRepository.AdminStatistics();
         }
 
+        public async Task<int> InstructorLectures(int id)
+        {
+            return await _adminLeaderBoardRepository.InstructorLectures(id);
+        }
+
         public async Task<int> InstructorStudents(int id)
         {
             return await _adminLeaderBoardRepository.InstructorStudents(id);
@@ -35,6 +40,12 @@ namespace GamifyLearnHub.Infra.Service
         public async Task<List<RankByPoints>> RankByPointsInstructorStudents(int id)
         {
             return await _adminLeaderBoardRepository.RankByPointsInstructorStudents(id);
+        }
+
+        public async Task<List<RankByPoints>> RankByPointsInstructorStudents2()
+        {
+            var result = await _adminLeaderBoardRepository.RankByPointsInstructorStudents2();
+            return result.Take(3).ToList();
         }
 
         public async Task<List<RankByPoints>> RankByPointsStudents()
