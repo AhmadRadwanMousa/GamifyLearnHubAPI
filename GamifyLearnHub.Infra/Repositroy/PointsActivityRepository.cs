@@ -33,6 +33,17 @@ namespace GamifyLearnHub.Infra.Repositroy
             return p.Get<int>("pointsActivity_Id");
         }
 
+        public async Task<int> DeletePointsActivity(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("pointsActivity_Id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("rows_effected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            await _dbContext.Connection.ExecuteAsync("PointsActivity_Package.DeletePointsActivity", p, commandType: CommandType.StoredProcedure);
+
+            return p.Get<int>("rows_effected");
+        }
+
         public async Task<List<Pointsactivity>> GetAll()
         {
             var result = await _dbContext.Connection.QueryAsync<Pointsactivity>("PointsActivity_Package.GetAllPointsActivity", commandType: CommandType.StoredProcedure);

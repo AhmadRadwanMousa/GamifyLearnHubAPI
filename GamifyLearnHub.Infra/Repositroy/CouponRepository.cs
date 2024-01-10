@@ -68,13 +68,13 @@ namespace GamifyLearnHub.Infra.Repositroy
 			p.Add("id", coupon.Couponid, dbType: DbType.Int32, direction: ParameterDirection.Input);
 			p.Add("coupon_name", coupon.Couponname, dbType: DbType.String, direction: ParameterDirection.Input);
 			p.Add("coupon_percent", coupon.Couponpercent, dbType: DbType.Int32, direction: ParameterDirection.Input);
-			p.Add("pointss", coupon.Points, dbType: DbType.Int32, direction: ParameterDirection.Input);
-			p.Add("updated_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
-			p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("new_points", coupon.Points, dbType: DbType.Int32, direction: ParameterDirection.Input);
+			//p.Add("updated_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			p.Add("RowsAffected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
 			await _dbContext.Connection.ExecuteAsync("Coupon_Package.UpdateCoupon", p, commandType: CommandType.StoredProcedure);
 
-			return p.Get<int>("rows_affected");
+			return p.Get<int>("RowsAffected");
 		}
 	}
 }

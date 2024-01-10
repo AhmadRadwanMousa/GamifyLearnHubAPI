@@ -33,7 +33,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("Badge_Points", badgeactivity.Badgepoints, dbType:DbType.Int32, direction:ParameterDirection.Input);
             p.Add("Badge_Name", badgeactivity.Badgename, dbType:DbType.String, direction:ParameterDirection.Input);
             p.Add("RowsAffected", dbType:DbType.Int32, direction:ParameterDirection.Output);
-			p.Add("updated_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+			//p.Add("updated_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
 
 			await _dbContext.Connection.ExecuteAsync("BadgeActivity_Package.UpdateBadgeActivity", p,commandType:CommandType.StoredProcedure);

@@ -24,12 +24,14 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetExamDetails/{id}")]
+        [CheckClaims("roleId", "3")]
         public async Task<List<ExamLearner>> GetExamDetails(int id)
         {
             return await _examLearnerService.GetExamDetails(id);
         }
 
         [HttpPost]
+        [CheckClaims("roleId", "3")]
         public async Task<IActionResult> CreateExamSolution(List<Examsolution> examsolutions)
         {
             var result = _examLearnerService.CreateExamSolution(examsolutions);
@@ -44,6 +46,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetUserSolution/{examId}/{userId}")]
+        [CheckClaims("roleId", "3")]
         public async Task<List<SolutionUserDetails>> GetSolutionUserDetails(int examId , int userId)
         {
             return await _examLearnerService.GetSolutionUserDetails(examId , userId);
@@ -60,7 +63,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetAllSectionsByLearnerId/{userId}")]
-        //[CheckClaims("roleId", "3")]
+        [CheckClaims("roleId", "3")]
         public async Task<List<Section>> GetAllSectionsByLearnerId(int userId)
         {
             return await _examLearnerService.GetAllSectionsByLearnerId(userId);
@@ -69,7 +72,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetAllExamByUserSection/{userId}/{sectionId}")]
-        //[CheckClaims("roleId", "3")]
+        [CheckClaims("roleId", "3")]
         public async Task<List<ExamsBySection>> GetAllExamByUserSection(int userId , int sectionId)
         {
             return await _examLearnerService.GetAllExamByUserSection(userId , sectionId);
@@ -77,6 +80,7 @@ namespace GamifyLearnHub.Controllers
 
         [HttpGet]
         [Route("GetExamDetailsByUserId/{userId}/{examId}")]
+        [CheckClaims("roleId", "3")]
         public async Task<Examsolutiondetail> GetExamDetailsByUserId(int userId, int examId)
         {
             return await _examLearnerService.GetExamDetailsByUserId(userId, examId);

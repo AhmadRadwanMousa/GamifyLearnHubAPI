@@ -1,4 +1,5 @@
-﻿using GamifyLearnHub.Core.DTO;
+﻿using GamifyLearnHub.Attributes;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,8 @@ namespace GamifyLearnHub.Controllers
 
 
 		[HttpGet("GetSectionReport/{id}")]
-		public async Task<List<InstructorReport>> GetAllReportsByInstructorId(int id)
+        [CheckClaims("roleId", "2")]
+        public async Task<List<InstructorReport>> GetAllReportsByInstructorId(int id)
 		{
 			return await _reportService.GetAllReportsByInstructorId(id);
 		}

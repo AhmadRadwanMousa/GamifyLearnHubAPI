@@ -46,12 +46,14 @@ namespace GamifyLearnHub.Controllers
         }
 
         [HttpPost]
+        [CheckClaims("roleId", "1")]
         public async Task<int> CreateProgram([FromBody] Core.Data.Program program) 
         { 
             return await _programService.CreateProgram(program);
         }
 
         [HttpPut]
+        [CheckClaims("roleId", "1")]
         public async Task<int> UpdateProgram([FromBody] Core.Data.Program program) 
         { 
             return await _programService.UpdateProgram(program);
@@ -79,6 +81,7 @@ namespace GamifyLearnHub.Controllers
 
 
         [HttpDelete("DeleteProgram/{id}")]
+        [CheckClaims("roleId", "1")]
         public async Task<int> DeleteProgram(int id) 
         { 
             return await _programService.DeleteProgram(id);
