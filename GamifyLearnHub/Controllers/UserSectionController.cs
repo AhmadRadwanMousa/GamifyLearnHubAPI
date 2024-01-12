@@ -36,8 +36,6 @@ namespace GamifyLearnHub.API.Controllers
             return await _userSectionService.GetAllUserStudents();
         }
 
-      
-
         [HttpGet("{userSectionId}")]
         public async Task<Usersection> GetUserSectionById(decimal userSectionId)
         {

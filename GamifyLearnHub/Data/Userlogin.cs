@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GamifyLearnHub.Core.Data
+namespace GamifyLearnHub.Data
 {
     public partial class Userlogin
     {

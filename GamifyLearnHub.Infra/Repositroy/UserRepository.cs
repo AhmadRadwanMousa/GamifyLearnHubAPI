@@ -33,7 +33,7 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("Is_Online", userDetails.Isonline, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("Is_Accepted", userDetails.Isaccepted, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("last_login", userDetails.Lastlogin, dbType: DbType.Date, direction: ParameterDirection.Input);
-            p.Add("Days_Count", userDetails.Dayscount, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("Days_Count", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("created_userLogin_id", dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("rows_affected", dbType: DbType.Int32, direction: ParameterDirection.Input);
             await _dbContext.Connection.ExecuteAsync("LoginAndRegister_Package.Register", p, commandType: CommandType.StoredProcedure);
