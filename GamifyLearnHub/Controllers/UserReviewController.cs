@@ -50,17 +50,17 @@ namespace GamifyLearnHub.Controllers
         [HttpGet("finished-programs/{userId}")]
         public async Task<IActionResult> GetFinishedPrograms(int userId)
         {
-           
-                var finishedPrograms = await _userReviewService.GetFinishedPrograms(userId);
-
-                if (finishedPrograms.Count > 0)
-                {
-                    return Ok(finishedPrograms);
-                }
-                else
-                {
-                    return NotFound("No finished programs found for the user.");
-                }
+            
+            var finishedPrograms = await _userReviewService.GetFinishedPrograms(userId);
+            
+            if (finishedPrograms.Count > 0)
+            {
+                return Ok(finishedPrograms);
+            }
+            else
+            {
+                return NotFound(0);
+            }
             
             
         }
