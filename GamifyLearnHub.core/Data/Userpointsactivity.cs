@@ -10,6 +10,7 @@ namespace GamifyLearnHub.Core.Data
         public decimal? Pointsactivityid { get; set; }
         public DateTime? Dateearned { get; set; }
         public decimal? Usersectionid { get; set; }
+        public bool? Isviewed { get; set; }
 
         public virtual Pointsactivity? Pointsactivity { get; set; }
         public virtual User? User { get; set; }

@@ -14,6 +14,7 @@ namespace GamifyLearnHub.Core.Data
             Certifications = new HashSet<Certification>();
             Examsolutiondetails = new HashSet<Examsolutiondetail>();
             Examsolutions = new HashSet<Examsolution>();
+            Instructordetails = new HashSet<Instructordetail>();
             Payments = new HashSet<Payment>();
             Sections = new HashSet<Section>();
             Testimonials = new HashSet<Testimonial>();
@@ -22,6 +23,7 @@ namespace GamifyLearnHub.Core.Data
             Userlogins = new HashSet<Userlogin>();
             Userpointsactivities = new HashSet<Userpointsactivity>();
             Userprogresses = new HashSet<Userprogress>();
+            Userreviews = new HashSet<Userreview>();
             Usersections = new HashSet<Usersection>();
         }
 
@@ -39,6 +41,7 @@ namespace GamifyLearnHub.Core.Data
         public virtual ICollection<Certification> Certifications { get; set; }
         public virtual ICollection<Examsolutiondetail> Examsolutiondetails { get; set; }
         public virtual ICollection<Examsolution> Examsolutions { get; set; }
+        public virtual ICollection<Instructordetail> Instructordetails { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
         public virtual ICollection<Section> Sections { get; set; }
         public virtual ICollection<Testimonial> Testimonials { get; set; }
@@ -47,6 +50,7 @@ namespace GamifyLearnHub.Core.Data
         public virtual ICollection<Userlogin> Userlogins { get; set; }
         public virtual ICollection<Userpointsactivity> Userpointsactivities { get; set; }
         public virtual ICollection<Userprogress> Userprogresses { get; set; }
+        public virtual ICollection<Userreview> Userreviews { get; set; }
         public virtual ICollection<Usersection> Usersections { get; set; }
     }
 }

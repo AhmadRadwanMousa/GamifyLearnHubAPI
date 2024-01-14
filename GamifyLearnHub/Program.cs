@@ -79,6 +79,7 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<ICartItemsRepository, CartItemsRepository>();
             builder.Services.AddScoped<ICartRepository, CartRepository>();
             builder.Services.AddScoped<IUserDashboardInfoRepository, UserDashboardInfoRepository>();
+            builder.Services.AddScoped<IUserReviewRepository, UserReviewRepository>();
 
             builder.Services.AddScoped<ICartItemsService, CartItemsService>();
             builder.Services.AddScoped<ICartService, CartService>();    
@@ -123,9 +124,10 @@ namespace GamifyLearnHub
             builder.Services.AddScoped<IUserPointsRepository, UserPointsRepository>();  
             builder.Services.AddScoped<IUserPointsService, UserPointsService>();    
             builder.Services.AddScoped<IAdminLeaderBoardService, AdminLeaderBoardService>();
-          
+            builder.Services.AddScoped<IUserReviewService, UserReviewService>();
 
-       
+
+
             builder.Services.AddScoped<IUserDashboardInfoService, UserDashboardInfoService>(); 
             builder.Services.AddAuthentication((opt) => {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
