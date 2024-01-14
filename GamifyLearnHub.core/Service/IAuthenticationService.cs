@@ -10,6 +10,7 @@ namespace GamifyLearnHub.Core.Service
     public interface IAuthenticationService
     {
         public Task<string>? Login(LoginCredentails loginDetails);
-
+        Task<int> IsUserNameExist(string userName);
+        Task<int>ResetPassword ( LoginCredentails loginDetails);    
     }
 }

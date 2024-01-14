@@ -75,7 +75,7 @@ namespace GamifyLearnHub.Controllers
         }
         [HttpPut]
         [Route("UpdatedUserStatus")]
-        public async Task<int> UpdateUserStatus([FromForm]int userId, [FromForm] bool isAccepted)
+        public async Task<int> UpdateUserStatus([FromForm]int userId, [FromForm] int isAccepted)
         {
            return await _userService.UpdateUserStatus(userId, isAccepted);
         }

@@ -1,5 +1,6 @@
 ﻿using GamifyLearnHub.Attributes;
 using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using GamifyLearnHub.Core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +37,18 @@ namespace GamifyLearnHub.Controllers
         public async Task<List<Userbadgeactivity>> GetAllUserBadgesByUserId(int userId)
         {
             return await _badgeActivityService.GetUserBadgesByUserId(userId);
+        }
+
+        [HttpGet]
+        [Route("UnviewedUserBadges/{userId}")]
+        public async Task<List<Userbadgeactivity>> GetAllUnViewedUserBadges(int userId) {
+            return await _badgeActivityService.GetAllUnviewedUserBadges(userId);
+        }
+        [HttpPut]
+        [Route("UpdateUserBadgeStatus")]
+        public async Task<int> UpdateUserBadgeStatus ([FromBody]UpdateUserBadgeDetails userbadgedetails)
+        {
+            return await _badgeActivityService.UpdateUserBadgeStatus(userbadgedetails);     
         }
     }
 }

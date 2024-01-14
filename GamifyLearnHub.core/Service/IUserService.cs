@@ -17,7 +17,7 @@ namespace GamifyLearnHub.Core.Service
         Task<User> GetUserById(int id);
         Task<List<User>> GetAllUsers();
         Task<List<User>> GetUnAcceptedUsers();
-        Task<int> UpdateUserStatus(int userId, bool isAccepted);
+        Task<int> UpdateUserStatus(int userId, int isAccepted);
 
         Task<List<ReportsUser>> ReportsByUserId(int userId, int programId);
         Task<List<Program>> GetProgramsByUserId(int userId);

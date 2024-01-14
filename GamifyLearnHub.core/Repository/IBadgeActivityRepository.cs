@@ -12,5 +12,8 @@ namespace GamifyLearnHub.Core.Repository
         Task<List<Badgeactivity>> GetAll();
         Task<int> UpdateBadgeActivity(Badgeactivity badgeactivity);
         Task<List<Userbadgeactivity>>GetUserBadgesByUserId(int userId);
+        Task<List<Userbadgeactivity>> GetAllUnviewedUserBadges(int userId);
+        Task<int> UpdateUserBadgeStatus(int userBadgeId);
+
     }
 }

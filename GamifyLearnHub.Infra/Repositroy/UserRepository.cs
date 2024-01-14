@@ -141,7 +141,7 @@ namespace GamifyLearnHub.Infra.Repositroy
 
         }
 
-        public async Task<int> UpdateUserStatus(int userId, bool isAccepted)
+        public async Task<int> UpdateUserStatus(int userId, int isAccepted)
         {
             var p = new DynamicParameters();
             p.Add("user_id", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);

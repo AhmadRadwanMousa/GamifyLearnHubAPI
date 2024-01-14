@@ -17,7 +17,7 @@ namespace GamifyLearnHub.Core.Repository
         Task<List<User>> GetAllUsers();
         Task<int> EditUserProfile(UserDetails userDetails);
         Task<List<User>> GetUnAcceptedUsers();
-        Task<int> UpdateUserStatus(int userId,bool isAccepted);
+        Task<int> UpdateUserStatus(int userId,int isAccepted);
 
 
         Task<List<ReportsUser>> ReportsByUserId(int userId, int programId);

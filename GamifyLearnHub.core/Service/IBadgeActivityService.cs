@@ -1,4 +1,5 @@
 ﻿using GamifyLearnHub.Core.Data;
+using GamifyLearnHub.Core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace GamifyLearnHub.Core.Service
         Task<List<Badgeactivity>> GetAll();
         Task<int> UpdateBadgeActivity(Badgeactivity badgeactivity);
         Task<List<Userbadgeactivity>> GetUserBadgesByUserId(int userId);
+        Task<List<Userbadgeactivity>> GetAllUnviewedUserBadges(int userId);
+        Task<int> UpdateUserBadgeStatus(UpdateUserBadgeDetails userbadgedetails);
+
 
     }
 }

@@ -19,6 +19,18 @@ namespace GamifyLearnHub.Infra.Repositroy
         {
             _dbContext = dbContext; 
         }
+
+        public async Task<int> IsUserNameExist(string userName)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_name", userName, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("isExist",  dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+            await _dbContext.Connection.ExecuteAsync
+            ("LoginAndRegister_Package.IsUserNameExsit", p, commandType: CommandType.StoredProcedure);
+            return p.Get<int>("isExist");
+        }
+
         public async Task<TokenPayload> Login(LoginCredentails loginDetails)
         {
             var p = new DynamicParameters();
@@ -26,6 +38,18 @@ namespace GamifyLearnHub.Infra.Repositroy
             p.Add("user_password",loginDetails.Password,dbType:DbType.String,direction:ParameterDirection.Input);
             var result =await _dbContext.Connection.QueryAsync<TokenPayload>("LoginAndRegister_Package.Login", p,commandType:CommandType.StoredProcedure);
             return result.FirstOrDefault();         
+        }
+
+        public async Task<int> ResetPassword(LoginCredentails loginDetails)
+        {
+            var p = new DynamicParameters();
+            p.Add("user_name", loginDetails.Username, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("new_password", loginDetails.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("rows_effected",dbType:DbType.Int32,direction: ParameterDirection.Output);
+
+            await _dbContext.Connection.ExecuteAsync
+            ("LoginAndRegister_Package.ResetPassword", p, commandType: CommandType.StoredProcedure);
+            return p.Get<int>("rows_effected");
         }
     }
 }

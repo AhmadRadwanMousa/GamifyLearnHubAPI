@@ -12,6 +12,8 @@ namespace GamifyLearnHub.Core.Repository
     {
 
         Task<TokenPayload> Login(LoginCredentails loginDetails);
+        Task<int> IsUserNameExist(string userName);
+        Task<int> ResetPassword(LoginCredentails loginDetails);
 
     }
 }

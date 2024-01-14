@@ -11,5 +11,6 @@ namespace GamifyLearnHub.Core.DTO
         public string Username { get; set; } = null!;
         public decimal? Userid { get; set; }
         public decimal? Roleid { get; set; }
+        public int ?Isaccepted { get; set; }
     }
 }
