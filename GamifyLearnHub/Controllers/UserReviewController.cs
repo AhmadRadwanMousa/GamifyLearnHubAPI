@@ -23,6 +23,13 @@ namespace GamifyLearnHub.Controllers
             return await _userReviewService.GetAllUserReviews();
         }
 
+        [HttpGet("byProgram/{id}")]
+        public async Task<List<Userreview>> GetAllUserReviewsByProgramId(int id)
+        {
+            var result =  await _userReviewService.GetAllUserReviews();
+            return result.Where(ur=> ur.Programid == id).ToList();
+        }
+
         [HttpGet("{id}")]
         public async Task<Userreview> GetUserReviewsById(int id)
         {
@@ -59,7 +66,7 @@ namespace GamifyLearnHub.Controllers
             }
             else
             {
-                return NotFound(0);
+                return NotFound();
             }
             
             

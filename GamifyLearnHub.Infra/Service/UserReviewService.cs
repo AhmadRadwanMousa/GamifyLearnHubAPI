@@ -38,7 +38,12 @@ namespace GamifyLearnHub.Infra.Service
 
         public async Task<List<FinishedProgram>> GetFinishedPrograms(int userId)
         {
-            return await _userReviewRepository.GetFinishedPrograms(userId);
+            var reviews = await _userReviewRepository.GetAllUserReviews();
+            var userReview = reviews.Where(r=> r.Userid == userId).ToList();
+            var finishedPrograms =  await _userReviewRepository.GetFinishedPrograms(userId);
+
+            return finishedPrograms.Where(p=> !userReview.Any(ur=> ur.Programid == p.ProgramId)).ToList();
+
         }
 
         public async Task<Userreview> GetUserReviewById(int id)
