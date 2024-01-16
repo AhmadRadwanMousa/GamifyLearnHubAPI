@@ -144,8 +144,19 @@ namespace GamifyLearnHub.Infra.Repository
         
         public async Task<IEnumerable<User>> GetAllUsersWithRoleId2()
         {
-            var result = await _dbContext.Connection.QueryAsync<User>(
+            var result = await _dbContext.Connection.QueryAsync<User , Instructordetail , User>(
                 "Section_Package.GetAllUsersWithRoleId2",
+                 (user, instructordetail) => {
+                     if (user.Instructordetails == null)
+                     {
+                         user.Instructordetails = new List<Instructordetail>();
+                     }
+                     user.Instructordetails.Add(instructordetail);
+
+
+                     return user;
+                 },
+                   splitOn: "userid",
                 commandType: CommandType.StoredProcedure
             );
 

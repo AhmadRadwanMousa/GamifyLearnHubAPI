@@ -139,7 +139,7 @@ namespace GamifyLearnHub.API.Controllers
         }
         [HttpGet]
         [Route("GetSectionsByInstructorId/{instructorId}")]
-        [CheckClaims("roleId","2")]
+        //[CheckClaims("roleId","2")]
          public async Task<List<Section>>GetSectionByInstructorId(int instructorId)
         {
             return await _sectionService.GetSectionByInstructorId(instructorId);

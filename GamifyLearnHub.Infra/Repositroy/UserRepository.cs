@@ -207,13 +207,13 @@ namespace GamifyLearnHub.Infra.Repositroy
             var p = new DynamicParameters();
             p.Add("instructor_Id", instructordetail.Instructorid, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("user_Id", instructordetail.Userid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("title", instructordetail.Title, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("description", instructordetail.Description, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("facebookLink", instructordetail.Facebooklink, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("instagramLink", instructordetail.Instagramlink, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("linkedinLink", instructordetail.Linkedinlink, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("twitterLink", instructordetail.Twitterlink, dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("experience", instructordetail.Experience, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_title", instructordetail.Title, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_description", instructordetail.Description, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_facebookLink", instructordetail.Facebooklink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_instagramLink", instructordetail.Instagramlink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_linkedinLink", instructordetail.Linkedinlink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_twitterLink", instructordetail.Twitterlink, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("p_experience", instructordetail.Experience, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("rows_effected", dbType: DbType.Int32, direction: ParameterDirection.Output);
 
             await _dbContext.Connection.ExecuteAsync("User_Package.UpdateInstructorDetails", p, commandType: CommandType.StoredProcedure);
