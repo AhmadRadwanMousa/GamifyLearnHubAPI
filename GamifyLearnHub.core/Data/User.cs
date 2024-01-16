@@ -23,6 +23,7 @@ namespace GamifyLearnHub.Core.Data
             Userlogins = new HashSet<Userlogin>();
             Userpointsactivities = new HashSet<Userpointsactivity>();
             Userprogresses = new HashSet<Userprogress>();
+            Userreviews = new HashSet<Userreview>();
             Usersections = new HashSet<Usersection>();
         }
 
@@ -49,6 +50,7 @@ namespace GamifyLearnHub.Core.Data
         public virtual ICollection<Userlogin> Userlogins { get; set; }
         public virtual ICollection<Userpointsactivity> Userpointsactivities { get; set; }
         public virtual ICollection<Userprogress> Userprogresses { get; set; }
+        public virtual ICollection<Userreview> Userreviews { get; set; }
         public virtual ICollection<Usersection> Usersections { get; set; }
     }
 }

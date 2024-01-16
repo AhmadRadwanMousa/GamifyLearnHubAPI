@@ -9,6 +9,7 @@ namespace GamifyLearnHub.Core.Data
         {
             Cartitems = new HashSet<Cartitem>();
             Coursesequences = new HashSet<Coursesequence>();
+            Userreviews = new HashSet<Userreview>();
         }
 
         public decimal Programid { get; set; }
@@ -25,5 +26,6 @@ namespace GamifyLearnHub.Core.Data
         public virtual Plan? Plan { get; set; }
         public virtual ICollection<Cartitem> Cartitems { get; set; }
         public virtual ICollection<Coursesequence> Coursesequences { get; set; }
+        public virtual ICollection<Userreview> Userreviews { get; set; }
     }
 }

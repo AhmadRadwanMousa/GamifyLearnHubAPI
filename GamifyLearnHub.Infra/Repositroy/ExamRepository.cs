@@ -36,7 +36,7 @@ namespace GamifyLearnHub.Infra.Repositroy
 
             await _dbContext.Connection.ExecuteAsync("Exam_Package.CreateExam", p,commandType:CommandType.StoredProcedure);
 
-            return p.Get<int>("created_id");
+            return p.Get<int>("rows_affected");
 
         }
 

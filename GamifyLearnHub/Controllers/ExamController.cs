@@ -79,7 +79,7 @@ namespace GamifyLearnHub.Controllers
         [CheckClaims("roleId", "2")]
         public async Task<int> CreateExam(Exam exam)
         {
-            return await _examService.CreateExam(exam);
+           return await _examService.CreateExam(exam);
         }
 
         [HttpPost("CreateQuestionWithOptions/{examId}")]
