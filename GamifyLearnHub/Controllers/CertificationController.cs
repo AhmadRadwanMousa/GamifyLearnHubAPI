@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MigraDoc.DocumentObjectModel.IO;
+using MimeKit;
 using System.Xml.Linq;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 
 namespace GamifyLearnHub.Controllers
@@ -63,7 +65,40 @@ namespace GamifyLearnHub.Controllers
             {
                 foreach (var user in UsersPass)
                 {
+
+                    MimeMessage message = new MimeMessage();
+                    MailboxAddress from = new MailboxAddress("IQ_Gamify ", "hebaalahmad48@gmail.com");
+                    message.From.Add(from);
+
+                    MailboxAddress to = new MailboxAddress(user.Firsname, user.Username);
+                    message.To.Add(to);
+                    message.Subject = "New Certification";
+                    BodyBuilder builder = new BodyBuilder();
+                    builder.HtmlBody = "<h3>Congratulations!</h3>" + " <p>You have received a certificate that you can download now.<p>" + "<h5>Best Regards<h5>";
+
+
                     byte[] pdfBytes = GeneratePdfCertificate(user.Firsname + user.Lastname, user.Coursename);
+
+
+                    var pdfAttachment = new MimePart("application", "pdf")
+                    {
+                        Content = new MimeContent(new MemoryStream(pdfBytes), ContentEncoding.Default),
+                        ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                        ContentTransferEncoding = ContentEncoding.Base64,
+                        FileName = "Certification.pdf"
+                    };
+
+                    builder.Attachments.Add(pdfAttachment);
+                    message.Body = builder.ToMessageBody();
+
+                    using (var client = new SmtpClient())
+                    {
+                        client.Connect("smtp.gmail.com", 465, true);
+                        client.Authenticate("hebaalahmad48@gmail.com", "tsmrupucunagrfqu");
+                        client.Send(message);
+                        client.Disconnect(true);
+                    }
+
 
                     // Save PDF file
                     string fileName = $"{Guid.NewGuid().ToString()}_Certificate.pdf";
