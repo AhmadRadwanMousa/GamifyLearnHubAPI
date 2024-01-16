@@ -9,6 +9,7 @@ namespace GamifyLearnHub.Core.Data
         public decimal? Badgeactivityid { get; set; }
         public DateTime? Dateearned { get; set; }
         public decimal Userbadgeactivityid { get; set; }
+        public bool? Isviewed { get; set; }
 
         public virtual Badgeactivity? Badgeactivity { get; set; }
         public virtual User? User { get; set; }
